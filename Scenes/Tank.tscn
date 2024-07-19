@@ -1,0 +1,56 @@
+[gd_scene load_steps=11 format=3 uid="uid://dlti5fu4oq66b"]
+
+[ext_resource type="Texture2D" uid="uid://bwfk1a3mr4nwn" path="res://Assets/Sprites/Tank.png" id="1_8mi47"]
+[ext_resource type="Script" path="res://src/Tank.cs" id="2_qo2tb"]
+[ext_resource type="PackedScene" uid="uid://cpw3jnonxif4s" path="res://Scenes/Food.tscn" id="3_6skbn"]
+[ext_resource type="PackedScene" uid="uid://bxips6vkfxffr" path="res://Scenes/Fish.tscn" id="4_yj2bn"]
+[ext_resource type="Resource" uid="uid://ckqn2nt2drfk3" path="res://Resources/Fish/test.tres" id="5_22xpq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vuf16"]
+atlas = ExtResource("1_8mi47")
+region = Rect2(0, 0, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ablp"]
+atlas = ExtResource("1_8mi47")
+region = Rect2(0, 360, 640, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mu73a"]
+atlas = ExtResource("1_8mi47")
+region = Rect2(0, 720, 640, 360)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gck63"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vuf16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ablp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mu73a")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yhs3y"]
+size = Vector2(640, 360)
+
+[node name="Tank" type="AnimatedSprite2D"]
+position = Vector2(320, 180)
+sprite_frames = SubResource("SpriteFrames_gck63")
+autoplay = "default"
+frame_progress = 0.279999
+script = ExtResource("2_qo2tb")
+food = ExtResource("3_6skbn")
+fish = ExtResource("4_yj2bn")
+ryba = ExtResource("5_22xpq")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_yhs3y")
+
+[node name="Food" type="Node" parent="."]

@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://bxips6vkfxffr"]
+
+[ext_resource type="Script" path="res://src/Fish.cs" id="1_fimy2"]
+[ext_resource type="Resource" uid="uid://2xp32elw8rdl" path="res://Resources/Fish/default.tres" id="2_najuh"]
+[ext_resource type="Script" path="res://src/StateMachine/StateMachine.cs" id="3_0hsun"]
+[ext_resource type="SpriteFrames" uid="uid://bbb33rl37olbl" path="res://Resources/Fish/Sprites/defaultSprites.tres" id="3_xi0um"]
+[ext_resource type="Script" path="res://src/StateMachine/States/Fish/IdleState.cs" id="4_cy616"]
+[ext_resource type="Script" path="res://src/StateMachine/States/Fish/FeedingState.cs" id="5_6ya3w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tm5q0"]
+radius = 11.0
+
+[node name="Fish" type="Area2D" node_paths=PackedStringArray("animatedSprite2D") groups=["fish"]]
+script = ExtResource("1_fimy2")
+fishData = ExtResource("2_najuh")
+animatedSprite2D = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("3_xi0um")
+animation = &"turn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4, 1)
+shape = SubResource("CircleShape2D_tm5q0")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState", "parent")]
+script = ExtResource("3_0hsun")
+initialState = NodePath("Idle")
+parent = NodePath("..")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_cy616")
+
+[node name="Feeding" type="Node" parent="StateMachine"]
+script = ExtResource("5_6ya3w")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="OnAnimationFinished"]

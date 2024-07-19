@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CoinData" load_steps=3 format=3 uid="uid://b6qpxvdjw51el"]
+
+[ext_resource type="Script" path="res://CoinData.cs" id="1_t4mok"]
+[ext_resource type="Texture2D" uid="uid://kkpcyp02rurh" path="res://Assets/Sprites/coi.png" id="2_wod3k"]
+
+[resource]
+script = ExtResource("1_t4mok")
+texture = ExtResource("2_wod3k")
+value = 10

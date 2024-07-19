@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://cpw3jnonxif4s"]
+
+[ext_resource type="Script" path="res://src/Food.cs" id="1_cdmtd"]
+[ext_resource type="Texture2D" uid="uid://bburk2o30dyua" path="res://Assets/Sprites/Food1.png" id="2_sfh3m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_edivo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7k80w"]
+atlas = ExtResource("2_sfh3m")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nv1c"]
+atlas = ExtResource("2_sfh3m")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7b1en"]
+atlas = ExtResource("2_sfh3m")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xnft7"]
+atlas = ExtResource("2_sfh3m")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ys5gd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7k80w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7nv1c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7b1en")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xnft7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Food" type="Area2D" groups=["food"]]
+script = ExtResource("1_cdmtd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_edivo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ys5gd")
+autoplay = "default"
+frame_progress = 0.601412

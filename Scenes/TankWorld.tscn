@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bg56oktm8pna5"]
+
+[ext_resource type="PackedScene" uid="uid://bxips6vkfxffr" path="res://Scenes/Fish.tscn" id="1_k76qi"]
+[ext_resource type="Resource" uid="uid://2xp32elw8rdl" path="res://Resources/Fish/default.tres" id="2_3ovie"]
+[ext_resource type="PackedScene" uid="uid://dlti5fu4oq66b" path="res://Scenes/Tank.tscn" id="2_vrscw"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Tank" parent="." instance=ExtResource("2_vrscw")]
+ryba = ExtResource("2_3ovie")
+
+[node name="Fish" parent="Tank" instance=ExtResource("1_k76qi")]
+position = Vector2(152, 26)
+scale = Vector2(2, 2)
+
+[node name="Camera2D" type="Camera2D" parent="Tank/Fish"]
