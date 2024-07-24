@@ -1,7 +1,8 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
-public partial class Coin : AnimatedSprite2D
+public partial class Coin : Area2D
 {
     [Export]
     CoinData coinData;
@@ -9,11 +10,14 @@ public partial class Coin : AnimatedSprite2D
     int value;
 
     bool onBottom;
-
+    AnimatedSprite2D AnimatedSprite2D; //exportem?
     Tween tween;
 
     public void SetCoinData(CoinData coinData){
         this.coinData = coinData;
+        AnimatedSprite2D = (AnimatedSprite2D)GetNode("Sprite");
+        AnimatedSprite2D.SpriteFrames = coinData.sprites;
+
     }
 
     public override void _Ready()
@@ -39,6 +43,31 @@ public partial class Coin : AnimatedSprite2D
         base._PhysicsProcess(delta);
 
     }
+    
 
+    bool mouseIn = false;
+    public override void _Input(InputEvent @event)
+    {
+        if(@event is InputEventMouseButton mouseButton && mouseIn){
+            GetTree().Root.SetInputAsHandled();
+            if(mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Left){
+                GD.Print("Pijonc");
+                QueueFree();
+            }
+        }
+    }
+    public override void _MouseEnter()
+    {
+        base._MouseEnter();
+        mouseIn = true;
+        GD.Print("Mouse In Area: "+Name);
+    }
+
+    public override void _MouseExit()
+    {
+        base._MouseExit();
+        mouseIn = false;
+        GD.Print("Mouse leave Area: "+Name);
+    }
 
 }

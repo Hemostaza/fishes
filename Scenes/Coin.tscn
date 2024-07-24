@@ -1,52 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://my0xkyo6xrn"]
+[gd_scene load_steps=4 format=3 uid="uid://my0xkyo6xrn"]
 
-[ext_resource type="Texture2D" uid="uid://cyj6bqsjagq0a" path="res://Assets/Sprites/New Piskel (47) (4).png" id="1_8g8qb"]
 [ext_resource type="Script" path="res://src/Coin.cs" id="1_s6xxo"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jqtly"]
-atlas = ExtResource("1_8g8qb")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k6w7a"]
-atlas = ExtResource("1_8g8qb")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tts46"]
-atlas = ExtResource("1_8g8qb")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eo7k8"]
-atlas = ExtResource("1_8g8qb")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_katb3"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jqtly")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k6w7a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tts46")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eo7k8")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[sub_resource type="SpriteFrames" id="SpriteFrames_idm7t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_od1tk"]
 
-[node name="Coin" type="AnimatedSprite2D"]
-sprite_frames = SubResource("SpriteFrames_katb3")
-autoplay = "default"
+[node name="Coin" type="Area2D"]
 script = ExtResource("1_s6xxo")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_idm7t")
+autoplay = "default"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_od1tk")

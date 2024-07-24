@@ -1,0 +1,74 @@
+[gd_scene load_steps=6 format=3 uid="uid://ytqemlynj8g1"]
+
+[ext_resource type="Theme" uid="uid://c5wp5trs7n07o" path="res://GUI.tres" id="1_g33sl"]
+[ext_resource type="Script" path="res://src/UI/TabContainerController.cs" id="2_ciiim"]
+[ext_resource type="Texture2D" uid="uid://5vyxcnrqy5ne" path="res://Assets/Sprites/GUI/sprite_3.png" id="3_4m4f1"]
+[ext_resource type="Texture2D" uid="uid://cc8nx8jxkxfjs" path="res://Assets/Sprites/GUI/sprite_2.png" id="4_ldt3f"]
+[ext_resource type="Texture2D" uid="uid://bsbiyieeiqu30" path="res://Assets/Sprites/GUI/sprite_1.png" id="5_mwbyn"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -964.0
+offset_bottom = -539.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+theme = ExtResource("1_g33sl")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 0
+offset_left = 780.0
+offset_top = 0.5
+offset_right = 945.0
+offset_bottom = 527.5
+script = ExtResource("2_ciiim")
+
+[node name="TabBar" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/TabBar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "CHUJ xD"
+
+[node name="TabBar2" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/TabBar2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Dwa chuje xD"
+
+[node name="TextureButton2" type="TextureButton" parent="TabContainer"]
+visible = false
+layout_mode = 2
+texture_normal = ExtResource("3_4m4f1")
+texture_pressed = ExtResource("3_4m4f1")
+texture_hover = ExtResource("4_ldt3f")
+texture_disabled = ExtResource("5_mwbyn")
+texture_focused = ExtResource("4_ldt3f")
+
+[node name="TextureButton" type="TextureButton" parent="TabContainer"]
+visible = false
+layout_mode = 2
+texture_normal = ExtResource("3_4m4f1")
+texture_pressed = ExtResource("3_4m4f1")
+texture_hover = ExtResource("4_ldt3f")
+texture_disabled = ExtResource("5_mwbyn")
+texture_focused = ExtResource("4_ldt3f")
+
+[node name="TextureButton3" type="TextureButton" parent="TabContainer"]
+visible = false
+layout_mode = 2
+texture_normal = ExtResource("3_4m4f1")
+texture_pressed = ExtResource("3_4m4f1")
+texture_hover = ExtResource("4_ldt3f")
+texture_disabled = ExtResource("5_mwbyn")
+texture_focused = ExtResource("4_ldt3f")

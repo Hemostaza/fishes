@@ -32,10 +32,10 @@ public partial class Fish : Entity
     public override void _Ready()
     {
         base._Ready();
-        isSpirteFlipped = false;
+        isSpirteFlipped = animatedSprite2D.FlipH;
         Scale = fishData.spawnSize();
         animatedSprite2D.SpriteFrames = fishData.sprites;
-        tank = (Tank) GetParent();
+        //tank = (Tank) GetParent();
         hunger = -1;//rng.RandiRange(1,3);
     }
 
@@ -120,19 +120,25 @@ public partial class Fish : Entity
 
     public void TurnSide(float X, float oldX){
         //if (animatedSprite2D.Animation == "idle"){
-            if (!isSpirteFlipped && X > 0 && oldX < 0){
+        // GD.Print("Turn Debug: ");
+        // GD.Print(X+" "+oldX);
+        // GD.Print(isSpirteFlipped);
+            if (!isSpirteFlipped && X > 0 && oldX <= 0){
                 animatedSprite2D.Play("turn");
                 //GD.Print("turn right");
                 isSpirteFlipped = true;
             }
-            if (isSpirteFlipped && X < 0 && oldX > 0){
+            if (isSpirteFlipped && X <= 0 && oldX > 0){
                 animatedSprite2D.Play("turn");
                 //GD.Print("turn left");
                 isSpirteFlipped = false;
             }
        // }
-        //GD.Print(flipped);
     }
 
+    public override void OnLeftClicked(){
+        base.OnLeftClicked();
+        GD.Print("Rybka");
+    }
 
 }

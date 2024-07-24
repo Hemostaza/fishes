@@ -17,11 +17,17 @@ public partial class Tank : AnimatedSprite2D
     public delegate void foodSpawnedEventHandler();
 
     Food instance;
+    Area2D tankArea;
+
+    public override void _Ready()
+    {
+        base._Ready();
+    }
 
     public override void _PhysicsProcess(double delta)
     {
         if(Input.IsActionJustPressed("fire")){
-            SpawnFood();
+            //SpawnFood();
         }
         if(Input.IsActionJustPressed("jump")){
             SpawnFish();
@@ -49,4 +55,23 @@ public partial class Tank : AnimatedSprite2D
         }
     }
 
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        base._UnhandledInput(@event);
+        if(@event is InputEventMouseButton mouseButton){
+            
+            if(mouseButton.Pressed){
+                SpawnFood();
+                GD.Print("Niekliklo");
+            }
+        }
+    }
+    // public override void _InputEvent(Viewport viewport, InputEvent @event, int shapeIdx)
+    // {
+    //     base._InputEvent(viewport, @event, shapeIdx);
+    //     viewport.PhysicsObjectPickingSort=true;
+    //     if(@event is InputEventMouseButton mouseButton){
+    //         GD.Print("Dank"+viewport);
+    //     }
+    // }
 }

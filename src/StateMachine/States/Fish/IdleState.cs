@@ -17,7 +17,7 @@ public partial class IdleState : State
         fish = (Fish) parent;
         swimmTime=0;
         swimmVector = fish.lastDirection;
-        fish.isSpirteFlipped = animatedSprite2D.FlipH;
+        animatedSprite2D.FlipH = fish.isSpirteFlipped;
         //swimmVector = Vector2.Left;
         base.Enter();
     }
@@ -27,6 +27,7 @@ public partial class IdleState : State
         //if(Input.IsActionJustPressed("jump")){
             //fish.TargetedFood();
         if(fish.isHungry() && GetTree().GetNodesInGroup("food").Count>0){
+            fish.lastDirection = swimmVector;
             EmitSignal(SignalName.transitioned,this,"Feeding");
         }
 

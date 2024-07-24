@@ -7,10 +7,11 @@
 [ext_resource type="Script" path="res://src/StateMachine/States/Fish/IdleState.cs" id="4_cy616"]
 [ext_resource type="Script" path="res://src/StateMachine/States/Fish/FeedingState.cs" id="5_6ya3w"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_tm5q0"]
-radius = 11.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_x35se"]
+radius = 14.0
 
 [node name="Fish" type="Area2D" node_paths=PackedStringArray("animatedSprite2D") groups=["fish"]]
+z_index = 10
 script = ExtResource("1_fimy2")
 fishData = ExtResource("2_najuh")
 animatedSprite2D = NodePath("AnimatedSprite2D")
@@ -20,8 +21,7 @@ sprite_frames = ExtResource("3_xi0um")
 animation = &"turn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-4, 1)
-shape = SubResource("CircleShape2D_tm5q0")
+shape = SubResource("CircleShape2D_x35se")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState", "parent")]
 script = ExtResource("3_0hsun")
