@@ -1,7 +1,12 @@
 [gd_resource type="Resource" load_steps=2 format=3 uid="uid://ckqn2nt2drfk3"]
 
-[ext_resource type="Script" path="res://FishData.cs" id="1_i7e2m"]
+[ext_resource type="Script" path="res://src/ObjectData/FishData.cs" id="1_1776v"]
 
 [resource]
-script = ExtResource("1_i7e2m")
+script = ExtResource("1_1776v")
+Name = "tESTD"
 maxSize = 2
+speed = 0.0
+coinDatas = null
+sizee = 0.0
+value = 1

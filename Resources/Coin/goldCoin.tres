@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CoinData" load_steps=8 format=3 uid="uid://dabxe8bqyvkda"]
 
-[ext_resource type="Script" path="res://CoinData.cs" id="1_0frvk"]
+[ext_resource type="Script" path="res://src/ObjectData/CoinData.cs" id="1_0frvk"]
 [ext_resource type="Texture2D" uid="uid://ct7003jixuh32" path="res://Assets/Sprites/New Piskel (47) (3).png" id="2_7cdri"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hmsjt"]

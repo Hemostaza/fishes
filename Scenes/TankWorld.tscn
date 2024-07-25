@@ -10,9 +10,9 @@
 position = Vector2(956.5, 531)
 
 [node name="Fish" parent="Tank" instance=ExtResource("1_k76qi")]
-scale = Vector2(1, 1)
 
 [node name="Control" parent="." instance=ExtResource("3_r7r43")]
-offset_right = 0.0
-offset_bottom = 0.0
-mouse_filter = 2
+offset_left = 642.0
+offset_top = 2.0
+offset_right = 642.0
+offset_bottom = 2.0

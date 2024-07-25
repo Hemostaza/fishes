@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmfhdybge37ge"]
+
+[ext_resource type="Theme" uid="uid://c5wp5trs7n07o" path="res://GUI.tres" id="1_vu1x1"]
+[ext_resource type="Script" path="res://src/UI/FishShopButton.cs" id="2_0iqdj"]
+[ext_resource type="Texture2D" uid="uid://lutvaxrihv2p" path="res://Assets/Sprites/GUI/sprite_4.png" id="3_u4shr"]
+[ext_resource type="Texture2D" uid="uid://bdj102ftfwemd" path="res://Assets/Sprites/rybka.png" id="3_yb4qe"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_82cfk"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+texture = ExtResource("3_u4shr")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cwv3q"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("3_u4shr")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+
+[node name="Control" type="Control" node_paths=PackedStringArray("button", "label")]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -33.0
+offset_right = 15.0
+grow_horizontal = 2
+theme = ExtResource("1_vu1x1")
+script = ExtResource("2_0iqdj")
+button = NodePath("Button")
+label = NodePath("Label")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -34.0
+offset_right = 34.0
+offset_bottom = 30.0
+grow_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_82cfk")
+text = "Nmae"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = -26.0
+offset_right = 31.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxTexture_cwv3q")
+text = "cena xD"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+icon = ExtResource("3_yb4qe")
+icon_alignment = 1
+expand_icon = true

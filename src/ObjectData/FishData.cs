@@ -6,6 +6,9 @@ using System.Collections.Generic;
 public partial class FishData : Resource
 {
     [Export]
+    public String Name;
+
+    [Export]
     public SpriteFrames sprites;
     [Export]
     public int maxSize;
@@ -22,6 +25,11 @@ public partial class FishData : Resource
     [Export]
     float sizee;
 
+    [Export]
+    public int value;
+    [Export]
+    public Texture2D icon;
+
 
     RandomNumberGenerator rng = new RandomNumberGenerator();
 
@@ -32,6 +40,11 @@ public partial class FishData : Resource
             size=sizee;
         }
         return new Vector2(size,size);
+    }
+
+    public override string ToString()
+    {
+        return Name+" "+value;
     }
 
 }

@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdpiiv8i22m5x"]
+
+[ext_resource type="Theme" uid="uid://c5wp5trs7n07o" path="res://GUI.tres" id="1_1tv0b"]
+[ext_resource type="PackedScene" uid="uid://dmfhdybge37ge" path="res://Scenes/UI/FishShopButton.tscn" id="2_pv0k1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b8v6q"]
+
+[node name="Panel" type="Panel"]
+offset_right = 477.0
+offset_bottom = 470.0
+theme = ExtResource("1_1tv0b")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_b8v6q")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -37.0
+offset_right = 37.0
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "Fish Shop"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 21.0
+offset_top = 38.0
+offset_right = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+
+[node name="Control" parent="GridContainer" instance=ExtResource("2_pv0k1")]
+layout_mode = 2
+
+[node name="Control2" parent="GridContainer" instance=ExtResource("2_pv0k1")]
+layout_mode = 2
+
+[node name="Control3" parent="GridContainer" instance=ExtResource("2_pv0k1")]
+layout_mode = 2
