@@ -1,32 +1,51 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://cracvhtucxb7y"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://cracvhtucxb7y"]
 
-[ext_resource type="Texture2D" uid="uid://bsbiyieeiqu30" path="res://Assets/Sprites/GUI/sprite_1.png" id="1_tlt2k"]
-[ext_resource type="Texture2D" uid="uid://cc8nx8jxkxfjs" path="res://Assets/Sprites/GUI/sprite_2.png" id="2_ca510"]
-[ext_resource type="Texture2D" uid="uid://5vyxcnrqy5ne" path="res://Assets/Sprites/GUI/sprite_3.png" id="3_qgrht"]
+[ext_resource type="Texture2D" uid="uid://coalnmplhou56" path="res://Assets/Sprites/GUI/side_tab_disabled.png" id="1_damlw"]
+[ext_resource type="Texture2D" uid="uid://drv0m8idbgym" path="res://Assets/Sprites/GUI/side_tab_hover.png" id="2_jekcj"]
+[ext_resource type="Texture2D" uid="uid://dmd64fas13rso" path="res://Assets/Sprites/GUI/side_tab_normal.png" id="3_mvtm1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_imqy6"]
-texture = ExtResource("3_qgrht")
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+texture = ExtResource("1_damlw")
 texture_margin_left = 15.0
 texture_margin_top = 15.0
 texture_margin_right = 15.0
 texture_margin_bottom = 15.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4dox2"]
-texture = ExtResource("2_ca510")
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+texture = ExtResource("2_jekcj")
 texture_margin_left = 15.0
 texture_margin_top = 15.0
 texture_margin_right = 15.0
 texture_margin_bottom = 15.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_158yb"]
-texture = ExtResource("1_tlt2k")
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+texture = ExtResource("3_mvtm1")
 texture_margin_left = 15.0
 texture_margin_top = 15.0
 texture_margin_right = 15.0
 texture_margin_bottom = 15.0
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8pf04"]
+load_path = "res://.godot/imported/sprite_07.png-283237f2d6eee5228d2b4e5d8efb6e30.ctex"
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i3apv"]
-texture = ExtResource("3_qgrht")
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+texture = SubResource("CompressedTexture2D_8pf04")
 texture_margin_left = 15.0
 texture_margin_top = 15.0
 texture_margin_right = 15.0

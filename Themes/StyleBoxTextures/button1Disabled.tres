@@ -1,0 +1,16 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://bd28ul7lfbnms"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jl60j"]
+load_path = "res://.godot/imported/sprite_11.png-51c518fbc32cac87b58f3ee2d8ee2766.ctex"
+
+[resource]
+resource_local_to_scene = true
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+texture = SubResource("CompressedTexture2D_jl60j")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0

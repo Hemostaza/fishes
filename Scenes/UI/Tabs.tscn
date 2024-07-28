@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsah7aj1liuhe"]
+
+[ext_resource type="Script" path="res://src/UI/TabContainerController.cs" id="1_1fkow"]
+
+[node name="Panel" type="Panel" node_paths=PackedStringArray("tabs", "buttons")]
+offset_right = 175.0
+offset_bottom = 482.0
+script = ExtResource("1_1fkow")
+tabs = []
+buttons = []

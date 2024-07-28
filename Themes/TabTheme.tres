@@ -1,0 +1,31 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cracvhtucxb7y"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_imqy6"]
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4dox2"]
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_158yb"]
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i3apv"]
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+
+[resource]
+Button/styles/disabled = SubResource("StyleBoxTexture_imqy6")
+Button/styles/hover = SubResource("StyleBoxTexture_4dox2")
+Button/styles/normal = SubResource("StyleBoxTexture_158yb")
+Button/styles/pressed = SubResource("StyleBoxTexture_i3apv")

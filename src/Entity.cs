@@ -33,24 +33,24 @@ public partial class Entity : Area2D
         }
     }
     virtual public void OnLeftClicked(){
-        GetTree().Root.SetInputAsHandled();
+        GetTree().Root.HandleInputLocally = true;
     }
     virtual public void OnRightClicked(){
-        GetTree().Root.SetInputAsHandled();
+        GetTree().Root.HandleInputLocally = true;
     }
 
     public override void _MouseEnter()
     {
         base._MouseEnter();
         mouseIn = true;
-        GD.Print("Mouse In Area: "+Name);
+        //GD.Print("Mouse In Area: "+Name);
     }
 
     public override void _MouseExit()
     {
         base._MouseExit();
         mouseIn = false;
-        GD.Print("Mouse leave Area: "+Name);
+        //GD.Print("Mouse leave Area: "+Name);
     }
 
 }

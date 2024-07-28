@@ -1,0 +1,84 @@
+[gd_resource type="Theme" load_steps=19 format=3 uid="uid://c5wp5trs7n07o"]
+
+[ext_resource type="StyleBox" uid="uid://bd28ul7lfbnms" path="res://Themes/StyleBoxTextures/button1Disabled.tres" id="1_m34sv"]
+[ext_resource type="StyleBox" uid="uid://baldgcgcftppa" path="res://Themes/StyleBoxTextures/button1Hover.tres" id="2_5qlfv"]
+[ext_resource type="StyleBox" uid="uid://2nrer8xxyr0c" path="res://Themes/StyleBoxTextures/button1Normal.tres" id="3_p2bxy"]
+[ext_resource type="Texture2D" uid="uid://cfivysp2tcu41" path="res://Assets/Sprites/GUI/tab_disabled.png" id="4_cjis4"]
+[ext_resource type="StyleBox" uid="uid://be7gtlegf2w12" path="res://Themes/StyleBoxTextures/button1Pressed.tres" id="4_rbms7"]
+[ext_resource type="Texture2D" uid="uid://doau1451e2vpk" path="res://Assets/Sprites/GUI/tab_hover.png" id="5_h304n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7o21m"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ca27j"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_f4xlo"]
+load_path = "res://.godot/imported/sprite_00.png-507aefe9f8f541ec7e8e4991775285b3.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f0kgl"]
+texture = SubResource("CompressedTexture2D_f4xlo")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5uuxp"]
+load_path = "res://.godot/imported/sprite_01.png-0178d69bc0ca65048480c30702844416.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1r4k3"]
+texture = SubResource("CompressedTexture2D_5uuxp")
+texture_margin_left = 15.0
+texture_margin_top = 2.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wvuvf"]
+texture = ExtResource("4_cjis4")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_527lo"]
+texture = ExtResource("5_h304n")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wjox2"]
+load_path = "res://.godot/imported/sprite_09.png-41fa889bfe5e72b20a5bd471960645de.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_abh5g"]
+texture = SubResource("CompressedTexture2D_wjox2")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5xciq"]
+load_path = "res://.godot/imported/sprite_10.png-6fd6b24a6fa1c1a990891211dc3ecd74.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0ojwy"]
+texture = SubResource("CompressedTexture2D_5xciq")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+expand_margin_bottom = 4.0
+
+[resource]
+Button/styles/disabled = ExtResource("1_m34sv")
+Button/styles/focus = SubResource("StyleBoxEmpty_7o21m")
+Button/styles/hover = ExtResource("2_5qlfv")
+Button/styles/normal = ExtResource("3_p2bxy")
+Button/styles/pressed = ExtResource("4_rbms7")
+Label/styles/normal = SubResource("StyleBoxTexture_ca27j")
+Panel/styles/panel = SubResource("StyleBoxTexture_f0kgl")
+TabContainer/styles/panel = SubResource("StyleBoxTexture_1r4k3")
+TabContainer/styles/tab_disabled = SubResource("StyleBoxTexture_wvuvf")
+TabContainer/styles/tab_hovered = SubResource("StyleBoxTexture_527lo")
+TabContainer/styles/tab_selected = SubResource("StyleBoxTexture_abh5g")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxTexture_0ojwy")
