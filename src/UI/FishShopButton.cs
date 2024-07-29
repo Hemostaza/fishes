@@ -17,7 +17,7 @@ public partial class FishShopButton : Control
 
     public override void _Ready()
     {
-        tank = (Tank) GetNode("/root/Node2D/Tank");
+        tank = TankController.Instance.GetTank();
         button.ButtonDown += OnClick;
         TestButtonData();
         base._Ready();

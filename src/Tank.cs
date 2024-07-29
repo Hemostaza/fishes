@@ -19,6 +19,9 @@ public partial class Tank : AnimatedSprite2D
     Food instance;
     Area2D tankArea;
 
+    [Export]
+    CollisionShape2D collider;
+
     public override void _Ready()
     {
         base._Ready();
@@ -56,23 +59,16 @@ public partial class Tank : AnimatedSprite2D
     //     }
     // }
 
-    public override void _UnhandledInput(InputEvent @event)
-    {
-        base._UnhandledInput(@event);
-        if(@event is InputEventMouseButton mouseButton){
-            
-            if(mouseButton.Pressed){
-                TankController.Instance.SpawnFood(PlayerStatus.Instance.GetMaxFoodCount());
-                GD.Print(TankController.Instance);
-            }
-        }
-    }
-    // public override void _InputEvent(Viewport viewport, InputEvent @event, int shapeIdx)
-    // {
-    //     base._InputEvent(viewport, @event, shapeIdx);
-    //     viewport.PhysicsObjectPickingSort=true;
+    
+    // void click(Viewport viewport, InputEvent @event, int shapeIdx){
     //     if(@event is InputEventMouseButton mouseButton){
-    //         GD.Print("Dank"+viewport);
+            
+    //         if(mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Left){
+    //             viewport.SetInputAsHandled();
+    //             TankController.Instance.SpawnFood(0);
+    //         }
     //     }
     // }
+    
+
 }

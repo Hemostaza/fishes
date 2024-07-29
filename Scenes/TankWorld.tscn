@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://dlti5fu4oq66b" path="res://Scenes/Tank.tscn" id="2_vrscw"]
 [ext_resource type="PackedScene" uid="uid://ytqemlynj8g1" path="res://Scenes/UI/UI.tscn" id="3_7fcqv"]
 
-[node name="Node2D" type="Node2D"]
+[node name="CHUJ" type="Node2D"]
 
 [node name="Control" parent="." instance=ExtResource("3_7fcqv")]
-z_index = 500
+z_index = 10
 mouse_filter = 1
 
 [node name="Tank" parent="." instance=ExtResource("2_vrscw")]

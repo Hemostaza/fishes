@@ -23,8 +23,9 @@ public partial class Entity : Area2D
         return animatedSprite2D;
     }
 
-    public override void _Input(InputEvent @event)
+    public override void _UnhandledInput(InputEvent @event)
     {
+        base._UnhandledInput(@event);
         if(@event is InputEventMouseButton mouseButton && mouseIn){
             
             if(mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Left){
@@ -33,24 +34,22 @@ public partial class Entity : Area2D
         }
     }
     virtual public void OnLeftClicked(){
-        GetTree().Root.HandleInputLocally = true;
+        GetTree().Root.SetInputAsHandled();
     }
     virtual public void OnRightClicked(){
-        GetTree().Root.HandleInputLocally = true;
+        GetTree().Root.SetInputAsHandled();
     }
 
     public override void _MouseEnter()
     {
         base._MouseEnter();
         mouseIn = true;
-        //GD.Print("Mouse In Area: "+Name);
     }
 
     public override void _MouseExit()
     {
         base._MouseExit();
         mouseIn = false;
-        //GD.Print("Mouse leave Area: "+Name);
     }
 
 }

@@ -11,14 +11,20 @@ public partial class TankController : Node
 
     PackedScene foodScene;
 
+    PackedScene mouseClick;
+
     public override void _Ready()
     {
         Instance = this;
         fishScene = ResourceLoader.Load<PackedScene>("res://Scenes/Fish.tscn");
         foodScene = ResourceLoader.Load<PackedScene>("res://Scenes/Food.tscn");
 
-        GD.Print("FishScene");
-        tank = (Tank) GetNode("/root/Node2D/Tank");
+        //GD.Print("FishScene");
+        tank = (Tank) GetNode("/root/CHUJ/Tank");
+    }
+
+    public Tank GetTank(){
+        return tank;
     }
 
     public void SpawnFish(string fishName)
@@ -29,11 +35,11 @@ public partial class TankController : Node
             instance.SetFishData(fishData);
             tank.AddChild(instance);
             
-            GD.Print("Try to spawn fish "+fishData.Name );
+            //GD.Print("Try to spawn fish "+fishData.Name );
         }
     }
     public  void SpawnFood(int index){
-        GD.Print("spawn tank");
+        //GD.Print("spawn tank");
         if(GetFoodCountInTank() < PlayerStatus.Instance.GetMaxFoodCount()){
             //index = FoodDataResources.Instance.GetFoodByIndex();
             if(foodScene!=null){
@@ -48,4 +54,16 @@ public partial class TankController : Node
         Array<Node> foods =  GetTree().GetNodesInGroup("food");
         return foods.Count;
     }
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        base._UnhandledInput(@event);
+        if(@event is InputEventMouseButton mouseButton){
+            
+            if(mouseButton.Pressed){
+                SpawnFood(0);
+            }
+        }
+    }
+
 }
