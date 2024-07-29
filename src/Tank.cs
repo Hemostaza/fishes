@@ -11,7 +11,7 @@ public partial class Tank : AnimatedSprite2D
     [Export]
     PackedScene fish;
     [Export]
-    FishData ryba;
+    FishData fishData;
     
     [Signal]
     public delegate void foodSpawnedEventHandler();
@@ -26,34 +26,35 @@ public partial class Tank : AnimatedSprite2D
 
     public override void _PhysicsProcess(double delta)
     {
-        if(Input.IsActionJustPressed("fire")){
-            //SpawnFood();
-        }
-        if(Input.IsActionJustPressed("jump")){
-            SpawnFish();
-        }
+        // if(Input.IsActionJustPressed("fire")){
+        //     //SpawnFood();
+        // }
+        // if(Input.IsActionJustPressed("jump")){
+        //     SpawnFish();
+        // }
 
     }
 
-    public void SpawnFood(){
+    // public void SpawnFood(){
 
-        if(food!=null){
-            instance = (Food) food.Instantiate();
-            mousePos = GetLocalMousePosition();
-            instance.Position = mousePos;
-            AddChild(instance);
-        }
-    }
-    public void SpawnFish(){
+    //     if(food!=null){
+    //         instance = (Food) food.Instantiate();
+    //         mousePos = GetLocalMousePosition();
+    //         instance.Position = mousePos;
+    //         AddChild(instance);
+    //     }
+    // }
+    // public void SpawnFish(String name){
 
-        if(fish!=null){
-            Fish inst = (Fish) fish.Instantiate();
-            mousePos = GetLocalMousePosition();
-            inst.SetFishData(ryba);
-            inst.Position = mousePos;
-            AddChild(inst);
-        }
-    }
+    //     if(fish!=null){
+    //         Fish inst = (Fish) fish.Instantiate();
+    //         mousePos = GetLocalMousePosition();
+    //         fishData = FishDataResources.Instance.GetFishDataByName(name);
+    //         inst.SetFishData(fishData);
+    //         inst.Position = mousePos;
+    //         AddChild(inst);
+    //     }
+    // }
 
     public override void _UnhandledInput(InputEvent @event)
     {
@@ -61,8 +62,8 @@ public partial class Tank : AnimatedSprite2D
         if(@event is InputEventMouseButton mouseButton){
             
             if(mouseButton.Pressed){
-                SpawnFood();
-                GD.Print("Niekliklo");
+                TankController.Instance.SpawnFood(PlayerStatus.Instance.GetMaxFoodCount());
+                GD.Print(TankController.Instance);
             }
         }
     }

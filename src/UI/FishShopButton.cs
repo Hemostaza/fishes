@@ -13,13 +13,21 @@ public partial class FishShopButton : Control
     String fishValue;
 
     String fishName;
+    Tank tank;
 
     public override void _Ready()
     {
-
+        tank = (Tank) GetNode("/root/Node2D/Tank");
         button.ButtonDown += OnClick;
-
+        TestButtonData();
         base._Ready();
+    }
+
+    public void TestButtonData(){
+        FishData fish = FishDataResources.Instance.GetFishDataByIndex(1);
+        button.Icon = fish.icon;
+        label.Text = fish.value.ToString();
+        fishName = fish.Name;
     }
 
     public void SetButtonData(Texture2D fishIco, String value, String name){
@@ -29,6 +37,8 @@ public partial class FishShopButton : Control
     }
 
     public void OnClick(){
+        //tank.SpawnFish(fishName);
+        TankController.Instance.SpawnFish(fishName);
         //GD.Print("Klikniete"); spawn fishdata xD spawn fish by name: spawnFish.
     }
     

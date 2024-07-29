@@ -12,8 +12,6 @@ public partial class Fish : Entity
 
     [Export]
     FishData fishData;
-
-    bool hungry;
     bool starving;
 
     //lista jedzenia:
@@ -36,14 +34,15 @@ public partial class Fish : Entity
         Scale = fishData.spawnSize();
         animatedSprite2D.SpriteFrames = fishData.sprites;
         //tank = (Tank) GetParent();
-        hunger = -1;//rng.RandiRange(1,3);
+        hunger = fishData.hungerMeter;//rng.RandiRange(1,3);
     }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
-        if(hunger>0){
-            hunger-=delta;
+        hunger-=delta;
+        if(hunger<0){
+            starving=true;
         }
     }
 
@@ -56,7 +55,8 @@ public partial class Fish : Entity
     }
 
     public bool isHungry(){
-        return hunger<0 ? true : false;
+        int halfMeter = fishData.hungerMeter/2;
+        return hunger<=halfMeter ? true : false;
     }
 
     public Food TargetedFood(){
@@ -100,10 +100,6 @@ public partial class Fish : Entity
     public float GetSpeed(){
         return fishData.speed;
     }
-    void AleHecaNieMaMnie(Food food){
-        
-    }
-
     public void OnAnimationFinished(){
         // if(animatedSprite2D.Animation=="turn"){
         //     if(isSpirteFlipped!=animatedSprite2D.FlipH){

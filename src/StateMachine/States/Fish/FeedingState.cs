@@ -65,6 +65,7 @@ public partial class FeedingState : State
     }
 
     public void SwimmToTarget(){
+        if(target!=null){
             if(animatedSprite2D.Animation=="idle"){
                 fish.lastDirection = direction;
                 direction = fish.Position.DirectionTo(target.Position);
@@ -80,6 +81,8 @@ public partial class FeedingState : State
                 fish.lastDirection = direction;
                 EmitSignal(SignalName.transitioned,this,"Idle");
             }
+        }
+            
     }
 
 }

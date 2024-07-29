@@ -3,15 +3,15 @@ using Godot.Collections;
 using System;
 using System.Linq;
 
-public partial class ResourcesLoader : Node
+public partial class FishDataResources : Node
 {
     public Dictionary<String, FishData> FishResources  { get; private set; }
-    public Array<FishData> fishDatas    { get; private set; }
+    Array<FishData> fishDatas    { get; set; }
 
-    public static FishData[] fishDatasByValue {get; set;}
+    FishData[] fishDatasByValue { get; set;}
 
-    String fishResourcesPath = "res://Resources/Fish/";
-    public static ResourcesLoader Instance { get; private set; }
+    string fishResourcesPath = "res://Resources/Fish/";
+    public static FishDataResources Instance { get; private set; }
 
     public override void _Ready()
     {
@@ -29,5 +29,13 @@ public partial class ResourcesLoader : Node
             FishResources[res.Name] = res;
             fishDatas.Add(res);
         }
+    }
+
+    public FishData GetFishDataByName(String name){
+        return FishResources[name];
+    }
+
+    public FishData GetFishDataByIndex(int index){
+        return fishDatasByValue[index];
     }
 }

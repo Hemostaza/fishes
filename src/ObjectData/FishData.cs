@@ -23,21 +23,23 @@ public partial class FishData : Resource
     public Array<CoinData> coinDatas;
 
     [Export]
-    float sizee;
+    float minSize;
 
     [Export]
     public int value;
     [Export]
     public Texture2D icon;
+    [Export]
+    public int hungerMeter;
 
 
     RandomNumberGenerator rng = new RandomNumberGenerator();
 
     public Vector2 spawnSize(){
         
-        float size = rng.RandfRange(0.5f,1);
-        if(sizee>0){
-            size=sizee;
+        float size = minSize + rng.RandfRange(-1,1);
+        if(minSize==0){
+            size=maxSize;
         }
         return new Vector2(size,size);
     }
