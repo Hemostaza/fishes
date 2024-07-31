@@ -11,7 +11,7 @@ public partial class Entity : Area2D
     public override void _Ready()
     {
         base._Ready();
-        animatedSprite2D.Play("idle");
+        animatedSprite2D.Play("swimm");
     }
 
     public override void _PhysicsProcess(double delta)

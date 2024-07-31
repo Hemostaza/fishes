@@ -1,8 +1,7 @@
-[gd_resource type="Resource" load_steps=5 format=3 uid="uid://2xp32elw8rdl"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://2xp32elw8rdl"]
 
 [ext_resource type="Resource" uid="uid://dabxe8bqyvkda" path="res://Resources/Coin/goldCoin.tres" id="1_sx78k"]
 [ext_resource type="Script" path="res://src/ObjectData/FishData.cs" id="3_hjkyn"]
-[ext_resource type="PackedScene" uid="uid://my0xkyo6xrn" path="res://Scenes/Coin.tscn" id="3_u5mhq"]
 [ext_resource type="SpriteFrames" uid="uid://bbb33rl37olbl" path="res://Resources/Fish/Sprites/defaultSprites.tres" id="5_mnbmf"]
 
 [resource]
@@ -11,7 +10,8 @@ Name = "DefALT"
 sprites = ExtResource("5_mnbmf")
 maxSize = 2
 speed = 1.0
-coinScene = ExtResource("3_u5mhq")
 coinDatas = Array[Object]([ExtResource("1_sx78k")])
-sizee = 3.0
+minSize = 1.0
 value = 5
+hungerMeter = 10
+hungerSpeed = 1.0

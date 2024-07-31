@@ -15,15 +15,11 @@ public partial class State : Node
     public AnimatedSprite2D animatedSprite2D;
     public String animationGroup;
     String fullAnimationName;
-    //[Export]
-    //public MoveComponent moveCompontent;
-    //public InventoryComponent inventoryComponent;
 
     virtual public void InitState(Entity parent){
-                this.parent = parent;
-                animatedSprite2D = parent.GetAnimatedSprite2D();
-                //moveCompontent = parent.GetMoveComponent();
-                InitState();
+        this.parent = parent;
+        animatedSprite2D = parent.GetAnimatedSprite2D();
+        InitState();
     }
     virtual public void InitState(){
 

@@ -2,7 +2,6 @@ using Godot;
 using Godot.Collections;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 
 public partial class Fish : Entity
@@ -12,6 +11,10 @@ public partial class Fish : Entity
 
     [Export]
     FishData fishData;
+
+    [Export]
+    public PackedScene coinScene;
+
     bool starving;
 
     //lista jedzenia:
@@ -21,7 +24,10 @@ public partial class Fish : Entity
 
     public bool isSpirteFlipped;
 
-    public Vector2 lastDirection;
+    bool needFood = true;
+
+    public Vector2 newDirection;
+    public Vector2 oldDirection;
 
     public void SetFishData(FishData fishData){
         this.fishData = fishData;
@@ -30,7 +36,12 @@ public partial class Fish : Entity
     public override void _Ready()
     {
         base._Ready();
-        isSpirteFlipped = animatedSprite2D.FlipH;
+        animatedSprite2D.AnimationFinished += OnAnimationFinished;
+
+        if(fishData.hungerMeter==0){
+            needFood = false;
+        }
+        //isSpirteFlipped = animatedSprite2D.FlipH;
         Scale = fishData.spawnSize();
         animatedSprite2D.SpriteFrames = fishData.sprites;
         //tank = (Tank) GetParent();
@@ -40,10 +51,26 @@ public partial class Fish : Entity
     public override void _Process(double delta)
     {
         base._Process(delta);
-        hunger-=delta;
+        if(needFood){
+if(!starving){
+            hunger-=delta*fishData.hungerSpeed;
+        }else{
+            hunger -=delta;
+        }
         if(hunger<0){
+            if(!starving){
+                Modulate = new Color(0.7f,0.9f,0.7f,1);
+                //Change sprites;
+            }
             starving=true;
         }
+        if(hunger<-5){
+
+            //QueueFree();
+            //Emit signal dieded
+        }
+        }
+        
     }
 
     public override void _PhysicsProcess(double delta)
@@ -77,7 +104,10 @@ public partial class Fish : Entity
     }
 
     public void Eated(){
-        //hunger+=rng.RandiRange(2,5);
+        hunger = 0;
+        starving = false;
+        Modulate = new Color(1,1,1,1);
+        hunger+=rng.RandiRange(2,5); //+ selectedFoodNutrition
         if(Scale.X<fishData.maxSize){
             Scale += new Vector2(0.1f,0.1f);
         }
@@ -85,8 +115,8 @@ public partial class Fish : Entity
     }
 
     public bool DropCoin(){
-        if(fishData.coinScene!=null){
-            Coin coin = (Coin) fishData.coinScene.Instantiate();
+        if(coinScene!=null){
+            Coin coin = (Coin) coinScene.Instantiate();
             coin.Position = Position;
             
             if(Scale.X>=1){
@@ -100,41 +130,42 @@ public partial class Fish : Entity
     public float GetSpeed(){
         return fishData.speed;
     }
-    public void OnAnimationFinished(){
-        // if(animatedSprite2D.Animation=="turn"){
-        //     if(isSpirteFlipped!=animatedSprite2D.FlipH){
-        //         animatedSprite2D.FlipH = isSpirteFlipped;
-        //     }
-        // }
-        if(animatedSprite2D.Animation!="idle"){
-            animatedSprite2D.Play("idle");
+
+    public bool TurnSide(){
+
+        if((newDirection.X >= 0 && oldDirection.X < 0) 
+        || (newDirection.X<0 && oldDirection.X>=0)){
+            animatedSprite2D.Play("turn");
+            return true;
         }
-        if(isSpirteFlipped!=animatedSprite2D.FlipH){
-            animatedSprite2D.FlipH = isSpirteFlipped;
-        }
+
+        return false;
     }
 
-    public void TurnSide(float X, float oldX){
-        //if (animatedSprite2D.Animation == "idle"){
-        // GD.Print("Turn Debug: ");
-        // GD.Print(X+" "+oldX);
-        // GD.Print(isSpirteFlipped);
-            if (!isSpirteFlipped && X > 0 && oldX <= 0){
-                animatedSprite2D.Play("turn");
-                //GD.Print("turn right");
-                isSpirteFlipped = true;
-            }
-            if (isSpirteFlipped && X <= 0 && oldX > 0){
-                animatedSprite2D.Play("turn");
-                //GD.Print("turn left");
-                isSpirteFlipped = false;
-            }
-       // }
+    void OnAnimationFinished(){
+        if(animatedSprite2D.Animation == "turn"){
+            animatedSprite2D.FlipH = !animatedSprite2D.FlipH;
+            animatedSprite2D.Play("swimm");
+        }
+        if(animatedSprite2D.Animation == "eat"){
+            animatedSprite2D.Play("swimm");
+        }
+        
     }
 
     public override void OnLeftClicked(){
         base.OnLeftClicked();
-        GD.Print("Rybka");
+        GD.Print(this);
+    }
+
+    public override string ToString()
+    {
+        return "Rybka: " + fishData + "\n Index: " + GetIndex() + "\n Hunger: "+hunger;
+    }
+
+    public void SetNewDirection(Vector2 direction){
+        oldDirection = newDirection;
+        newDirection = direction;
     }
 
 }

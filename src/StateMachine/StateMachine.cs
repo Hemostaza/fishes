@@ -9,6 +9,7 @@ public partial class StateMachine : Node
     [Export]
     Entity parent;
     State currentState;
+    State previousState;
     Dictionary<String, State> states = new Dictionary<string, State>();
     public override void _Ready()
     {
@@ -45,6 +46,7 @@ public partial class StateMachine : Node
         if(state!=currentState){
             return;
         }
+        previousState = state;
         ChangeState(newStateName);
     }
 
@@ -68,5 +70,15 @@ public partial class StateMachine : Node
 
     public State GetCurrentState(){
         return currentState;
+    }
+    
+    public State GetPreviousState(){
+        return previousState;
+    }
+    public String GetPreviousStateName(){
+        if(previousState!=null){
+            return previousState.Name;
+        }
+        return "O kurwa";
     }
 }

@@ -12,32 +12,35 @@ public partial class FeedingState : State
 
     Vector2 direction;
 
+    public override void InitState()
+    {
+        base.InitState();
+        fish = (Fish) parent;
+    }
+
     public override void Enter(){
         base.Enter();
         searchTimer = 1;
-        fish = (Fish) parent;
-        animatedSprite2D.FlipH = fish.isSpirteFlipped;
-        direction = fish.lastDirection;
+
         SearchForTarget();
 
     }
 
     public bool SearchForTarget(){
-        if (animatedSprite2D.Animation == "idle")
+        if (animatedSprite2D.Animation == "swimm")
         {
             Food oldTarget = target;
             target = fish.TargetedFood();
             if (target == null)
             {
-                fish.lastDirection = direction;
                 EmitSignal(SignalName.transitioned, this, "Idle");
                 return false;
             }
             if (target != null || !oldTarget.Equals(target))
             {
-                fish.lastDirection = direction;
                 direction = fish.Position.DirectionTo(target.Position);
-                fish.TurnSide(direction.X, fish.lastDirection.X);
+                fish.SetNewDirection(direction);
+                fish.TurnSide();
                 return true;
             }
         }
@@ -66,19 +69,18 @@ public partial class FeedingState : State
 
     public void SwimmToTarget(){
         if(target!=null){
-            if(animatedSprite2D.Animation=="idle"){
-                fish.lastDirection = direction;
-                direction = fish.Position.DirectionTo(target.Position);
+            direction = fish.Position.DirectionTo(target.Position);
+            fish.SetNewDirection(direction);
+            if(animatedSprite2D.Animation=="swimm"){
                 parent.Position += direction*2;
-            }else{
-                parent.Position += fish.lastDirection;
             }
-
-            if(fish.OverlapsArea(target) && animatedSprite2D.Animation=="idle"){
+            else{
+                parent.Position += direction;
+            }
+            if(fish.OverlapsArea(target) && animatedSprite2D.Animation=="swimm"){
                 fish.Eated();
                 target.QueueFree();
                 animatedSprite2D.Play("eat");
-                fish.lastDirection = direction;
                 EmitSignal(SignalName.transitioned,this,"Idle");
             }
         }

@@ -17,8 +17,7 @@ public partial class FishData : Resource
     [Export]
     public float speed;
     
-    [Export]
-    public PackedScene coinScene;
+
     [Export]
     public Array<CoinData> coinDatas;
 
@@ -29,15 +28,18 @@ public partial class FishData : Resource
     public int value;
     [Export]
     public Texture2D icon;
+
     [Export]
     public int hungerMeter;
+    [Export]
+    public float hungerSpeed;
 
 
     RandomNumberGenerator rng = new RandomNumberGenerator();
 
     public Vector2 spawnSize(){
         
-        float size = minSize + rng.RandfRange(-1,1);
+        float size = minSize + rng.RandfRange(-0.5f,0.5f);
         if(minSize==0){
             size=maxSize;
         }
@@ -46,7 +48,7 @@ public partial class FishData : Resource
 
     public override string ToString()
     {
-        return Name+" "+value;
+        return "\n Name: "+Name+"\n Value: "+value;
     }
 
 }

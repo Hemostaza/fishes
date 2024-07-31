@@ -10,17 +10,12 @@ public partial class Tank : AnimatedSprite2D
     PackedScene food;
     [Export]
     PackedScene fish;
-    [Export]
-    FishData fishData;
     
     [Signal]
     public delegate void foodSpawnedEventHandler();
 
     Food instance;
     Area2D tankArea;
-
-    [Export]
-    CollisionShape2D collider;
 
     public override void _Ready()
     {

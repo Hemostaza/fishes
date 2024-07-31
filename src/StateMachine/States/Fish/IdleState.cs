@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net.Http.Headers;
 
@@ -12,22 +13,25 @@ public partial class IdleState : State
 
     Fish fish;
     bool flipped;
+    bool debug = false;
+
+    public override void InitState()
+    {
+        base.InitState();
+        fish = (Fish) parent;
+        if(debug){
+            GD.Print("Debug ON");
+        }
+    }
 
     public override void Enter(){
-        fish = (Fish) parent;
-        swimmTime=0;
-        swimmVector = fish.lastDirection;
-        animatedSprite2D.FlipH = fish.isSpirteFlipped;
-        //swimmVector = Vector2.Left;
         base.Enter();
+        swimmTime=0;
     }
 
     public override void Update(double delta){
         base.Update(delta);
-        //if(Input.IsActionJustPressed("jump")){
-            //fish.TargetedFood();
         if(fish.isHungry() && GetTree().GetNodesInGroup("food").Count>0){
-            fish.lastDirection = swimmVector;
             EmitSignal(SignalName.transitioned,this,"Feeding");
         }
 
@@ -35,12 +39,12 @@ public partial class IdleState : State
     public override void PhysicsUpdate(double delta)
     {
         
-        if(animatedSprite2D.Animation == "idle"){
+        if(animatedSprite2D.Animation == "swimm"){
             ChangeSwimm();
             swimmTime -= delta;
             parent.Position += swimmVector;
         }else{
-            parent.Position += fish.lastDirection*0.5f;
+            parent.Position += fish.newDirection*0.5f;
         }
 
         base.PhysicsUpdate(delta);
@@ -49,10 +53,10 @@ public partial class IdleState : State
     public void ChangeSwimm(){
 
         if(swimmTime<=0){
-            fish.lastDirection = swimmVector;
             swimmVector = new Vector2(rng.RandfRange(-1,1) ,rng.RandfRange(-1,1))*fish.GetSpeed();
+            fish.SetNewDirection(swimmVector);
+            fish.TurnSide();
             swimmTime = 2;
-            fish.TurnSide(swimmVector.X, fish.lastDirection.X);
         }
     }
 

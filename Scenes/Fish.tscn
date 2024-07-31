@@ -17,9 +17,11 @@ animatedSprite2D = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("3_xi0um")
-animation = &"turn"
+animation = &"swimm"
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_x35se")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState", "parent")]
@@ -32,5 +34,3 @@ script = ExtResource("4_cy616")
 
 [node name="Feeding" type="Node" parent="StateMachine"]
 script = ExtResource("5_6ya3w")
-
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="OnAnimationFinished"]
