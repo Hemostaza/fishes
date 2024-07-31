@@ -17,9 +17,6 @@ public partial class Fish : Entity
 
     bool starving;
 
-    //lista jedzenia:
-    Node tank;
-
     SpriteFrames sprites;
 
     public bool isSpirteFlipped;
@@ -29,6 +26,12 @@ public partial class Fish : Entity
     public Vector2 newDirection;
     public Vector2 oldDirection;
 
+    double heatlh;
+    bool chargingHealth;
+    double chargingHealthTime;
+
+    TankController tank;
+
     public void SetFishData(FishData fishData){
         this.fishData = fishData;
     }
@@ -36,7 +39,12 @@ public partial class Fish : Entity
     public override void _Ready()
     {
         base._Ready();
+        tank = TankController.Instance;
+
         animatedSprite2D.AnimationFinished += OnAnimationFinished;
+
+        heatlh = fishData.maxHealth;
+        chargingHealthTime = fishData.healthRegen;
 
         if(fishData.hungerMeter==0){
             needFood = false;
@@ -52,25 +60,35 @@ public partial class Fish : Entity
     {
         base._Process(delta);
         if(needFood){
-if(!starving){
-            hunger-=delta*fishData.hungerSpeed;
-        }else{
-            hunger -=delta;
-        }
-        if(hunger<0){
             if(!starving){
-                Modulate = new Color(0.7f,0.9f,0.7f,1);
-                //Change sprites;
+            hunger-=delta*fishData.hungerSpeed;
+            }else{
+            hunger -=delta;
             }
-            starving=true;
+            if(hunger<0){
+                if(!starving){
+                    Modulate = new Color(0.7f,0.9f,0.7f,1);
+                    //Change sprites;
+                }
+                starving=true;
+            }
+            if(hunger<-5){
+                //QueueFree();
+                //Emit signal dieded
+            }
         }
-        if(hunger<-5){
+        Healing(delta);
+    }
 
-            //QueueFree();
-            //Emit signal dieded
+    void Healing(double delta){
+        if(chargingHealth==true){
+
+            heatlh += fishData.healthRegen * delta;
+            if(heatlh>=fishData.maxHealth){
+                heatlh = fishData.maxHealth;
+                chargingHealth=false;
+            }
         }
-        }
-        
     }
 
     public override void _PhysicsProcess(double delta)
@@ -155,7 +173,19 @@ if(!starving){
 
     public override void OnLeftClicked(){
         base.OnLeftClicked();
-        GD.Print(this);
+        if(heatlh>0 && !chargingHealth){
+            heatlh -= PlayerStatus.Instance.GetClickPower();
+            CheckHealth();
+        }
+        tank.SetActiveFish(this);
+        GD.Print(tank.GetActiveFish());
+    }
+
+    void CheckHealth(){
+        if(heatlh<=0){
+            DropCoin();
+            chargingHealth = true;
+        }
     }
 
     public override string ToString()

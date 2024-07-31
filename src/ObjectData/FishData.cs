@@ -33,6 +33,10 @@ public partial class FishData : Resource
     public int hungerMeter;
     [Export]
     public float hungerSpeed;
+    [Export]
+    public float maxHealth;
+    [Export]
+    public float healthRegen;
 
 
     RandomNumberGenerator rng = new RandomNumberGenerator();

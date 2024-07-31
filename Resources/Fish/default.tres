@@ -15,3 +15,5 @@ minSize = 1.0
 value = 5
 hungerMeter = 10
 hungerSpeed = 1.0
+maxHealth = 10.0
+healthRegen = 10.0

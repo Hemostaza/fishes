@@ -11,7 +11,7 @@ public partial class TankController : Node
 
     PackedScene foodScene;
 
-    PackedScene mouseClick;
+    Fish activeFish;
 
     public override void _Ready()
     {
@@ -64,6 +64,17 @@ public partial class TankController : Node
                 SpawnFood(0);
             }
         }
+    }
+
+    public Fish GetActiveFish(){
+        return activeFish;
+    }
+    public void SetActiveFish(Fish fish){
+        if(activeFish!=null){
+            activeFish.ZIndex -= 10;
+        }
+        activeFish = fish;
+        activeFish.ZIndex += 10;
     }
 
 }
