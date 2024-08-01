@@ -32,6 +32,18 @@ public partial class Fish : Entity
 
     TankController tank;
 
+    Timer flashDurationTimer = new Timer();
+    float flashDuration = 0.1f;
+
+    //FishHungerController
+    //FishClickController
+    //FishHealthController
+
+    [Export]
+    SpriteFrames particleFrames;
+    AnimatedSprite2D particle;
+    //Particle jako scena i osobny skrypt
+
     public void SetFishData(FishData fishData){
         this.fishData = fishData;
     }
@@ -39,8 +51,8 @@ public partial class Fish : Entity
     public override void _Ready()
     {
         base._Ready();
-        tank = TankController.Instance;
 
+        tank = TankController.Instance;
         animatedSprite2D.AnimationFinished += OnAnimationFinished;
 
         heatlh = fishData.maxHealth;
@@ -54,6 +66,23 @@ public partial class Fish : Entity
         animatedSprite2D.SpriteFrames = fishData.sprites;
         //tank = (Tank) GetParent();
         hunger = fishData.hungerMeter;//rng.RandiRange(1,3);
+        SetTimer();
+    }
+
+    void SetTimer(){
+        flashDurationTimer.OneShot = true;
+        flashDurationTimer.WaitTime = flashDuration;
+        flashDurationTimer.Timeout += StopFlash;
+        AddChild(flashDurationTimer);
+    }
+
+    void StopFlash(){
+        Modulate = new Color(1,1,1,1);
+    }
+
+    public void StartFlash(Color color){
+        flashDurationTimer.Start();
+        Modulate = color;
     }
 
     public override void _Process(double delta)
@@ -67,7 +96,7 @@ public partial class Fish : Entity
             }
             if(hunger<0){
                 if(!starving){
-                    Modulate = new Color(0.7f,0.9f,0.7f,1);
+                    animatedSprite2D.Modulate = new Color(0.7f,0.9f,0.7f,1);
                     //Change sprites;
                 }
                 starving=true;
@@ -83,10 +112,11 @@ public partial class Fish : Entity
     void Healing(double delta){
         if(chargingHealth==true){
 
-            heatlh += fishData.healthRegen * delta;
+            heatlh += fishData.healthRegen * delta * PlayerStatus.Instance.GetFishHealthRegeneration();
             if(heatlh>=fishData.maxHealth){
                 heatlh = fishData.maxHealth;
                 chargingHealth=false;
+                particle.QueueFree();
             }
         }
     }
@@ -124,7 +154,7 @@ public partial class Fish : Entity
     public void Eated(){
         hunger = 0;
         starving = false;
-        Modulate = new Color(1,1,1,1);
+        animatedSprite2D.Modulate = new Color(1,1,1,1);
         hunger+=rng.RandiRange(2,5); //+ selectedFoodNutrition
         if(Scale.X<fishData.maxSize){
             Scale += new Vector2(0.1f,0.1f);
@@ -146,7 +176,7 @@ public partial class Fish : Entity
         return false;
     }
     public float GetSpeed(){
-        return fishData.speed;
+        return fishData.maxSpeed;
     }
 
     public bool TurnSide(){
@@ -176,26 +206,41 @@ public partial class Fish : Entity
         if(heatlh>0 && !chargingHealth){
             heatlh -= PlayerStatus.Instance.GetClickPower();
             CheckHealth();
+            StartFlash(new Color(100,100,100,100));
         }
         tank.SetActiveFish(this);
         GD.Print(tank.GetActiveFish());
+    }
+
+    void FlashLight(){
+        Modulate = new Color(100,100,100,100);
     }
 
     void CheckHealth(){
         if(heatlh<=0){
             DropCoin();
             chargingHealth = true;
+            particle = new AnimatedSprite2D
+            {
+                SpriteFrames = particleFrames
+            };
+            AddChild(particle);
+            particle.Play();
         }
     }
 
     public override string ToString()
     {
-        return "Rybka: " + fishData + "\n Index: " + GetIndex() + "\n Hunger: "+hunger;
+        return "Rybka: " + fishData + "\n Index: " + GetIndex() + "\n Hunger: "+hunger + "\n Health: "+heatlh;
     }
 
     public void SetNewDirection(Vector2 direction){
         oldDirection = newDirection;
         newDirection = direction;
+    }
+
+    public RandomNumberGenerator GetRng(){
+        return rng;
     }
 
 }

@@ -10,11 +10,14 @@ public partial class PlayerStatus : Node
 
     int selectedFood;
 
+    float fishHealthRegeneration;
+
     public override void _Ready()
     {
         Instance = this;
         maxFoodCount = 1;
         clickPower = 1;
+        fishHealthRegeneration = 1;
         selectedFood = 0;
     }
     public int GetClickPower(){
@@ -29,5 +32,9 @@ public partial class PlayerStatus : Node
 
     public int GetSelectedFood(){
         return selectedFood;
+    }
+
+    public float GetFishHealthRegeneration(){
+        return fishHealthRegeneration;
     }
 }

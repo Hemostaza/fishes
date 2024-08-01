@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ytqemlynj8g1"]
+[gd_scene load_steps=17 format=3 uid="uid://ytqemlynj8g1"]
 
 [ext_resource type="Theme" uid="uid://c5wp5trs7n07o" path="res://Themes/GUI.tres" id="1_l3t2i"]
 [ext_resource type="Theme" uid="uid://cracvhtucxb7y" path="res://TabTheme.tres" id="2_4k0wq"]
@@ -6,8 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://bgn41iy0d6c5x" path="res://Assets/Sprites/GUI/New Piskel (5)/opentab_icon.png" id="3_brq6l"]
 [ext_resource type="PackedScene" uid="uid://fsumc22n7wwf" path="res://Scenes/UI/Button.tscn" id="4_a08fm"]
 [ext_resource type="FontFile" uid="uid://cdjcinofxacyd" path="res://Assets/Fonts/Minecraft.ttf" id="5_se5e0"]
+[ext_resource type="StyleBox" uid="uid://ckeremn1iu8f4" path="res://Themes/StyleBoxTextures/panelConcave.tres" id="6_4v3pe"]
 [ext_resource type="Script" path="res://src/UI/FishShopTab.cs" id="6_fs1tv"]
 [ext_resource type="Texture2D" uid="uid://ldwyrhwc5j14" path="res://Assets/Sprites/GUI/New Piskel (5)/closetab_icon.png" id="6_ii81n"]
+[ext_resource type="Texture2D" uid="uid://d2175agg0tepq" path="res://Assets/Sprites/GUI/panel_concave_blue.png" id="9_tbtaf"]
+[ext_resource type="SpriteFrames" uid="uid://bbb33rl37olbl" path="res://Resources/Fish/Sprites/defaultSprites.tres" id="9_x4bep"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_f4xlo"]
 load_path = "res://.godot/imported/sprite_00.png-507aefe9f8f541ec7e8e4991775285b3.ctex"
@@ -30,11 +33,8 @@ texture_margin_bottom = 4.0
 line_spacing = 0.0
 font = ExtResource("5_se5e0")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mss2t"]
-load_path = "res://.godot/imported/sprite_01.png-dc0e60eb1414830dd620aa6623bd322e.ctex"
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gwrsv"]
-texture = SubResource("CompressedTexture2D_mss2t")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p456u"]
+texture = ExtResource("9_tbtaf")
 texture_margin_left = 4.0
 texture_margin_top = 4.0
 texture_margin_right = 4.0
@@ -60,7 +60,7 @@ offset_left = -180.0
 grow_horizontal = 0
 grow_vertical = 2
 script = ExtResource("3_8umue")
-tabs = [NodePath("NinePatchRect/FishShopTab"), NodePath("NinePatchRect/Panel")]
+tabs = [NodePath("NinePatchRect/FishShopTab"), NodePath("NinePatchRect/FishInfoTab")]
 buttons = [NodePath("NinePatchRect/TabButtons/tab1"), NodePath("NinePatchRect/TabButtons/tab2")]
 togglePanelButton = NodePath("OpenTabs")
 openIco = ExtResource("3_brq6l")
@@ -82,6 +82,7 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
 [node name="FishShopTab" type="Panel" parent="Panel/NinePatchRect"]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 clip_contents = true
 custom_minimum_size = Vector2(150, 0)
@@ -90,8 +91,8 @@ anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -81.0
-offset_right = 81.0
+offset_left = -80.0
+offset_right = 80.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -119,7 +120,7 @@ offset_top = 40.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_gwrsv")
+theme_override_styles/panel = ExtResource("6_4v3pe")
 script = ExtResource("6_fs1tv")
 
 [node name="GridContainer" type="GridContainer" parent="Panel/NinePatchRect/FishShopTab/Panel"]
@@ -136,6 +137,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/h_separation = 14
 columns = 2
+
+[node name="ButtonPanel1" parent="Panel/NinePatchRect/FishShopTab/Panel/GridContainer" node_paths=PackedStringArray("button", "label") instance=ExtResource("4_a08fm")]
+layout_mode = 2
+button = NodePath("../ButtonPanel2/Panel/Button")
+label = NodePath("../ButtonPanel2/Value")
 
 [node name="ButtonPanel2" parent="Panel/NinePatchRect/FishShopTab/Panel/GridContainer" instance=ExtResource("4_a08fm")]
 layout_mode = 2
@@ -164,14 +170,89 @@ layout_mode = 2
 [node name="ButtonPanel10" parent="Panel/NinePatchRect/FishShopTab/Panel/GridContainer" instance=ExtResource("4_a08fm")]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="Panel/NinePatchRect/FishShopTab/Panel/GridContainer"]
-layout_mode = 2
+[node name="FishInfoTab" type="Panel" parent="Panel/NinePatchRect"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(160, 480)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_right = 80.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="Panel/NinePatchRect"]
-visible = false
+[node name="Label" type="Label" parent="Panel/NinePatchRect/FishInfoTab"]
+custom_minimum_size = Vector2(150, 25)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 5.0
+offset_bottom = 32.0
+grow_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_54drk")
+text = "Fish Info
+"
+label_settings = SubResource("LabelSettings_w73ax")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FishGraph" type="Panel" parent="Panel/NinePatchRect/FishInfoTab"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_top = 39.0
+offset_right = 80.0
+offset_bottom = 199.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_p456u")
+script = ExtResource("6_fs1tv")
+
+[node name="Control" type="Control" parent="Panel/NinePatchRect/FishInfoTab/FishGraph"]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -78.0
+offset_right = 82.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/NinePatchRect/FishInfoTab/FishGraph/Control"]
+position = Vector2(6, 6)
+scale = Vector2(4.5, 4.5)
+sprite_frames = ExtResource("9_x4bep")
+animation = &"eat"
+centered = false
+
+[node name="InfoPanel" type="Panel" parent="Panel/NinePatchRect/FishInfoTab"]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_top = 205.0
+offset_right = 80.0
+offset_bottom = 465.0
+grow_horizontal = 2
+theme_override_styles/panel = ExtResource("6_4v3pe")
+
+[node name="Label" type="Label" parent="Panel/NinePatchRect/FishInfoTab/InfoPanel"]
 layout_mode = 0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 23.0
+text = "Hunger:
+HitToCoin
+regeneration coin"
 
 [node name="TabButtons" type="GridContainer" parent="Panel/NinePatchRect"]
 layout_mode = 1

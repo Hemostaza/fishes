@@ -72,7 +72,7 @@ public partial class FeedingState : State
             direction = fish.Position.DirectionTo(target.Position);
             fish.SetNewDirection(direction);
             if(animatedSprite2D.Animation=="swimm"){
-                parent.Position += direction*2;
+                parent.Position += direction * (fish.GetSpeed() * 2);
             }
             else{
                 parent.Position += direction;

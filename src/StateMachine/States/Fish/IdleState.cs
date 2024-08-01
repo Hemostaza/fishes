@@ -9,7 +9,7 @@ public partial class IdleState : State
     private double swimmTime;
     private Vector2 swimmVector = Vector2.Left;
     private Vector2 oldVector;
-    RandomNumberGenerator rng = new RandomNumberGenerator();
+    
 
     Fish fish;
     bool flipped;
@@ -53,7 +53,8 @@ public partial class IdleState : State
     public void ChangeSwimm(){
 
         if(swimmTime<=0){
-            swimmVector = new Vector2(rng.RandfRange(-1,1) ,rng.RandfRange(-1,1))*fish.GetSpeed();
+            swimmVector = new Vector2(fish.GetRng().RandfRange(-1,1) ,fish.GetRng().RandfRange(-1,1)) 
+                * fish.GetRng().RandfRange(fish.GetSpeed()/2,fish.GetSpeed());
             fish.SetNewDirection(swimmVector);
             fish.TurnSide();
             swimmTime = 2;

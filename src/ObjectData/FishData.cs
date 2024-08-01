@@ -15,7 +15,7 @@ public partial class FishData : Resource
     [Export]
     Coin coin;
     [Export]
-    public float speed;
+    public float maxSpeed;
     
 
     [Export]
