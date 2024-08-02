@@ -78,7 +78,7 @@ public partial class FeedingState : State
                 parent.Position += direction;
             }
             if(fish.OverlapsArea(target) && animatedSprite2D.Animation=="swimm"){
-                fish.Eated();
+                fish.GetHungerComponent().Eated();
                 target.QueueFree();
                 animatedSprite2D.Play("eat");
                 EmitSignal(SignalName.transitioned,this,"Idle");

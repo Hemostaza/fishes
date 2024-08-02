@@ -52,7 +52,7 @@ public partial class FishData : Resource
 
     public override string ToString()
     {
-        return "\n Name: "+Name+"\n Value: "+value;
+        return "\n Name: "+ Name +"\n Value: "+value;
     }
 
 }

@@ -10,7 +10,7 @@ public partial class Fish : Entity
     RandomNumberGenerator rng = new RandomNumberGenerator();
 
     [Export]
-    FishData fishData;
+    public FishData fishData;
 
     [Export]
     public PackedScene coinScene;
@@ -26,18 +26,10 @@ public partial class Fish : Entity
     public Vector2 newDirection;
     public Vector2 oldDirection;
 
-    double heatlh;
-    bool chargingHealth;
-    double chargingHealthTime;
-
     TankController tank;
 
     Timer flashDurationTimer = new Timer();
     float flashDuration = 0.1f;
-
-    //FishHungerController
-    //FishClickController
-    //FishHealthController
 
     [Export]
     SpriteFrames particleFrames;
@@ -47,29 +39,46 @@ public partial class Fish : Entity
     [Signal]
     public delegate void onDieEventHandler(Fish fish);
 
+    [Export]
+    FishHealthComponent healthComponent;
+    [Export]
+    FishHungerComponent hungerComponent;
+
     public void SetFishData(FishData fishData){
         this.fishData = fishData;
+    }
+    public FishData GetFishData(){
+        return fishData;
     }
 
     public override void _Ready()
     {
         base._Ready();
 
+        healthComponent.InitComponent(this);
+        hungerComponent.InitComponent(this);
+
         tank = TankController.Instance;
         animatedSprite2D.AnimationFinished += OnAnimationFinished;
 
-        heatlh = fishData.maxHealth;
-        chargingHealthTime = fishData.healthRegen;
-
-        if(fishData.hungerMeter==0){
-            needFood = false;
-        }
-        //isSpirteFlipped = animatedSprite2D.FlipH;
         Scale = fishData.spawnSize();
+        
         animatedSprite2D.SpriteFrames = fishData.sprites;
-        //tank = (Tank) GetParent();
-        hunger = fishData.hungerMeter;//rng.RandiRange(1,3);
         SetTimer();
+    }
+
+    public FishHungerComponent GetHungerComponent(){
+        return hungerComponent;
+    }
+
+    public FishHealthComponent GetFishHealthComponent(){
+        return healthComponent;
+    }
+
+    public void Die(bool fromHunger){
+        if(fromHunger){
+            EmitSignal(SignalName.onDie,this);
+        }
     }
 
     void SetTimer(){
@@ -88,56 +97,6 @@ public partial class Fish : Entity
         Modulate = color;
     }
 
-    public override void _Process(double delta)
-    {
-        base._Process(delta);
-        if(needFood){
-            if(!starving){
-            hunger-=delta*fishData.hungerSpeed;
-            }else{
-            hunger -=delta;
-            }
-            if(hunger<0){
-                if(!starving){
-                    animatedSprite2D.Modulate = new Color(0.7f,0.9f,0.7f,1);
-                    //Change sprites;
-                }
-                starving=true;
-            }
-            if(hunger<-5){
-                EmitSignal(SignalName.onDie,this);
-                //QueueFree();
-                //Emit signal dieded
-            }
-        }
-        Healing(delta);
-    }
-
-    void Healing(double delta){
-        if(chargingHealth==true){
-
-            heatlh += fishData.healthRegen * delta * PlayerStatus.Instance.GetFishHealthRegeneration();
-            if(heatlh>=fishData.maxHealth){
-                heatlh = fishData.maxHealth;
-                chargingHealth=false;
-                particle.QueueFree();
-            }
-        }
-    }
-
-    public override void _PhysicsProcess(double delta)
-    {
-        base._PhysicsProcess(delta);
-        if(Input.IsActionJustPressed("jump")){
-            DropCoin();
-        }
-    }
-
-    public bool isHungry(){
-        int halfMeter = fishData.hungerMeter/2;
-        return hunger<=halfMeter ? true : false;
-    }
-
     public Food TargetedFood(){
         Array<Node> foods = GetTree().GetNodesInGroup("food");
         if(foods.Count>0){
@@ -150,22 +109,8 @@ public partial class Fish : Entity
             }
             return closestFood;
         }
-        
-        //GD.Print("Closest food distance: "+Position.DistanceTo(closestFood.Position));
         return null;
     }
-
-    public void Eated(){
-        hunger = 0;
-        starving = false;
-        animatedSprite2D.Modulate = new Color(1,1,1,1);
-        hunger+=rng.RandiRange(2,5); //+ selectedFoodNutrition
-        if(Scale.X<fishData.maxSize){
-            Scale += new Vector2(0.1f,0.1f);
-        }
-        //getbiger change FishData;
-    }
-
     public bool DropCoin(){
         if(coinScene!=null){
             Coin coin = (Coin) coinScene.Instantiate();
@@ -207,35 +152,11 @@ public partial class Fish : Entity
 
     public override void OnLeftClicked(){
         base.OnLeftClicked();
-        if(heatlh>0 && !chargingHealth){
-            heatlh -= PlayerStatus.Instance.GetClickPower();
-            CheckHealth();
-            StartFlash(new Color(100,100,100,100));
-        }
+
+        healthComponent.GetHit(PlayerStatus.Instance.GetClickPower());
+
         tank.SetActiveFish(this);
         GD.Print(tank.GetActiveFish());
-    }
-
-    void FlashLight(){
-        Modulate = new Color(100,100,100,100);
-    }
-
-    void CheckHealth(){
-        if(heatlh<=0){
-            DropCoin();
-            chargingHealth = true;
-            particle = new AnimatedSprite2D
-            {
-                SpriteFrames = particleFrames
-            };
-            AddChild(particle);
-            particle.Play();
-        }
-    }
-
-    public override string ToString()
-    {
-        return "Rybka: " + fishData + "\n Index: " + GetIndex() + "\n Hunger: "+hunger + "\n Health: "+heatlh;
     }
 
     public void SetNewDirection(Vector2 direction){
@@ -246,5 +167,10 @@ public partial class Fish : Entity
     public RandomNumberGenerator GetRng(){
         return rng;
     }
+    public override string ToString()
+    {
+        return "Rybka: " + fishData + "\n Index: " + GetIndex() + "\n Hunger: "+hungerComponent.GetHunger() + "\n Health: "+healthComponent.GetHealth();
+    }
+
 
 }

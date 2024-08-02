@@ -37,7 +37,7 @@ public partial class IdleState : State
 
     public override void Update(double delta){
         base.Update(delta);
-        if(fish.isHungry() && GetTree().GetNodesInGroup("food").Count>0 ){ //|| GetTree().GetNodesInGroup("fishFood").Count>0
+        if(fish.GetHungerComponent().isHungry() && GetTree().GetNodesInGroup("food").Count>0 ){ //|| GetTree().GetNodesInGroup("fishFood").Count>0
             EmitSignal(SignalName.transitioned,this,"Feeding");
         }
 

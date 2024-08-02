@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bxips6vkfxffr"]
+[gd_scene load_steps=13 format=3 uid="uid://bxips6vkfxffr"]
 
 [ext_resource type="Script" path="res://src/Fish.cs" id="1_fimy2"]
 [ext_resource type="Resource" uid="uid://2xp32elw8rdl" path="res://Resources/Fish/default.tres" id="2_najuh"]
@@ -9,16 +9,20 @@
 [ext_resource type="Script" path="res://src/StateMachine/States/Fish/IdleState.cs" id="4_cy616"]
 [ext_resource type="Script" path="res://src/StateMachine/States/Fish/FeedingState.cs" id="5_6ya3w"]
 [ext_resource type="Script" path="res://src/StateMachine/States/Fish/DeadState.cs" id="9_u575r"]
+[ext_resource type="Script" path="res://src/Components/FishHealthComponent.cs" id="10_sonm6"]
+[ext_resource type="Script" path="res://src/Components/FishHungerComponent.cs" id="11_wkq0q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x35se"]
 radius = 14.0
 
-[node name="Fish" type="Area2D" node_paths=PackedStringArray("animatedSprite2D") groups=["fish"]]
+[node name="Fish" type="Area2D" node_paths=PackedStringArray("healthComponent", "hungerComponent", "animatedSprite2D") groups=["fish"]]
 z_index = 10
 script = ExtResource("1_fimy2")
 fishData = ExtResource("2_najuh")
 coinScene = ExtResource("3_a8fvx")
 particleFrames = ExtResource("3_o8bb2")
+healthComponent = NodePath("HealthComponent")
+hungerComponent = NodePath("HungerComponent")
 animatedSprite2D = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -43,3 +47,9 @@ script = ExtResource("5_6ya3w")
 
 [node name="Dieded" type="Node" parent="StateMachine"]
 script = ExtResource("9_u575r")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("10_sonm6")
+
+[node name="HungerComponent" type="Node" parent="."]
+script = ExtResource("11_wkq0q")
