@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http.Headers;
+using System.Runtime.CompilerServices;
 
 public partial class IdleState : State
 {
@@ -19,9 +20,14 @@ public partial class IdleState : State
     {
         base.InitState();
         fish = (Fish) parent;
+        fish.onDie += Die;
         if(debug){
             GD.Print("Debug ON");
         }
+    }
+
+    void Die(Fish fish){
+        EmitSignal(SignalName.transitioned,this,"Dieded");
     }
 
     public override void Enter(){

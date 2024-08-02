@@ -44,6 +44,9 @@ public partial class Fish : Entity
     AnimatedSprite2D particle;
     //Particle jako scena i osobny skrypt
 
+    [Signal]
+    public delegate void onDieEventHandler(Fish fish);
+
     public void SetFishData(FishData fishData){
         this.fishData = fishData;
     }
@@ -102,6 +105,7 @@ public partial class Fish : Entity
                 starving=true;
             }
             if(hunger<-5){
+                EmitSignal(SignalName.onDie,this);
                 //QueueFree();
                 //Emit signal dieded
             }
