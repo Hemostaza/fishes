@@ -62,6 +62,13 @@ public partial class Fish : Entity
         SetTimer();
     }
 
+    public void SpawnFish(){
+        //spadanie do akwarium
+        if(fishData.spawnSize().X < 2){
+            AddToGroup("fishFood");
+        }
+    }
+
     public FishHungerComponent GetHungerComponent(){
         return hungerComponent;
     }
@@ -134,7 +141,7 @@ public partial class Fish : Entity
         if(healthComponent.GetHit(PlayerStatus.Instance.GetClickPower())){
             GetTree().Root.SetInputAsHandled();
         }
-        
+
         tank.SetActiveFish(this);
         GD.Print(tank.GetActiveFish());
     }

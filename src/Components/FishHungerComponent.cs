@@ -21,7 +21,10 @@ public partial class FishHungerComponent : Node
         FishData data = fish.fishData;
         this.fish = fish;
         fishSprites = fish.GetAnimatedSprite2D();
+
         foodGroup = data.carnivore ? "fishFood" : "food";
+        //fishfoodmaxsize mozna dodac?
+
         hungerSpeed = data.hungerSpeed;
         hungerMeter = data.hungerMeter;
         hunger = hungerMeter;
@@ -83,6 +86,9 @@ public partial class FishHungerComponent : Node
         hunger+=2;//rng.RandiRange(2,5); //+ selectedFoodNutrition
         if(fish.Scale.X<maxSize){
             fish.Scale += new Vector2(0.1f,0.1f);
+        }
+        if(fish.Scale.X>2){
+            fish.RemoveFromGroup("fishFood");
         }
     }
 
