@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public partial class FishHungerComponent : Node
@@ -14,10 +15,13 @@ public partial class FishHungerComponent : Node
 
     Food favFood;
 
+    String foodGroup;
+
     public void InitComponent(Fish fish){
         FishData data = fish.fishData;
         this.fish = fish;
         fishSprites = fish.GetAnimatedSprite2D();
+        foodGroup = data.carnivore ? "fishFood" : "food";
         hungerSpeed = data.hungerSpeed;
         hungerMeter = data.hungerMeter;
         hunger = hungerMeter;
@@ -43,6 +47,28 @@ public partial class FishHungerComponent : Node
             if(hunger>=hungerMeter){
                 hunger = hungerMeter;
             }
+    }
+
+    public bool FindFood(){
+        return GetTree().GetNodesInGroup(foodGroup).Count > 0;
+    }
+
+    public Node2D TargetedFood(){
+
+        Array<Node> foods = GetTree().GetNodesInGroup(foodGroup);
+
+        if(foods.Count>0){
+            Node2D closestFood = (Node2D) foods[0];
+            foreach (Node2D food in GetTree().GetNodesInGroup(foodGroup)){
+                float distance = fish.Position.DistanceTo(food.Position);
+                float distanceToClosestFood = fish.Position.DistanceTo(closestFood.Position);
+                if(distance < distanceToClosestFood){
+                    closestFood = food;
+                }
+            }
+            return closestFood;
+        }
+        return null;
     }
 
     public bool isHungry(){

@@ -90,20 +90,6 @@ public partial class Fish : Entity
         Modulate = color;
     }
 
-    public Food TargetedFood(){
-        Array<Node> foods = GetTree().GetNodesInGroup("food");
-        if(foods.Count>0){
-            Food closestFood = (Food) foods[0];
-            foreach (Food food in GetTree().GetNodesInGroup("food")){
-                float distance = Position.DistanceTo(food.Position);
-                if(distance<Position.DistanceTo(closestFood.Position)){
-                    closestFood = food;
-                }
-            }
-            return closestFood;
-        }
-        return null;
-    }
     public bool DropCoin(){
         if(coinScene!=null){
             Coin coin = (Coin) coinScene.Instantiate();
@@ -148,6 +134,7 @@ public partial class Fish : Entity
         if(healthComponent.GetHit(PlayerStatus.Instance.GetClickPower())){
             GetTree().Root.SetInputAsHandled();
         }
+        
         tank.SetActiveFish(this);
         GD.Print(tank.GetActiveFish());
     }

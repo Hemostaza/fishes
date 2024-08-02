@@ -6,7 +6,7 @@ public partial class FeedingState : State
 
     Fish fish;
 
-    Food target;
+    Node2D target;
 
     double searchTimer;
 
@@ -29,8 +29,8 @@ public partial class FeedingState : State
     public bool SearchForTarget(){
         if (animatedSprite2D.Animation == "swimm")
         {
-            Food oldTarget = target;
-            target = fish.TargetedFood();
+            Node2D oldTarget = target;
+            target = fish.GetHungerComponent().TargetedFood();
             if (target == null)
             {
                 EmitSignal(SignalName.transitioned, this, "Idle");
