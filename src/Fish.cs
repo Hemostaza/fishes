@@ -15,13 +15,7 @@ public partial class Fish : Entity
     [Export]
     public PackedScene coinScene;
 
-    bool starving;
-
     SpriteFrames sprites;
-
-    public bool isSpirteFlipped;
-
-    bool needFood = true;
 
     public Vector2 newDirection;
     public Vector2 oldDirection;
@@ -43,6 +37,7 @@ public partial class Fish : Entity
     FishHealthComponent healthComponent;
     [Export]
     FishHungerComponent hungerComponent;
+
 
     public void SetFishData(FishData fishData){
         this.fishData = fishData;
@@ -76,9 +71,7 @@ public partial class Fish : Entity
     }
 
     public void Die(bool fromHunger){
-        if(fromHunger){
-            EmitSignal(SignalName.onDie,this);
-        }
+        
     }
 
     void SetTimer(){
@@ -147,14 +140,14 @@ public partial class Fish : Entity
         if(animatedSprite2D.Animation == "eat"){
             animatedSprite2D.Play("swimm");
         }
-        
     }
 
     public override void OnLeftClicked(){
         base.OnLeftClicked();
 
-        healthComponent.GetHit(PlayerStatus.Instance.GetClickPower());
-
+        if(healthComponent.GetHit(PlayerStatus.Instance.GetClickPower())){
+            GetTree().Root.SetInputAsHandled();
+        }
         tank.SetActiveFish(this);
         GD.Print(tank.GetActiveFish());
     }

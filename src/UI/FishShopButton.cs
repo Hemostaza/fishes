@@ -13,7 +13,7 @@ public partial class FishShopButton : Control
     String fishValue;
 
     String fishName;
-    Tank tank;
+    Node tank;
 
     public override void _Ready()
     {

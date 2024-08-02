@@ -61,6 +61,10 @@ public partial class FeedingState : State
             SearchForTarget();
         }
 
+        if(fish.GetHungerComponent().GetHunger()<-5){
+            EmitSignal(SignalName.transitioned,this,"Dieded");
+        }
+
     }
     public override void PhysicsUpdate(double delta)
     {

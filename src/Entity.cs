@@ -34,7 +34,7 @@ public partial class Entity : Area2D
         }
     }
     virtual public void OnLeftClicked(){
-        GetTree().Root.SetInputAsHandled();
+        //GetTree().Root.SetInputAsHandled();
     }
     virtual public void OnRightClicked(){
         GetTree().Root.SetInputAsHandled();

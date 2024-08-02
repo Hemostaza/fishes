@@ -6,7 +6,7 @@ public partial class TankController : Node
 {
     public static TankController Instance { get; private set; }
 
-    Tank tank;
+    AnimatedSprite2D tank;
     PackedScene fishScene;
 
     PackedScene foodScene;
@@ -20,10 +20,10 @@ public partial class TankController : Node
         foodScene = ResourceLoader.Load<PackedScene>("res://Scenes/Food.tscn");
 
         //GD.Print("FishScene");
-        tank = (Tank) GetNode("/root/CHUJ/Tank");
+        tank = (AnimatedSprite2D) GetNode("/root/CHUJ/Tank");
     }
 
-    public Tank GetTank(){
+    public Node GetTank(){
         return tank;
     }
 
@@ -75,6 +75,7 @@ public partial class TankController : Node
         }
         activeFish = fish;
         activeFish.ZIndex += 10;
+        //emit signal on tab?
     }
 
 }

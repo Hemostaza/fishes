@@ -1,9 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://dlti5fu4oq66b"]
+[gd_scene load_steps=6 format=3 uid="uid://dlti5fu4oq66b"]
 
 [ext_resource type="Texture2D" uid="uid://bwfk1a3mr4nwn" path="res://Assets/Sprites/Tank.png" id="1_8mi47"]
-[ext_resource type="Script" path="res://src/Tank.cs" id="2_qo2tb"]
-[ext_resource type="PackedScene" uid="uid://cpw3jnonxif4s" path="res://Scenes/Food.tscn" id="3_6skbn"]
-[ext_resource type="PackedScene" uid="uid://bxips6vkfxffr" path="res://Scenes/Fish.tscn" id="4_yj2bn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c02jh"]
 atlas = ExtResource("1_8mi47")
@@ -38,8 +35,5 @@ animations = [{
 position = Vector2(357, 238.5)
 scale = Vector2(1.11875, 1.35278)
 sprite_frames = SubResource("SpriteFrames_bja6b")
-script = ExtResource("2_qo2tb")
-food = ExtResource("3_6skbn")
-fish = ExtResource("4_yj2bn")
 
 [node name="Food" type="Node" parent="."]

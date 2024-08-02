@@ -13,22 +13,18 @@ public partial class IdleState : State
     
 
     Fish fish;
-    bool flipped;
-    bool debug = false;
 
     public override void InitState()
     {
         base.InitState();
         fish = (Fish) parent;
-        fish.onDie += Die;
-        if(debug){
-            GD.Print("Debug ON");
-        }
+        //fish.onDie += Die;
+
     }
 
-    void Die(Fish fish){
-        EmitSignal(SignalName.transitioned,this,"Dieded");
-    }
+    // void Die(Fish fish){
+    //     EmitSignal(SignalName.transitioned,this,"Dieded");
+    // }
 
     public override void Enter(){
         base.Enter();
@@ -39,6 +35,9 @@ public partial class IdleState : State
         base.Update(delta);
         if(fish.GetHungerComponent().isHungry() && GetTree().GetNodesInGroup("food").Count>0 ){ //|| GetTree().GetNodesInGroup("fishFood").Count>0
             EmitSignal(SignalName.transitioned,this,"Feeding");
+        }
+        if(fish.GetHungerComponent().GetHunger()<-5){
+            EmitSignal(SignalName.transitioned,this,"Dieded");
         }
 
     }
@@ -52,7 +51,7 @@ public partial class IdleState : State
         }else{
             parent.Position += fish.newDirection*0.5f;
         }
-
+        
         base.PhysicsUpdate(delta);
     }
 

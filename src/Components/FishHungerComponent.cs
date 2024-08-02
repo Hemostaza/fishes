@@ -40,9 +40,6 @@ public partial class FishHungerComponent : Node
                 }
                 starving=true;
             }
-            if(hunger<-5){
-                fish.Die(true);
-            }
             if(hunger>=hungerMeter){
                 hunger = hungerMeter;
             }

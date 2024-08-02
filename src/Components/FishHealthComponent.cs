@@ -37,13 +37,15 @@ public partial class FishHealthComponent : Node
         }
     }
 
-    public void GetHit(float hit){
+    public bool GetHit(float hit){
         GD.Print("GET HIT"+hit);
         if(heatlh >= 0 && !chargingHealth){
             heatlh -= hit;
             CheckHealth();
             fish.StartFlash(new Color(100,100,100,100));
+            return true;
         }
+        return false;
     }
     void CheckHealth(){
         if(heatlh<=0){
