@@ -9,6 +9,10 @@ public partial class FishHealthComponent : Node
     double healthRegen;
 
     Fish fish;
+    
+    AnimatedSprite2D particle;
+    [Export]
+    SpriteFrames spriteFrames;
 
     public void InitComponent(Fish fish){
         this.fish = fish;
@@ -32,7 +36,7 @@ public partial class FishHealthComponent : Node
             if(heatlh>=maxHelath){
                 heatlh = maxHelath;
                 chargingHealth=false;
-                //particle.QueueFree();
+                particle.QueueFree();
             }
         }
     }
@@ -51,12 +55,14 @@ public partial class FishHealthComponent : Node
         if(heatlh<=0){
             fish.DropCoin();
             chargingHealth = true;
-            // particle = new AnimatedSprite2D
-            // {
-            //     SpriteFrames = particleFrames
-            // };
-            // AddChild(particle);
-            // particle.Play();
+
+            //Jakaś klasa spejclana na aprtiklesy w przyszłosci teraz chuj z tym
+
+            particle = new AnimatedSprite2D(){
+                SpriteFrames = spriteFrames
+            };
+            fish.AddChild(particle);
+            particle.Play();
         }
     }
 

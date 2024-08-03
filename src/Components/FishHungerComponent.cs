@@ -13,7 +13,8 @@ public partial class FishHungerComponent : Node
     float maxSize;
     Fish fish;
 
-    Food favFood;
+    String favFood;
+    float favBonus;
 
     String foodGroup;
 
@@ -21,6 +22,8 @@ public partial class FishHungerComponent : Node
         FishData data = fish.fishData;
         this.fish = fish;
         fishSprites = fish.GetAnimatedSprite2D();
+
+        favFood = data.favroiteFoodName;
 
         foodGroup = data.carnivore ? "fishFood" : "food";
         //fishfoodmaxsize mozna dodac?
@@ -56,13 +59,13 @@ public partial class FishHungerComponent : Node
         return GetTree().GetNodesInGroup(foodGroup).Count > 0;
     }
 
-    public Node2D TargetedFood(){
+    public Food TargetedFood(){
 
         Array<Node> foods = GetTree().GetNodesInGroup(foodGroup);
 
         if(foods.Count>0){
-            Node2D closestFood = (Node2D) foods[0];
-            foreach (Node2D food in GetTree().GetNodesInGroup(foodGroup)){
+            Food closestFood = (Food) foods[0];
+            foreach (Food food in GetTree().GetNodesInGroup(foodGroup)){
                 float distance = fish.Position.DistanceTo(food.Position);
                 float distanceToClosestFood = fish.Position.DistanceTo(closestFood.Position);
                 if(distance < distanceToClosestFood){
@@ -79,11 +82,15 @@ public partial class FishHungerComponent : Node
         return hunger<=halfMeter ? true : false;
     }
 
-    public void Eated(){
+    public void Eated(String foodName, float nutrition){
         hunger = 0;
         starving = false;
         fishSprites.Modulate = new Color(1,1,1,1);
-        hunger+=2;//rng.RandiRange(2,5); //+ selectedFoodNutrition
+        hunger += nutrition;
+        if(foodName.Equals(favFood)){
+            hunger*=2;
+        }
+        //hunger+=2;//rng.RandiRange(2,5); //+ selectedFoodNutrition
         if(fish.Scale.X<maxSize){
             fish.Scale += new Vector2(0.1f,0.1f);
         }
@@ -91,7 +98,6 @@ public partial class FishHungerComponent : Node
             fish.RemoveFromGroup("fishFood");
         }
     }
-
     public double GetHunger(){
         return hunger;
     }

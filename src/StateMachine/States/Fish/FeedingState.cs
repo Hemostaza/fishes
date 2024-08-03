@@ -6,7 +6,7 @@ public partial class FeedingState : State
 
     Fish fish;
 
-    Node2D target;
+    Food target;
 
     double searchTimer;
 
@@ -82,13 +82,11 @@ public partial class FeedingState : State
                 parent.Position += direction;
             }
             if(fish.OverlapsArea(target) && animatedSprite2D.Animation=="swimm"){
-                fish.GetHungerComponent().Eated();
+                fish.GetHungerComponent().Eated(target.GetFoodData().Name,target.GetFoodData().nutrition);
                 target.QueueFree();
                 animatedSprite2D.Play("eat");
                 EmitSignal(SignalName.transitioned,this,"Idle");
             }
         }
-            
     }
-
 }

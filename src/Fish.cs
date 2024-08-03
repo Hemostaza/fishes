@@ -27,7 +27,7 @@ public partial class Fish : Entity
 
     [Export]
     SpriteFrames particleFrames;
-    AnimatedSprite2D particle;
+    //AnimatedSprite2D particle;
     //Particle jako scena i osobny skrypt
 
     [Signal]
@@ -60,6 +60,7 @@ public partial class Fish : Entity
         
         animatedSprite2D.SpriteFrames = fishData.sprites;
         SetTimer();
+        SpawnFish();
     }
 
     public void SpawnFish(){
@@ -77,8 +78,8 @@ public partial class Fish : Entity
         return healthComponent;
     }
 
-    public void Die(bool fromHunger){
-        
+    public void Die(){
+        GD.Print("Nothing");
     }
 
     void SetTimer(){
@@ -105,7 +106,9 @@ public partial class Fish : Entity
             if(Scale.X>=1){
                 coin.SetCoinData(fishData.coinDatas[0]);
                 GetParent().AddChild(coin);
+                
                 return true;  
+                
             }
         }
         return false;

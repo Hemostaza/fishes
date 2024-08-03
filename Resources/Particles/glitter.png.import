@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://m0daq8momocg"
-path="res://.godot/imported/health.png-450e5f69497c53a04b8d9a149a57347f.ctex"
+uid="uid://cw54ivyet14v1"
+path="res://.godot/imported/glitter.png-165d00357c96072e8d30189e8866aca7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Particle/health.png"
-dest_files=["res://.godot/imported/health.png-450e5f69497c53a04b8d9a149a57347f.ctex"]
+source_file="res://Resources/Particles/glitter.png"
+dest_files=["res://.godot/imported/glitter.png-165d00357c96072e8d30189e8866aca7.ctex"]
 
 [params]
 

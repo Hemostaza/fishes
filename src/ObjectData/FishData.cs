@@ -13,16 +13,16 @@ public partial class FishData : Resource
     [Export]
     public int maxSize;
     [Export]
-    Coin coin;
-    [Export]
     public float maxSpeed;
     
     [Export]
     public bool carnivore;
 
-    /*[Export]
-    FoodData favroiteFood
-    */
+    [Export]
+    public String favroiteFoodName;
+    [Export]
+    public int favroiteFoodBonus;
+    
 
     [Export]
     public Array<CoinData> coinDatas;
