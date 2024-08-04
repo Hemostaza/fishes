@@ -1,0 +1,22 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://bwf610miuyp8h"]
+
+[ext_resource type="Resource" uid="uid://dabxe8bqyvkda" path="res://Resources/Coin/goldCoin.tres" id="1_gefg1"]
+[ext_resource type="Script" path="res://src/ObjectData/FishData.cs" id="2_xujqs"]
+[ext_resource type="SpriteFrames" uid="uid://bbb33rl37olbl" path="res://Resources/Fish/Sprites/defaultSprites.tres" id="3_fdaog"]
+
+[resource]
+script = ExtResource("2_xujqs")
+Name = "Default"
+sprites = ExtResource("3_fdaog")
+maxSize = 2
+maxSpeed = 1.0
+carnivore = false
+favroiteFoodName = "defaultFood"
+favroiteFoodBonus = 0
+coinDatas = Array[Object]([ExtResource("1_gefg1")])
+minSize = 1.0
+value = 1
+hungerMeter = 10
+hungerSpeed = 5.0
+maxHealth = 1.0
+healthRegen = 1.0

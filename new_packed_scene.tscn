@@ -1,0 +1,93 @@
+[gd_scene load_steps=8 format=3 uid="uid://dyqpt3y3ghe88"]
+
+[ext_resource type="Theme" uid="uid://c5wp5trs7n07o" path="res://Themes/GUI.tres" id="1_kmp2h"]
+[ext_resource type="Script" path="res://src/UI/FishShopButton.cs" id="2_dgoa6"]
+[ext_resource type="FontFile" uid="uid://cdjcinofxacyd" path="res://Assets/Fonts/Minecraft.ttf" id="3_4s5um"]
+[ext_resource type="Texture2D" uid="uid://kkpcyp02rurh" path="res://Assets/Sprites/coi.png" id="4_wtogq"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ljku1"]
+load_path = "res://.godot/imported/sprite_02.png-ff1512e23d27a133f946b3817103dd8b.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hgs3i"]
+content_margin_left = 0.0
+content_margin_top = 4.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = SubResource("CompressedTexture2D_ljku1")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_jho17"]
+font = ExtResource("3_4s5um")
+font_color = Color(0.996094, 0.859375, 0.578125, 1)
+
+[node name="ButtonPanel" type="Panel" node_paths=PackedStringArray("button", "label")]
+self_modulate = Color(1, 1, 1, 0)
+clip_contents = true
+custom_minimum_size = Vector2(64, 72)
+offset_right = 64.0
+offset_bottom = 72.0
+size_flags_horizontal = 3
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_kmp2h")
+script = ExtResource("2_dgoa6")
+button = NodePath("Panel/Button")
+label = NodePath("Value")
+
+[node name="Value" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxTexture_hgs3i")
+text = "$90000"
+label_settings = SubResource("LabelSettings_jho17")
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="Panel"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_right = -8.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_kmp2h")
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_wtogq")
+expand_mode = 1
+stretch_mode = 5

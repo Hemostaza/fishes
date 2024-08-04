@@ -109,7 +109,7 @@ label_settings = SubResource("LabelSettings_w73ax")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Panel" type="Panel" parent="Panel/NinePatchRect/FishShopTab"]
+[node name="Panel" type="Panel" parent="Panel/NinePatchRect/FishShopTab" node_paths=PackedStringArray("buttonGrid")]
 custom_minimum_size = Vector2(130, 430)
 layout_mode = 1
 anchors_preset = 15
@@ -121,6 +121,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("6_4v3pe")
 script = ExtResource("6_fs1tv")
+buttonScene = ExtResource("4_a08fm")
+buttonGrid = NodePath("GridContainer")
 
 [node name="GridContainer" type="GridContainer" parent="Panel/NinePatchRect/FishShopTab/Panel"]
 custom_minimum_size = Vector2(120, 0)
@@ -136,38 +138,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/h_separation = 14
 columns = 2
-
-[node name="ButtonPanel1" parent="Panel/NinePatchRect/FishShopTab/Panel/GridContainer" node_paths=PackedStringArray("button", "label") instance=ExtResource("4_a08fm")]
-layout_mode = 2
-button = NodePath("../ButtonPanel2/Panel/Button")
-label = NodePath("../ButtonPanel2/Value")
-
-[node name="ButtonPanel2" parent="Panel/NinePatchRect/FishShopTab/Panel/GridContainer" instance=ExtResource("4_a08fm")]
-layout_mode = 2
-
-[node name="ButtonPanel3" parent="Panel/NinePatchRect/FishShopTab/Panel/GridContainer" instance=ExtResource("4_a08fm")]
-layout_mode = 2
-
-[node name="ButtonPanel4" parent="Panel/NinePatchRect/FishShopTab/Panel/GridContainer" instance=ExtResource("4_a08fm")]
-layout_mode = 2
-
-[node name="ButtonPanel5" parent="Panel/NinePatchRect/FishShopTab/Panel/GridContainer" instance=ExtResource("4_a08fm")]
-layout_mode = 2
-
-[node name="ButtonPanel6" parent="Panel/NinePatchRect/FishShopTab/Panel/GridContainer" instance=ExtResource("4_a08fm")]
-layout_mode = 2
-
-[node name="ButtonPanel7" parent="Panel/NinePatchRect/FishShopTab/Panel/GridContainer" instance=ExtResource("4_a08fm")]
-layout_mode = 2
-
-[node name="ButtonPanel8" parent="Panel/NinePatchRect/FishShopTab/Panel/GridContainer" instance=ExtResource("4_a08fm")]
-layout_mode = 2
-
-[node name="ButtonPanel9" parent="Panel/NinePatchRect/FishShopTab/Panel/GridContainer" instance=ExtResource("4_a08fm")]
-layout_mode = 2
-
-[node name="ButtonPanel10" parent="Panel/NinePatchRect/FishShopTab/Panel/GridContainer" instance=ExtResource("4_a08fm")]
-layout_mode = 2
 
 [node name="FishInfoTab" type="Panel" parent="Panel/NinePatchRect"]
 visible = false
@@ -209,7 +179,6 @@ offset_right = 80.0
 offset_bottom = 199.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_p456u")
-script = ExtResource("6_fs1tv")
 
 [node name="Control" type="Control" parent="Panel/NinePatchRect/FishInfoTab/FishGraph"]
 custom_minimum_size = Vector2(160, 160)

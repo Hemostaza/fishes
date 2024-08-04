@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Collections.Immutable;
 using System.Linq;
 
 public partial class FishDataResources : Node
@@ -8,7 +9,7 @@ public partial class FishDataResources : Node
     public Dictionary<String, FishData> FishResources  { get; private set; }
     Array<FishData> fishDatas    { get; set; }
 
-    FishData[] fishDatasByValue { get; set;}
+    Array<FishData> fishDatasByValue { get; set;}
 
     string fishResourcesPath = "res://Resources/Fish/";
     public static FishDataResources Instance { get; private set; }
@@ -19,8 +20,12 @@ public partial class FishDataResources : Node
         FishResources = new Dictionary<string, FishData>();
         fishDatas = new Array<FishData>();
         LoadFishData(fishResourcesPath);
-        fishDatasByValue = fishDatas.OrderBy(item => item.value).ToArray();
+        fishDatas.OrderBy(item => item.value);
         
+    }
+
+    public Array<FishData> GetFishDatas(){
+        return fishDatas;
     }
 
     public void LoadFishData(String path){
@@ -36,6 +41,6 @@ public partial class FishDataResources : Node
     }
 
     public FishData GetFishDataByIndex(int index){
-        return fishDatasByValue[index];
+        return fishDatas[index];
     }
 }

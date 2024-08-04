@@ -32,15 +32,20 @@ public partial class TankController : Node
     public void SpawnFish(string fishName)
     {
         if(fishScene!=null){
+
             Fish instance = (Fish) fishScene.Instantiate();
 
             Vector2 spawnPos = new Vector2(rng.RandfRange(10,710),0);
+
+            // fishName = rng.RandiRange(0,2)>1 ? "Default" : "Default1";
+
             FishData fishData = FishDataResources.Instance.GetFishDataByName(fishName);
             //instance.SetFishData(fishData);
             instance.SpawnFish(fishData);
             instance.Position = spawnPos;
             tank.AddChild(instance);
             
+            GD.Print(fishData);
             //GD.Print("Try to spawn fish "+fishData.Name );
         }
     }

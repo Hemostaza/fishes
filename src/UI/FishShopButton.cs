@@ -15,25 +15,27 @@ public partial class FishShopButton : Control
     String fishName;
     Node2D tank;
 
+    bool fishUnlocked;
     public override void _Ready()
     {
         tank = TankController.Instance.GetTank();
         button.ButtonDown += OnClick;
-        TestButtonData();
+        //TestButtonData();
         base._Ready();
     }
 
     public void TestButtonData(){
         FishData fish = FishDataResources.Instance.GetFishDataByIndex(1);
-        button.Icon = fish.icon;
+        //button.Icon = fish.icon;
         label.Text = fish.value.ToString();
         fishName = fish.Name;
     }
 
-    public void SetButtonData(Texture2D fishIco, String value, String name){
+    public void SetButtonData(String name, int value, Texture2D fishIco){
         button.Icon = fishIco;
-        label.Text = value;
+        label.Text = value.ToString();
         fishName = name;
+        button.Disabled = PlayerStatus.Instance.IsFishLocked(name);
     }
 
     public void OnClick(){
