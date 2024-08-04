@@ -18,4 +18,4 @@ autoplay = "default"
 [node name="Tank" type="Node2D" parent="."]
 
 [node name="Fish" parent="Tank" instance=ExtResource("1_k76qi")]
-position = Vector2(401, 113)
+position = Vector2(316, 98)

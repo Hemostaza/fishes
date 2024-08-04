@@ -34,7 +34,7 @@ public partial class Food : Area2D
     }
     public override void _PhysicsProcess(double delta)
     {
-        if(Position.Y < 160){
+        if(Position.Y < 440){
             Position += Vector2.Down;
         }
         base._PhysicsProcess(delta);

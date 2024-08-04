@@ -30,7 +30,7 @@ public partial class Coin : Area2D
     public override void _Process(double delta)
     {
         base._Process(delta);
-        if(Position.Y < 160){
+        if(Position.Y < 440){
             Position += Vector2.Down;
         }else{
             tween = GetTree().CreateTween();
