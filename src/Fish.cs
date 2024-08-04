@@ -39,9 +39,9 @@ public partial class Fish : Entity
     FishHungerComponent hungerComponent;
 
 
-    public void SetFishData(FishData fishData){
-        this.fishData = fishData;
-    }
+    // public void SetFishData(FishData fishData){
+    //     this.fishData = fishData;
+    // }
     public FishData GetFishData(){
         return fishData;
     }
@@ -56,16 +56,20 @@ public partial class Fish : Entity
         tank = TankController.Instance;
         animatedSprite2D.AnimationFinished += OnAnimationFinished;
 
-        Scale = fishData.spawnSize();
+        //Scale = fishData.spawnSize();
         
         animatedSprite2D.SpriteFrames = fishData.sprites;
         SetTimer();
-        SpawnFish();
+        //SpawnFish();
     }
 
-    public void SpawnFish(){
+    public void SpawnFish(FishData data){
         //spadanie do akwarium
-        if(fishData.spawnSize().X < 2){
+        fishData = data;
+
+        Scale = fishData.spawnSize();
+        
+        if(Scale.X < 2){
             AddToGroup("fishFood");
         }
     }

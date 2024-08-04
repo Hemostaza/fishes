@@ -6,24 +6,26 @@ public partial class TankController : Node
 {
     public static TankController Instance { get; private set; }
 
-    AnimatedSprite2D tank;
+    Node2D tank;
     PackedScene fishScene;
 
     PackedScene foodScene;
 
     Fish activeFish;
 
+    RandomNumberGenerator rng; 
     public override void _Ready()
     {
         Instance = this;
         fishScene = ResourceLoader.Load<PackedScene>("res://Scenes/Fish.tscn");
         foodScene = ResourceLoader.Load<PackedScene>("res://Scenes/Food.tscn");
 
+        rng = new RandomNumberGenerator();
         //GD.Print("FishScene");
-        tank = (AnimatedSprite2D) GetNode("/root/CHUJ/Tank");
+        tank = (Node2D) GetNode("/root/CHUJ/Tank");
     }
 
-    public Node GetTank(){
+    public Node2D GetTank(){
         return tank;
     }
 
@@ -31,8 +33,12 @@ public partial class TankController : Node
     {
         if(fishScene!=null){
             Fish instance = (Fish) fishScene.Instantiate();
+
+            Vector2 spawnPos = new Vector2(rng.RandfRange(10,710),0);
             FishData fishData = FishDataResources.Instance.GetFishDataByName(fishName);
-            instance.SetFishData(fishData);
+            //instance.SetFishData(fishData);
+            instance.SpawnFish(fishData);
+            instance.Position = spawnPos;
             tank.AddChild(instance);
             
             //GD.Print("Try to spawn fish "+fishData.Name );
@@ -46,7 +52,7 @@ public partial class TankController : Node
                 Food instance = (Food) foodScene.Instantiate();
                 FoodData foodData = FoodDataResources.Instance.GetFoodDataByName(Name);
                 instance.SetFoodData(foodData);
-                Vector2 mousePos = tank.GetLocalMousePosition();
+                Vector2 mousePos = tank.GetGlobalMousePosition();
                 instance.Position = mousePos;
                 tank.AddChild(instance);
             }
@@ -78,6 +84,10 @@ public partial class TankController : Node
         activeFish = fish;
         activeFish.ZIndex += 10;
         //emit signal on tab?
+    }
+
+    public RandomNumberGenerator GetRandomNumberGenerator(){
+        return rng;
     }
 
 }

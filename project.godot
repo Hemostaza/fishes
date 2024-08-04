@@ -17,10 +17,10 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-FishDataResources="*res://src/FishDataResources.cs"
+FishDataResources="*res://src/Loaders/FishDataResources.cs"
 TankController="*res://src/TankController.cs"
 PlayerStatus="*res://src/PlayerStatus.cs"
-FoodDataResources="*res://src/FoodDataResources.cs"
+FoodDataResources="*res://src/Loaders/FoodDataResources.cs"
 
 [display]
 

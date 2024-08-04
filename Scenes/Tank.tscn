@@ -35,5 +35,3 @@ animations = [{
 position = Vector2(357, 238.5)
 scale = Vector2(1.11875, 1.35278)
 sprite_frames = SubResource("SpriteFrames_bja6b")
-
-[node name="Food" type="Node" parent="."]

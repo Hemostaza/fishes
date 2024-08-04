@@ -8,9 +8,9 @@
 [ext_resource type="Script" path="res://src/StateMachine/States/Fish/IdleState.cs" id="4_cy616"]
 [ext_resource type="Script" path="res://src/StateMachine/States/Fish/FeedingState.cs" id="5_6ya3w"]
 [ext_resource type="Script" path="res://src/StateMachine/States/Fish/DeadState.cs" id="9_u575r"]
+[ext_resource type="Script" path="res://src/StateMachine/States/Fish/SpawnState.cs" id="10_5uc55"]
 [ext_resource type="Script" path="res://src/Components/FishHealthComponent.cs" id="10_sonm6"]
-[ext_resource type="SpriteFrames" uid="uid://clax6hharwswk" path="res://Resources/Particles/particleSpriteFrames.tres" id="11_fbd5c"]
-[ext_resource type="SpriteFrames" uid="uid://clax6hharwswk" path="res://Resources/Particles/glitter.tres" id="11_utjnb"]
+[ext_resource type="SpriteFrames" uid="uid://clax6hharwswk" path="res://Resources/Particles/particleSpriteFrames.tres" id="11_utjnb"]
 [ext_resource type="Script" path="res://src/Components/FishHungerComponent.cs" id="11_wkq0q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x35se"]
@@ -21,7 +21,7 @@ z_index = 10
 script = ExtResource("1_fimy2")
 fishData = ExtResource("2_najuh")
 coinScene = ExtResource("3_a8fvx")
-particleFrames = ExtResource("11_fbd5c")
+particleFrames = ExtResource("11_utjnb")
 healthComponent = NodePath("HealthComponent")
 hungerComponent = NodePath("HungerComponent")
 animatedSprite2D = NodePath("AnimatedSprite2D")
@@ -37,7 +37,7 @@ shape = SubResource("CircleShape2D_x35se")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState", "parent")]
 script = ExtResource("3_0hsun")
-initialState = NodePath("Idle")
+initialState = NodePath("Spawn")
 parent = NodePath("..")
 
 [node name="Idle" type="Node" parent="StateMachine"]
@@ -48,6 +48,9 @@ script = ExtResource("5_6ya3w")
 
 [node name="Dieded" type="Node" parent="StateMachine"]
 script = ExtResource("9_u575r")
+
+[node name="Spawn" type="Node" parent="StateMachine"]
+script = ExtResource("10_5uc55")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("10_sonm6")

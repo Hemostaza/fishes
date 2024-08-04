@@ -12,6 +12,7 @@ maxSize = 2
 maxSpeed = 1.0
 carnivore = false
 favroiteFoodName = "defaultFood"
+favroiteFoodBonus = 0
 coinDatas = Array[Object]([ExtResource("1_sx78k")])
 minSize = 1.0
 value = 5
