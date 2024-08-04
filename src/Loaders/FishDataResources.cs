@@ -7,7 +7,7 @@ using System.Linq;
 public partial class FishDataResources : Node
 {
     public Dictionary<String, FishData> FishResources  { get; private set; }
-    Array<FishData> fishDatas    { get; set; }
+    FishData[] fishDatas    { get; set; }
 
     Array<FishData> fishDatasByValue { get; set;}
 
@@ -18,13 +18,14 @@ public partial class FishDataResources : Node
     {
         Instance = this;
         FishResources = new Dictionary<string, FishData>();
-        fishDatas = new Array<FishData>();
+        //fishDatas = new Array<FishData>();
         LoadFishData(fishResourcesPath);
-        fishDatas.OrderBy(item => item.value);
+        //fishDatas.OrderBy(item => item.value).ToArray();
+        fishDatas = FishResources.Values.OrderBy(item => item.value).ToArray();
         
     }
 
-    public Array<FishData> GetFishDatas(){
+    public FishData[] GetFishDatas(){
         return fishDatas;
     }
 
@@ -32,7 +33,7 @@ public partial class FishDataResources : Node
         foreach (var filePath in DirAccess.GetFilesAt(path)){
             FishData res = (FishData) GD.Load(path+"/"+filePath);
             FishResources[res.Name] = res;
-            fishDatas.Add(res);
+            //fishDatas.Add(res);
         }
     }
 

@@ -23,8 +23,8 @@ public partial class FishShopTab : Panel
     public void InsertButtons(){
         //GD.Print(fishDataResources.fishDatasByValue[0]);
         if(buttonScene!=null){
-            foreach(var fish in fishDataResources.FishResources){
-                FishData fishData = fish.Value;
+            foreach(var fish in fishDataResources.GetFishDatas()){
+                FishData fishData = fish;
                 GD.Print(fishData);
                 FishShopButton instance = (FishShopButton) buttonScene.Instantiate();
                 instance.SetButtonData(fishData.Name,fishData.value,fishData.icon);
