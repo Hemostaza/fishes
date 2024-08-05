@@ -29,7 +29,7 @@ public partial class TankController : Node
         return tank;
     }
 
-    public void SpawnFish(string fishName)
+    public void SpawnFish(int index)
     {
         if(fishScene!=null){
 
@@ -39,13 +39,12 @@ public partial class TankController : Node
 
             // fishName = rng.RandiRange(0,2)>1 ? "Default" : "Default1";
 
-            FishData fishData = FishDataResources.Instance.GetFishDataByName(fishName);
+            FishData fishData = FishDataResources.Instance.GetFishDataByIndex(index);
             //instance.SetFishData(fishData);
             instance.SpawnFish(fishData);
             instance.Position = spawnPos;
             tank.AddChild(instance);
             
-            GD.Print(fishData);
             //GD.Print("Try to spawn fish "+fishData.Name );
         }
     }

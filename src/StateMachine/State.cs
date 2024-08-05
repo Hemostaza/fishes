@@ -26,7 +26,6 @@ public partial class State : Node
     }
 
     virtual public void Enter(){
-        GD.Print(Name);
     }
 
     virtual public void Exit(){

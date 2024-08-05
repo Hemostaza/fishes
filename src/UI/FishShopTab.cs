@@ -23,13 +23,19 @@ public partial class FishShopTab : Panel
     public void InsertButtons(){
         //GD.Print(fishDataResources.fishDatasByValue[0]);
         if(buttonScene!=null){
-            foreach(var fish in fishDataResources.GetFishDatas()){
-                FishData fishData = fish;
-                GD.Print(fishData);
+            FishData[] fishDatas = fishDataResources.GetFishDatas();
+            for(int i = 0; i<fishDatas.Length;i++){
                 FishShopButton instance = (FishShopButton) buttonScene.Instantiate();
-                instance.SetButtonData(fishData.Name,fishData.value,fishData.icon);
+                instance.SetButtonData(i,fishDatas[i].value,fishDatas[i].icon);
                 buttonGrid.AddChild(instance);
             }
+            // foreach(var fish in fishDataResources.GetFishDatas()){
+            //     FishData fishData = fish;
+            //     GD.Print(fishData);
+            //     FishShopButton instance = (FishShopButton) buttonScene.Instantiate();
+            //     instance.SetButtonData(fishData.Name,fishData.value,fishData.icon);
+            //     buttonGrid.AddChild(instance);
+            // }
         }
         //foreach(FishData fish in fishDataResources.GetFishDatas()){
             // SetButtonData(Texture2D fishIco, String value, String name){

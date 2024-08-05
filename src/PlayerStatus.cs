@@ -13,47 +13,63 @@ public partial class PlayerStatus : Node
 
     float fishHealthRegeneration;
 
-    Dictionary<String, bool> lockedFish;
+    //Dictionary<String, bool> lockedFish;
+    bool[] lockedFish;
 
     [Signal]
     public delegate void onFishUnlockedEventHandler(String fishName);
 
-    public void SetUnlockedFishForStart(){
-        lockedFish = new Dictionary<String, bool>();
-        foreach (FishData fish in FishDataResources.Instance.GetFishDatas()){
-            lockedFish[fish.Name] = true;
+    public void SetLockedFishForStart(){
+        lockedFish = new bool[FishDataResources.Instance.GetFishDatas().Length];
+        for(int i = 0;i<lockedFish.Length;i++){
+            lockedFish[i] = true;
         }
+        // lockedFish = new Dictionary<String, bool>();
+        // foreach (FishData fish in FishDataResources.Instance.GetFishDatas()){
+        //     lockedFish[fish.Name] = true;
+        // }
     }
 
-    public Dictionary<String, bool> GetUnlockedFish(){
+    // public Dictionary<String, bool> GetUnlockedFish(){
+    //     return lockedFish;
+    // }
+
+    public bool[] GetLockedFishes(){
         return lockedFish;
     }
 
-    public bool IsFishLocked(FishData fish){
-        return IsFishLocked(fish.Name);
-    }
-    public bool IsFishLocked(String fishName){
-        return lockedFish[fishName];
+    public bool IsFishLocked(int index){
+        return lockedFish[index];
     }
 
-    public void UnlockFish(FishData fish){
-        UnlockFish(fish.Name);
+    public void UnlockFish(int index){
+        lockedFish[index] = false;
     }
-    public void UnlockFish(String fishName){
-        lockedFish[fishName] = false;
-    }
+
+    // public bool IsFishLocked(FishData fish){
+    //     return IsFishLocked(fish.Name);
+    // }
+    // public bool IsFishLocked(String fishName){
+    //     return lockedFish[fishName];
+    // }
+
+    // public void UnlockFish(FishData fish){
+    //     UnlockFish(fish.Name);
+    // }
+    // public void UnlockFish(String fishName){
+    //     lockedFish[fishName] = false;
+    // }
 
     public override void _Ready()
     {
-        SetUnlockedFishForStart();
+        SetLockedFishForStart();
         Instance = this;
         maxFoodCount = 1;
         clickPower = 1;
         fishHealthRegeneration = 1;
         selectedFood = 0;
 
-        UnlockFish("Default");
-        UnlockFish("Default1");
+        UnlockFish(0);
 
         //GD.Print(IsFishUnlocked("Default"));
     }

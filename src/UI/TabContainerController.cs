@@ -37,9 +37,6 @@ public partial class TabContainerController : Panel
         foreach(Control tab in tabs){
             tab.Visible = false;
         }
-        //tabs[0].Visible = true;
-        //buttons[activeTab].Disabled = true;
-        //ChangeActiveTab(false,0);
     }
 
     public void ChangeActiveTab(bool pressed, int tab){
@@ -59,26 +56,6 @@ public partial class TabContainerController : Panel
         if(!pressed){
             ClosePanel();
         }
-        // if(!isShowed){
-        //     ShowPanel();
-        // }
-        // if(tab<0){
-        //     ClosePanel();
-        // }
-        // if(tab>=tabs.Count){
-        //     return -1;
-        // }
-        // if(tab==activeTab){
-        //     ClosePanel();
-        // }
-        // previousTab = activeTab;
-        // //buttons[previousTab].Disabled = false;
-        // //buttons[tab].Disabled = true;
-        // tabs[previousTab].Visible = false;
-        // buttons[previousTab].ButtonPressed = false;
-        // activeTab = tab;
-        // tabs[activeTab].Visible = true;
-        // return activeTab;
     }
 
     public void ToggleShow(){
@@ -88,16 +65,13 @@ public partial class TabContainerController : Panel
     }
 
     public void ShowPanel(){
-        GD.Print(Position+" "+panelSize.X);
         Position -= new Vector2(170,0);
-        GD.Print("Powinno sie pojawic "+Position);
         isShowed = true;
         togglePanelButton.Icon = closeIco;
     }
 
     public void ClosePanel(){
         Position += new Vector2(170,0);
-        GD.Print("Powinno schowac "+Position);
         isShowed = false;
         if(activeTab!=-1){
             tabs[activeTab].Visible = false;

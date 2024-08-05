@@ -12,7 +12,7 @@ public partial class FishShopButton : Control
     Texture2D fishIcon;
     String fishValue;
 
-    String fishName;
+    int fishIndex;
     Node2D tank;
 
     bool fishUnlocked;
@@ -28,19 +28,27 @@ public partial class FishShopButton : Control
         FishData fish = FishDataResources.Instance.GetFishDataByIndex(1);
         //button.Icon = fish.icon;
         label.Text = fish.value.ToString();
-        fishName = fish.Name;
+        //fishName = fish.Name;
     }
 
-    public void SetButtonData(String name, int value, Texture2D fishIco){
+    public void SetButtonData(String name,int index, int value, Texture2D fishIco){
         button.Icon = fishIco;
         label.Text = value.ToString();
-        fishName = name;
-        button.Disabled = PlayerStatus.Instance.IsFishLocked(name);
+        fishIndex = index;
+        //fishName = name;
+        button.Disabled = PlayerStatus.Instance.IsFishLocked(index);
+    }
+
+    public void SetButtonData(int index,int value, Texture2D fishIco){
+        button.Icon = fishIco;
+        label.Text = value.ToString();
+        fishIndex = index;
+        button.Disabled = PlayerStatus.Instance.IsFishLocked(index);
     }
 
     public void OnClick(){
         //tank.SpawnFish(fishName);
-        TankController.Instance.SpawnFish(fishName);
+        TankController.Instance.SpawnFish(fishIndex);
         //GD.Print("Klikniete"); spawn fishdata xD spawn fish by name: spawnFish.
     }
     
