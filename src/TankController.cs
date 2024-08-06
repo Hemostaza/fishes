@@ -48,13 +48,13 @@ public partial class TankController : Node
             //GD.Print("Try to spawn fish "+fishData.Name );
         }
     }
-    public  void SpawnFood(string Name){
+    public  void SpawnFood(int index){
         //GD.Print("spawn tank");
         if(GetFoodCountInTank() < PlayerStatus.Instance.GetMaxFoodCount()){
             //index = FoodDataResources.Instance.GetFoodByIndex();
             if(foodScene!=null){
                 Food instance = (Food) foodScene.Instantiate();
-                FoodData foodData = FoodDataResources.Instance.GetFoodDataByName(Name);
+                FoodData foodData = FoodDataResources.Instance.GetFoodDataByIndex(index);
                 instance.SetFoodData(foodData);
                 Vector2 mousePos = tank.GetGlobalMousePosition();
                 instance.Position = mousePos;
@@ -73,7 +73,7 @@ public partial class TankController : Node
         if(@event is InputEventMouseButton mouseButton){
             
             if(mouseButton.Pressed){
-                SpawnFood("defaultFood");
+                SpawnFood(0);
             }
         }
     }
