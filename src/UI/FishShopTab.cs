@@ -1,9 +1,9 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public partial class FishShopTab : Panel
 {
-    //FishData[] fishDatas;
     [Export]
     PackedScene buttonScene;
     [Export]
@@ -12,43 +12,31 @@ public partial class FishShopTab : Panel
     FishDataResources fishDataResources;
     PlayerStatus playerStatus;
 
+    Array<FishShopButton> fishShopButtons;
+
     public override void _Ready()
     {
         base._Ready();
         fishDataResources = FishDataResources.Instance;
         playerStatus = PlayerStatus.Instance;
+        playerStatus.onFishUnlocked += UnlockButton;
+        fishShopButtons = new Array<FishShopButton>();
         InsertButtons();
     }
 
-    public void InsertButtons(){
+    void InsertButtons(){
         //GD.Print(fishDataResources.fishDatasByValue[0]);
         if(buttonScene!=null){
             FishData[] fishDatas = fishDataResources.GetFishDatas();
             for(int i = 0; i<fishDatas.Length;i++){
                 FishShopButton instance = (FishShopButton) buttonScene.Instantiate();
                 instance.SetButtonData(i,fishDatas[i].value,fishDatas[i].icon);
+                fishShopButtons.Add(instance);
                 buttonGrid.AddChild(instance);
             }
-            // foreach(var fish in fishDataResources.GetFishDatas()){
-            //     FishData fishData = fish;
-            //     GD.Print(fishData);
-            //     FishShopButton instance = (FishShopButton) buttonScene.Instantiate();
-            //     instance.SetButtonData(fishData.Name,fishData.value,fishData.icon);
-            //     buttonGrid.AddChild(instance);
-            // }
         }
-        //foreach(FishData fish in fishDataResources.GetFishDatas()){
-            // SetButtonData(Texture2D fishIco, String value, String name){
-            // playerStatus.IsFishUnlocked(fish.Name);
-            // String fishName;
-            // fishName = "Default";
-            // GD.Print(fishDataResources.GetFishDataByName(fishName));
-            // GD.Print(playerStatus.IsFishUnlocked(fishName));
-            //if(button!=null){
-                // FishShopButton instance = button.Instantiate<FishShopButton>();
-                // instance.SetButtonData(fish.icon,fish.value.ToString(),fish.Name);
-                // buttonGrid.AddChild(instance);
-            //}
-        //}
+    }
+    void UnlockButton(int index){
+        fishShopButtons[index].UnlockButton();
     }
 }

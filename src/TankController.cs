@@ -76,6 +76,12 @@ public partial class TankController : Node
                 SpawnFood(0);
             }
         }
+
+        if(@event is InputEventKey inputEventKey){
+            if(inputEventKey.Keycode==Key.A){
+                PlayerStatus.Instance.UnlockFish(1);
+            }
+        }
     }
 
     public Fish GetActiveFish(){

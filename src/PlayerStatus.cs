@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class PlayerStatus : Node
 {
@@ -13,52 +14,34 @@ public partial class PlayerStatus : Node
 
     float fishHealthRegeneration;
 
-    //Dictionary<String, bool> lockedFish;
-    bool[] lockedFish;
+    Dictionary<String, bool> lockedFish;
 
     [Signal]
-    public delegate void onFishUnlockedEventHandler(String fishName);
+    public delegate void onFishUnlockedEventHandler(int fishIndex);
 
     public void SetLockedFishForStart(){
-        lockedFish = new bool[FishDataResources.Instance.GetFishDatas().Length];
-        for(int i = 0;i<lockedFish.Length;i++){
-            lockedFish[i] = true;
+        lockedFish = new Dictionary<String, bool>();
+        foreach (FishData fish in FishDataResources.Instance.GetFishDatas()){
+            lockedFish[fish.Name] = true;
         }
-        // lockedFish = new Dictionary<String, bool>();
-        // foreach (FishData fish in FishDataResources.Instance.GetFishDatas()){
-        //     lockedFish[fish.Name] = true;
-        // }
-    }
-
-    // public Dictionary<String, bool> GetUnlockedFish(){
-    //     return lockedFish;
-    // }
-
-    public bool[] GetLockedFishes(){
-        return lockedFish;
     }
 
     public bool IsFishLocked(int index){
-        return lockedFish[index];
+        return IsFishLocked(lockedFish.ElementAt(index).Key);
+    }
+    public bool IsFishLocked(String name){
+        return lockedFish[name];
     }
 
     public void UnlockFish(int index){
-        lockedFish[index] = false;
+
+        UnlockFish(lockedFish.ElementAt(index).Key);
     }
+    public void UnlockFish(String name){
 
-    // public bool IsFishLocked(FishData fish){
-    //     return IsFishLocked(fish.Name);
-    // }
-    // public bool IsFishLocked(String fishName){
-    //     return lockedFish[fishName];
-    // }
-
-    // public void UnlockFish(FishData fish){
-    //     UnlockFish(fish.Name);
-    // }
-    // public void UnlockFish(String fishName){
-    //     lockedFish[fishName] = false;
-    // }
+        lockedFish[name] = false;
+        EmitSignal(SignalName.onFishUnlocked,lockedFish.Keys.ToList().IndexOf(name));
+    }
 
     public override void _Ready()
     {

@@ -46,10 +46,13 @@ public partial class FishShopButton : Control
         button.Disabled = PlayerStatus.Instance.IsFishLocked(index);
     }
 
-    public void OnClick(){
+    void OnClick(){
         //tank.SpawnFish(fishName);
         TankController.Instance.SpawnFish(fishIndex);
         //GD.Print("Klikniete"); spawn fishdata xD spawn fish by name: spawnFish.
     }
-    
+    public void UnlockButton(){
+        button.Disabled = false;
+    }
+
 }
