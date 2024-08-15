@@ -14,6 +14,8 @@ public partial class PlayerStatus : Node
 
     float fishHealthRegeneration;
 
+    Dictionary<String, Variant> PlayerStats;
+
     Dictionary<String, bool> lockedFish;
 
     [Signal]
@@ -24,6 +26,11 @@ public partial class PlayerStatus : Node
         foreach (FishData fish in FishDataResources.Instance.GetFishDatas()){
             lockedFish[fish.Name] = true;
         }
+    }
+
+    public void NewGame(){
+        SetLockedFishForStart();
+        UnlockFish(0);
     }
 
     public bool IsFishLocked(int index){
@@ -45,14 +52,17 @@ public partial class PlayerStatus : Node
 
     public override void _Ready()
     {
-        SetLockedFishForStart();
+        //SetLockedFishForStart();
+
+        //new game
+        NewGame();
+        //new game
         Instance = this;
         maxFoodCount = 1;
         clickPower = 1;
         fishHealthRegeneration = 1;
         selectedFood = 0;
 
-        UnlockFish(0);
 
         //GD.Print(IsFishUnlocked("Default"));
     }

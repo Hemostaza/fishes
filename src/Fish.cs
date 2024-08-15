@@ -134,7 +134,7 @@ public partial class Fish : Entity
 
     void OnAnimationFinished(){
         if(animatedSprite2D.Animation == "turn"){
-            animatedSprite2D.FlipH = !animatedSprite2D.FlipH;
+            //animatedSprite2D.FlipH = !animatedSprite2D.FlipH;
             animatedSprite2D.Play("swimm");
         }
         if(animatedSprite2D.Animation == "eat"){
@@ -150,12 +150,19 @@ public partial class Fish : Entity
         }
 
         tank.SetActiveFish(this);
-        GD.Print(tank.GetActiveFish());
+        //GD.Print(tank.GetActiveFish());
     }
 
     public void SetNewDirection(Vector2 direction){
         oldDirection = newDirection;
         newDirection = direction;
+        if(newDirection.X>0){
+            animatedSprite2D.FlipH = true;
+        }
+        else{
+            animatedSprite2D.FlipH = false;
+        }
+        //GD.Print("old: "+oldDirection+" \n new: "+newDirection);
     }
 
     public RandomNumberGenerator GetRng(){

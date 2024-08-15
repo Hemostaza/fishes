@@ -27,8 +27,9 @@ public partial class FeedingState : State
     }
 
     public bool SearchForTarget(){
-        if (animatedSprite2D.Animation == "swimm")
-        {
+        //if (animatedSprite2D.Animation == "swimm")
+        //{
+        //GD.Print("Szukam celu");
             Node2D oldTarget = target;
             target = fish.GetHungerComponent().TargetedFood();
             if (target == null)
@@ -38,12 +39,13 @@ public partial class FeedingState : State
             }
             if (target != null || !oldTarget.Equals(target))
             {
-                direction = fish.Position.DirectionTo(target.Position);
-                fish.SetNewDirection(direction);
-                fish.TurnSide();
+                // direction = fish.Position.DirectionTo(target.Position);
+                // fish.SetNewDirection(direction);
+                // fish.TurnSide();
+                //GD.Print("Cel znalezion: "+target);
                 return true;
             }
-        }
+        //}
         return false;
     }
 
@@ -52,10 +54,12 @@ public partial class FeedingState : State
         searchTimer-=delta;
 
         if(searchTimer<=0){
+            //GD.Print("Czas sie skonczyl.");
             SearchForTarget();
             searchTimer = 1;
         }
         try{
+            //GD.Print("Płyne do celu: ");
             SwimmToTarget();
         }catch (ObjectDisposedException){
             SearchForTarget();
