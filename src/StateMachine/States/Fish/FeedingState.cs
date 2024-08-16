@@ -6,7 +6,7 @@ public partial class FeedingState : State
 
     Fish fish;
 
-    Food target;
+    Node2D target;
 
     double searchTimer;
 
@@ -39,10 +39,11 @@ public partial class FeedingState : State
             }
             if (target != null || !oldTarget.Equals(target))
             {
-                // direction = fish.Position.DirectionTo(target.Position);
-                // fish.SetNewDirection(direction);
+                direction = fish.Position.DirectionTo(target.Position);
+                fish.SetNewDirection(direction);
                 // fish.TurnSide();
                 //GD.Print("Cel znalezion: "+target);
+                fish.TurnSide();
                 return true;
             }
         //}
@@ -77,20 +78,21 @@ public partial class FeedingState : State
 
     public void SwimmToTarget(){
         if(target!=null){
-            direction = fish.Position.DirectionTo(target.Position);
-            fish.SetNewDirection(direction);
             if(animatedSprite2D.Animation=="swimm"){
+                direction = fish.Position.DirectionTo(target.Position);
+                fish.SetNewDirection(direction);
                 parent.Position += direction * (fish.GetSpeed() * 2);
             }
             else{
-                parent.Position += direction;
+                parent.Position += fish.oldDirection;
             }
             if(fish.OverlapsArea(target) && animatedSprite2D.Animation=="swimm"){
-                fish.GetHungerComponent().Eated(target.GetFoodData().Name,target.GetFoodData().nutrition);
+                fish.GetHungerComponent().Eated(target);
                 target.QueueFree();
                 animatedSprite2D.Play("eat");
                 EmitSignal(SignalName.transitioned,this,"Idle");
             }
+            
         }
     }
 }

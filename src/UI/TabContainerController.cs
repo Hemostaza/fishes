@@ -37,6 +37,9 @@ public partial class TabContainerController : Panel
         foreach(Control tab in tabs){
             tab.Visible = false;
         }
+        //Tymczasowo domyślnie aktywna karta to 0
+        activeTab = 0;
+        tabs[0].Visible = true;
     }
 
     public void ChangeActiveTab(bool pressed, int tab){

@@ -50,22 +50,22 @@ public partial class FishHungerComponent : Node
                 }
                 starving=true;
             }
-            if(hunger>=hungerMeter){
-                hunger = hungerMeter;
-            }
+            // if(hunger>=hungerMeter){
+            //     hunger = hungerMeter;
+            // }
     }
 
     public bool FindFood(){
         return GetTree().GetNodesInGroup(foodGroup).Count > 0;
     }
 
-    public Food TargetedFood(){
+    public Node2D TargetedFood(){
 
         Array<Node> foods = GetTree().GetNodesInGroup(foodGroup);
 
         if(foods.Count>0){
-            Food closestFood = (Food) foods[0];
-            foreach (Food food in GetTree().GetNodesInGroup(foodGroup)){
+            Node2D closestFood = (Node2D) foods[0];
+            foreach (Node2D food in GetTree().GetNodesInGroup(foodGroup)){
                 float distance = fish.Position.DistanceTo(food.Position);
                 float distanceToClosestFood = fish.Position.DistanceTo(closestFood.Position);
                 if(distance < distanceToClosestFood){
@@ -86,16 +86,30 @@ public partial class FishHungerComponent : Node
         hunger = 0;
         starving = false;
         fishSprites.Modulate = new Color(1,1,1,1);
-        hunger += nutrition;
+
         if(foodName.Equals(favFood)){
-            hunger*=2;
+            nutrition*=2;
         }
+
+        hunger += nutrition;
+        
         //hunger+=2;//rng.RandiRange(2,5); //+ selectedFoodNutrition
         if(fish.Scale.X<maxSize){
             fish.Scale += new Vector2(0.1f,0.1f);
         }
         if(fish.Scale.X>2){
             fish.RemoveFromGroup("fishFood");
+        }
+    }
+    public void Eated(Node2D food){
+        if(food is Food){
+            Food food1 = food as Food;
+            Eated(food1.GetFoodData().Name,food1.GetFoodData().nutrition);
+            GD.Print("Cipa");
+        }
+        if(food is Fish){
+            Fish fish = food as Fish;
+            Eated(fish.Name,fish.Scale.X*10);
         }
     }
     public double GetHunger(){

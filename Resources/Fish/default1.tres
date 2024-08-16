@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("2_xujqs")
-Name = "Default"
+Name = "Default1"
 sprites = ExtResource("3_fdaog")
 maxSize = 2
 maxSpeed = 1.0

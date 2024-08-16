@@ -35,8 +35,10 @@ public partial class FishData : Resource
     [Export]
     public Texture2D icon;
 
+    //Ile głodu wytrzyma
     [Export]
     public int hungerMeter;
+    //Jak szybko głodnieje
     [Export]
     public float hungerSpeed;
     [Export]

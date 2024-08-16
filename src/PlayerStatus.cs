@@ -31,6 +31,7 @@ public partial class PlayerStatus : Node
     public void NewGame(){
         SetLockedFishForStart();
         UnlockFish(0);
+        UnlockFish("CarnivoreTest");
     }
 
     public bool IsFishLocked(int index){

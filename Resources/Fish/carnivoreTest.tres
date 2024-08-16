@@ -1,0 +1,22 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://dftpfdmxs3vyq"]
+
+[ext_resource type="Resource" uid="uid://dabxe8bqyvkda" path="res://Resources/Coin/goldCoin.tres" id="1_m3ht8"]
+[ext_resource type="Script" path="res://src/ObjectData/FishData.cs" id="2_bqu0h"]
+[ext_resource type="SpriteFrames" uid="uid://bbb33rl37olbl" path="res://Resources/Fish/Sprites/defaultSprites.tres" id="3_aktde"]
+
+[resource]
+script = ExtResource("2_bqu0h")
+Name = "CarnivoreTest"
+sprites = ExtResource("3_aktde")
+maxSize = 2
+maxSpeed = 1.0
+carnivore = true
+favroiteFoodName = "defaultFood"
+favroiteFoodBonus = 0
+coinDatas = Array[Object]([ExtResource("1_m3ht8")])
+minSize = 5.0
+value = 5
+hungerMeter = 10
+hungerSpeed = 2.0
+maxHealth = 1.0
+healthRegen = 1.0
