@@ -17,8 +17,6 @@ public partial class TabContainerController : Panel
     [Export]
     Button togglePanelButton;
 
-    Array<Control> c = new Array<Control>();
-
     bool isShowed;
     
     [Export]

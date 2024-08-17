@@ -11,6 +11,7 @@ z_index = 100
 mouse_filter = 1
 
 [node name="TankOld" parent="." instance=ExtResource("2_vrscw")]
+visible = false
 position = Vector2(363, 218)
 scale = Vector2(1, 1)
 autoplay = "default"

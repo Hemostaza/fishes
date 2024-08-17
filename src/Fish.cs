@@ -145,7 +145,7 @@ public partial class Fish : Entity
     public override void OnLeftClicked(){
         base.OnLeftClicked();
 
-        if(healthComponent.GetHit(PlayerStatus.Instance.GetClickPower())){
+        if(healthComponent.GetHit(PlayerStatus.Instance.GetBuffValue("clickPower").As<float>())){
             GetTree().Root.SetInputAsHandled();
         }
 

@@ -10,7 +10,7 @@ public partial class FishShopButton : Control
     Label label;
 
     Texture2D fishIcon;
-    String fishValue;
+    int fishValue;
 
     int fishIndex;
     Node2D tank;
@@ -34,6 +34,7 @@ public partial class FishShopButton : Control
     public void SetButtonData(String name,int index, int value, Texture2D fishIco){
         button.Icon = fishIco;
         label.Text = value.ToString();
+        fishValue = value;
         fishIndex = index;
         //fishName = name;
         button.Disabled = PlayerStatus.Instance.IsFishLocked(index);
@@ -42,13 +43,21 @@ public partial class FishShopButton : Control
     public void SetButtonData(int index,int value, Texture2D fishIco){
         button.Icon = fishIco;
         label.Text = value.ToString();
+        fishValue = value;
         fishIndex = index;
         button.Disabled = PlayerStatus.Instance.IsFishLocked(index);
     }
 
     void OnClick(){
         //tank.SpawnFish(fishName);
-        TankController.Instance.SpawnFish(fishIndex);
+        int money = PlayerStatus.Instance.GetStats("money").As<int>();
+        if(money>=fishValue){
+            TankController.Instance.SpawnFish(fishIndex);
+            money -= fishValue;
+            PlayerStatus.Instance.ChangeStats("money",money);
+        }else{
+            GD.Print("ni ma pijondza: "+PlayerStatus.Instance.GetStats("money").As<int>());
+        }
         //GD.Print("Klikniete"); spawn fishdata xD spawn fish by name: spawnFish.
     }
     public void UnlockButton(){

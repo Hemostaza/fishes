@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ytqemlynj8g1"]
+[gd_scene load_steps=16 format=3 uid="uid://ytqemlynj8g1"]
 
 [ext_resource type="Theme" uid="uid://c5wp5trs7n07o" path="res://Themes/GUI.tres" id="1_l3t2i"]
 [ext_resource type="Theme" uid="uid://cracvhtucxb7y" path="res://TabTheme.tres" id="2_4k0wq"]
@@ -9,7 +9,7 @@
 [ext_resource type="StyleBox" uid="uid://ckeremn1iu8f4" path="res://Themes/StyleBoxTextures/panelConcave.tres" id="6_4v3pe"]
 [ext_resource type="Script" path="res://src/UI/FishShopTab.cs" id="6_fs1tv"]
 [ext_resource type="Texture2D" uid="uid://ldwyrhwc5j14" path="res://Assets/Sprites/GUI/New Piskel (5)/closetab_icon.png" id="6_ii81n"]
-[ext_resource type="Texture2D" uid="uid://d2175agg0tepq" path="res://Assets/Sprites/GUI/panel_concave_blue.png" id="9_tbtaf"]
+[ext_resource type="StyleBox" uid="uid://giitlokyo6tb" path="res://Themes/StyleBoxTextures/panelConcaveBlue.tres" id="9_lolq5"]
 [ext_resource type="SpriteFrames" uid="uid://bbb33rl37olbl" path="res://Resources/Fish/Sprites/defaultSprites.tres" id="9_x4bep"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_f4xlo"]
@@ -33,13 +33,6 @@ texture_margin_bottom = 4.0
 line_spacing = 0.0
 font = ExtResource("5_se5e0")
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p456u"]
-texture = ExtResource("9_tbtaf")
-texture_margin_left = 4.0
-texture_margin_top = 4.0
-texture_margin_right = 4.0
-texture_margin_bottom = 4.0
-
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 0
@@ -60,8 +53,8 @@ offset_left = -180.0
 grow_horizontal = 0
 grow_vertical = 2
 script = ExtResource("3_8umue")
-tabs = [NodePath("NinePatchRect/FishShopTab"), NodePath("NinePatchRect/FishInfoTab")]
-buttons = [NodePath("NinePatchRect/TabButtons/tab1"), NodePath("NinePatchRect/TabButtons/tab2")]
+tabs = [NodePath("NinePatchRect/FishShopTab"), NodePath("NinePatchRect/FishInfoTab"), NodePath("NinePatchRect/FoodTab")]
+buttons = [NodePath("NinePatchRect/TabButtons/ShopBtn"), NodePath("NinePatchRect/TabButtons/InfoBtn"), NodePath("NinePatchRect/TabButtons/FoodBtn")]
 togglePanelButton = NodePath("OpenTabs")
 openIco = ExtResource("3_brq6l")
 closeIco = ExtResource("6_ii81n")
@@ -82,6 +75,7 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
 [node name="FishShopTab" type="Panel" parent="Panel/NinePatchRect"]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 clip_contents = true
 custom_minimum_size = Vector2(150, 0)
@@ -183,7 +177,7 @@ offset_top = 39.0
 offset_right = 80.0
 offset_bottom = 199.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_p456u")
+theme_override_styles/panel = ExtResource("9_lolq5")
 
 [node name="Control" type="Control" parent="Panel/NinePatchRect/FishInfoTab/FishGraph"]
 custom_minimum_size = Vector2(160, 160)
@@ -228,6 +222,78 @@ text = "Hunger:
 HitToCoin
 regeneration coin"
 
+[node name="FoodTab" type="Panel" parent="Panel/NinePatchRect"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(160, 480)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_right = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel/NinePatchRect/FoodTab"]
+custom_minimum_size = Vector2(150, 25)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 5.0
+offset_bottom = 32.0
+grow_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_54drk")
+text = "Food"
+label_settings = SubResource("LabelSettings_w73ax")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Panel/NinePatchRect/FoodTab"]
+custom_minimum_size = Vector2(150, 25)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = 10.0
+offset_right = 75.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_54drk")
+text = "Info"
+label_settings = SubResource("LabelSettings_w73ax")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="Panel/NinePatchRect/FoodTab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 40.0
+offset_bottom = -240.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("6_4v3pe")
+
+[node name="Panel2" type="Panel" parent="Panel/NinePatchRect/FoodTab"]
+custom_minimum_size = Vector2(160, 50)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -190.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = ExtResource("6_4v3pe")
+
 [node name="TabButtons" type="GridContainer" parent="Panel/NinePatchRect"]
 layout_mode = 1
 anchors_preset = 4
@@ -240,12 +306,17 @@ offset_bottom = 41.0
 grow_vertical = 2
 theme = ExtResource("2_4k0wq")
 
-[node name="tab1" type="Button" parent="Panel/NinePatchRect/TabButtons"]
+[node name="ShopBtn" type="Button" parent="Panel/NinePatchRect/TabButtons"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 toggle_mode = true
 
-[node name="tab2" type="Button" parent="Panel/NinePatchRect/TabButtons"]
+[node name="InfoBtn" type="Button" parent="Panel/NinePatchRect/TabButtons"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+toggle_mode = true
+
+[node name="FoodBtn" type="Button" parent="Panel/NinePatchRect/TabButtons"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 toggle_mode = true
@@ -261,5 +332,16 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[connection signal="toggled" from="Panel/NinePatchRect/TabButtons/tab1" to="Panel" method="ChangeActiveTab" binds= [0]]
-[connection signal="toggled" from="Panel/NinePatchRect/TabButtons/tab2" to="Panel" method="ChangeActiveTab" binds= [1]]
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 242.0
+offset_bottom = 20.0
+
+[node name="Label" type="Label" parent="Panel2"]
+layout_mode = 0
+offset_right = 241.0
+offset_bottom = 23.0
+
+[connection signal="toggled" from="Panel/NinePatchRect/TabButtons/ShopBtn" to="Panel" method="ChangeActiveTab" binds= [0]]
+[connection signal="toggled" from="Panel/NinePatchRect/TabButtons/InfoBtn" to="Panel" method="ChangeActiveTab" binds= [1]]
+[connection signal="toggled" from="Panel/NinePatchRect/TabButtons/FoodBtn" to="Panel" method="ChangeActiveTab" binds= [2]]

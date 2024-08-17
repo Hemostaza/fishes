@@ -8,6 +8,8 @@ public partial class FishHealthComponent : Node
     bool chargingHealth;
     double healthRegen;
 
+    double bonusHealthRegen;
+
     Fish fish;
     
     AnimatedSprite2D particle;
@@ -31,8 +33,8 @@ public partial class FishHealthComponent : Node
 
     void Healing(double delta){
         if(chargingHealth==true){
-
-            heatlh += healthRegen * delta * PlayerStatus.Instance.GetFishHealthRegeneration();
+            bonusHealthRegen=PlayerStatus.Instance.GetBuffValue("fishHelthRegeneration").As<double>();
+            heatlh += healthRegen * delta * bonusHealthRegen;
             if(heatlh>=maxHelath){
                 heatlh = maxHelath;
                 chargingHealth=false;
@@ -42,7 +44,7 @@ public partial class FishHealthComponent : Node
     }
 
     public bool GetHit(float hit){
-        GD.Print("GET HIT"+hit);
+        //GD.Print("GET HIT"+hit);
         if(heatlh >= 0 && !chargingHealth){
             heatlh -= hit;
             CheckHealth();

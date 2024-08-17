@@ -14,11 +14,15 @@ public partial class TankController : Node
     Fish activeFish;
 
     RandomNumberGenerator rng; 
+
+    PlayerStatus playerStatus;
     public override void _Ready()
     {
         Instance = this;
         fishScene = ResourceLoader.Load<PackedScene>("res://Scenes/Fish.tscn");
         foodScene = ResourceLoader.Load<PackedScene>("res://Scenes/Food.tscn");
+
+        playerStatus = PlayerStatus.Instance;
 
         rng = new RandomNumberGenerator();
         //GD.Print("FishScene");
@@ -45,19 +49,33 @@ public partial class TankController : Node
             instance.Position = spawnPos;
             tank.AddChild(instance);
             
+            GD.Print(playerStatus.GetStats("foodSelected"));
+
             //GD.Print("Try to spawn fish "+fishData.Name );
         }
     }
     public  void SpawnFood(int index){
         //GD.Print("spawn tank");
-        if(GetFoodCountInTank() < PlayerStatus.Instance.GetMaxFoodCount()){
+        
+        FoodData foodData = FoodDataResources.Instance.GetFoodDataByIndex(index);
+
+        if(playerStatus.GetStats("money").As<int>()<foodData.price){
+            //dzwiek ze nie ma pijondza i błyskanie pijondzów?
+            GD.Print("ni ma pijondza: "+PlayerStatus.Instance.GetStats("money").As<int>());
+            return;
+        }
+        if(GetFoodCountInTank() < playerStatus.GetBuffValue("maxFoodCount").As<int>()){
             //index = FoodDataResources.Instance.GetFoodByIndex();
             if(foodScene!=null){
                 Food instance = (Food) foodScene.Instantiate();
-                FoodData foodData = FoodDataResources.Instance.GetFoodDataByIndex(index);
                 instance.SetFoodData(foodData);
                 Vector2 mousePos = tank.GetGlobalMousePosition();
                 instance.Position = mousePos;
+
+                int money = playerStatus.GetStats("money").As<int>();
+                money-=foodData.price;
+                playerStatus.ChangeStats("money",money);
+
                 tank.AddChild(instance);
             }
         }
@@ -73,7 +91,9 @@ public partial class TankController : Node
         if(@event is InputEventMouseButton mouseButton){
             
             if(mouseButton.Pressed){
-                SpawnFood(0);
+                int fod = playerStatus.GetStats("foodSelected").As<int>();
+                GD.Print(fod);
+                SpawnFood(fod);
             }
         }
 

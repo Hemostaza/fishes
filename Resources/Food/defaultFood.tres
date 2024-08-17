@@ -7,5 +7,5 @@
 script = ExtResource("1_v825r")
 Name = "defaultFood"
 nutrition = 5.0
-price = 5
+price = 50
 spriteFrames = ExtResource("2_o8msy")

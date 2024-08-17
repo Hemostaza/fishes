@@ -12,9 +12,12 @@ public partial class PlayerStatus : Node
 
     int selectedFood;
 
+    int money;
+
     float fishHealthRegeneration;
 
-    Dictionary<String, Variant> PlayerStats;
+    Dictionary<String, Variant> playerStats;
+    Dictionary<String, Variant> buffs;
 
     Dictionary<String, bool> lockedFish;
 
@@ -28,27 +31,11 @@ public partial class PlayerStatus : Node
         }
     }
 
-    public void NewGame(){
-        SetLockedFishForStart();
-        UnlockFish(0);
-        UnlockFish("CarnivoreTest");
-    }
-
-    public bool IsFishLocked(int index){
-        return IsFishLocked(lockedFish.ElementAt(index).Key);
-    }
-    public bool IsFishLocked(String name){
-        return lockedFish[name];
-    }
-
-    public void UnlockFish(int index){
-
-        UnlockFish(lockedFish.ElementAt(index).Key);
-    }
-    public void UnlockFish(String name){
-
-        lockedFish[name] = false;
-        EmitSignal(SignalName.onFishUnlocked,lockedFish.Keys.ToList().IndexOf(name));
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+        playerStats = new Dictionary<string, Variant>();
+        buffs = new Dictionary<string, Variant>();
     }
 
     public override void _Ready()
@@ -67,18 +54,49 @@ public partial class PlayerStatus : Node
 
         //GD.Print(IsFishUnlocked("Default"));
     }
-    public int GetClickPower(){
-        int power = clickPower; //Odjebanie matematyki na siłe z bonusów?
-        return power;
+
+    public void NewGame(){
+        SetLockedFishForStart();
+        UnlockFish(0);
+        UnlockFish("CarnivoreTest");
+
+        playerStats.Add("money",100);
+        playerStats.Add("foodSelected",0);
+
+        buffs.Add("clickPower",1);
+        buffs.Add("fishHelthRegeneration",1);
+        buffs.Add("maxFoodCount",1);
     }
 
-    public int GetMaxFoodCount(){
-        int maxCount = maxFoodCount; //odebanie matematyki an sile;
-        return maxCount;
+    public void SetBuffValue(String key, Variant value){
+        buffs[key] = value;
+    }
+    public Variant GetBuffValue(String key){
+        return buffs[key];
     }
 
-    public int GetSelectedFood(){
-        return selectedFood;
+    public void ChangeStats(String key, Variant value){
+        playerStats[key] = value;
+    }
+    public Variant GetStats(String key){
+        return playerStats[key];
+    }
+
+    public bool IsFishLocked(int index){
+        return IsFishLocked(lockedFish.ElementAt(index).Key);
+    }
+    public bool IsFishLocked(String name){
+        return lockedFish[name];
+    }
+
+    public void UnlockFish(int index){
+
+        UnlockFish(lockedFish.ElementAt(index).Key);
+    }
+    public void UnlockFish(String name){
+
+        lockedFish[name] = false;
+        EmitSignal(SignalName.onFishUnlocked,lockedFish.Keys.ToList().IndexOf(name));
     }
 
     public float GetFishHealthRegeneration(){
