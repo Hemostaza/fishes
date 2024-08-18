@@ -5,10 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://dmd64fas13rso" path="res://Assets/Sprites/GUI/side_tab_normal.png" id="3_mvtm1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_imqy6"]
-content_margin_left = 2.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-content_margin_bottom = 2.0
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
 texture = ExtResource("1_damlw")
 texture_margin_left = 15.0
 texture_margin_top = 15.0
@@ -27,10 +27,10 @@ texture_margin_right = 15.0
 texture_margin_bottom = 15.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_158yb"]
-content_margin_left = 2.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-content_margin_bottom = 2.0
+content_margin_left = 7.0
+content_margin_top = 7.0
+content_margin_right = 7.0
+content_margin_bottom = 7.0
 texture = ExtResource("3_mvtm1")
 texture_margin_left = 15.0
 texture_margin_top = 15.0
@@ -41,10 +41,10 @@ texture_margin_bottom = 15.0
 load_path = "res://.godot/imported/sprite_07.png-283237f2d6eee5228d2b4e5d8efb6e30.ctex"
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i3apv"]
-content_margin_left = 2.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-content_margin_bottom = 2.0
+content_margin_left = 7.0
+content_margin_top = 7.0
+content_margin_right = 7.0
+content_margin_bottom = 7.0
 texture = SubResource("CompressedTexture2D_8pf04")
 texture_margin_left = 15.0
 texture_margin_top = 15.0

@@ -52,6 +52,9 @@ public partial class Coin : Area2D
             GetTree().Root.SetInputAsHandled();
             if(mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Left){
                 GD.Print("Pijonc");
+                int money = PlayerStatus.Instance.GetStats("money").As<int>();
+                money += coinData.value;
+                PlayerStatus.Instance.ChangeStats("money",money);
                 QueueFree();
             }
         }

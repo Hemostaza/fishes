@@ -106,13 +106,11 @@ public partial class Fish : Entity
         if(coinScene!=null){
             Coin coin = (Coin) coinScene.Instantiate();
             coin.Position = Position;
-            
+            coin.ZIndex=100;
             if(Scale.X>=1){
                 coin.SetCoinData(fishData.coinDatas[0]);
                 GetParent().AddChild(coin);
-                
                 return true;  
-                
             }
         }
         return false;

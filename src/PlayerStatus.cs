@@ -23,6 +23,8 @@ public partial class PlayerStatus : Node
 
     [Signal]
     public delegate void onFishUnlockedEventHandler(int fishIndex);
+    [Signal]
+    public delegate void onMoneyChangeEventHandler(int changeValue);
 
     public void SetLockedFishForStart(){
         lockedFish = new Dictionary<String, bool>();
@@ -60,8 +62,9 @@ public partial class PlayerStatus : Node
         UnlockFish(0);
         UnlockFish("CarnivoreTest");
 
-        playerStats.Add("money",100);
+        playerStats.Add("money",0);
         playerStats.Add("foodSelected",0);
+        ChangeStats("money",100);
 
         buffs.Add("clickPower",1);
         buffs.Add("fishHelthRegeneration",1);
@@ -77,6 +80,9 @@ public partial class PlayerStatus : Node
 
     public void ChangeStats(String key, Variant value){
         playerStats[key] = value;
+        if(key.Equals("money")){
+            EmitSignal(SignalName.onMoneyChange,value);
+        }
     }
     public Variant GetStats(String key){
         return playerStats[key];

@@ -42,4 +42,4 @@ animations = [{
 [resource]
 script = ExtResource("1_0frvk")
 sprites = SubResource("SpriteFrames_isy6g")
-value = 0
+value = 100
