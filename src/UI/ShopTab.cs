@@ -2,7 +2,7 @@ using Godot;
 using Godot.Collections;
 using System;
 
-public partial class FishShopTab : Control
+public partial class ShopTab : Control
 {
     [Export]
     PackedScene buttonScene;
@@ -12,7 +12,7 @@ public partial class FishShopTab : Control
     FishDataResources fishDataResources;
     PlayerStatus playerStatus;
 
-    Array<FishShopButton> fishShopButtons;
+    Array<ShopButton> ShopButtons;
 
     public override void _Ready()
     {
@@ -20,7 +20,7 @@ public partial class FishShopTab : Control
         fishDataResources = FishDataResources.Instance;
         playerStatus = PlayerStatus.Instance;
         playerStatus.onFishUnlocked += UnlockButton;
-        fishShopButtons = new Array<FishShopButton>();
+        ShopButtons = new Array<ShopButton>();
         InsertButtons();
     }
 
@@ -30,17 +30,14 @@ public partial class FishShopTab : Control
         if(buttonScene!=null){
             FishData[] fishDatas = fishDataResources.GetFishDatas();
             for(int i = 0; i<fishDatas.Length;i++){
-                FishShopButton instance = (FishShopButton) buttonScene.Instantiate();
-                AtlasTexture atlasTexture = new AtlasTexture();
-                atlasTexture.Atlas = fishDatas[i].sprites;
-                atlasTexture.Region = new Rect2(new Vector2(0, 0), new Vector2(32,32));
-                instance.SetButtonData(i,fishDatas[i].value,atlasTexture);
-                fishShopButtons.Add(instance);
+                ShopButton instance = (ShopButton) buttonScene.Instantiate();
+                instance.SetButtonData(i,fishDatas[i].value,fishDatas[i].icon);
+                ShopButtons.Add(instance);
                 buttonGrid.AddChild(instance);
             }
         }
     }
     void UnlockButton(int index){
-        fishShopButtons[index].UnlockButton();
+        ShopButtons[index].UnlockButton();
     }
 }

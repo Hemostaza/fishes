@@ -9,6 +9,7 @@ public partial class SpawnState : State
     {
         base.Enter();
         force = TankController.Instance.GetRandomNumberGenerator().RandfRange(15,25);
+        animationPlayer.Play("swimm");
     }
 
     public override void Update(double delta)

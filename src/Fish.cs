@@ -38,6 +38,8 @@ public partial class Fish : Entity
     [Export]
     FishHungerComponent hungerComponent;
 
+    //AnimationPlayer animationPlayer;
+
 
     // public void SetFishData(FishData fishData){
     //     this.fishData = fishData;
@@ -54,11 +56,15 @@ public partial class Fish : Entity
         hungerComponent.InitComponent(this);
 
         tank = TankController.Instance;
-        animatedSprite2D.AnimationFinished += OnAnimationFinished;
+        //animationPlayer = GetAnimationPlayer();
+        //GD.Print("anim"+animationPlayers);
+        //animatedSprite2D.AnimationFinished += OnAnimationFinished;
+        //animationPlayer.AnimationFinished += OnAnimationFinished;
 
         //Scale = fishData.spawnSize();
         
-        animatedSprite2D.SpriteFrames = fishData.sprites;
+        //animatedSprite2D.SpriteFrames = fishData.sprites;
+        sprite2D.Texture = fishData.sprites;
         SetTimer();
         //SpawnFish();
     }
@@ -82,8 +88,9 @@ public partial class Fish : Entity
         return healthComponent;
     }
 
-    public void Die(){
-        GD.Print("Nothing");
+    public override void Die(){
+        sprite2D.Modulate = new Color(1,1,1,0.5f);
+        animationPlayer.Play("dead");
     }
 
     void SetTimer(){
@@ -103,7 +110,7 @@ public partial class Fish : Entity
     }
 
     public bool DropCoin(){
-        if(coinScene!=null){
+        if(coinScene!=null && hungerComponent.GetHunger()>=0){
             Coin coin = (Coin) coinScene.Instantiate();
             coin.Position = Position;
             coin.ZIndex=100;
@@ -123,20 +130,23 @@ public partial class Fish : Entity
 
         if((newDirection.X >= 0 && oldDirection.X < 0) 
         || (newDirection.X<0 && oldDirection.X>=0)){
-            animatedSprite2D.Play("turn");
+            //animatedSprite2D.Play("turn");
+            animationPlayer.Play("turn");
             return true;
         }
 
         return false;
     }
 
-    void OnAnimationFinished(){
-        if(animatedSprite2D.Animation == "turn"){
+    void _on_animation_player_animation_finished(String finishedAnim){
+        if(finishedAnim == "turn"){
             //animatedSprite2D.FlipH = !animatedSprite2D.FlipH;
-            animatedSprite2D.Play("swimm");
+            animationPlayer.Play("swimm");
+            //animatedSprite2D.Play("swimm");
         }
-        if(animatedSprite2D.Animation == "eat"){
-            animatedSprite2D.Play("swimm");
+        if(finishedAnim == "eat"){
+            animationPlayer.Play("swimm");
+            //animatedSprite2D.Play("swimm");
         }
     }
 
@@ -155,10 +165,10 @@ public partial class Fish : Entity
         oldDirection = newDirection;
         newDirection = direction;
         if(newDirection.X>0){
-            animatedSprite2D.FlipH = true;
+            sprite2D.FlipH = true;
         }
         else{
-            animatedSprite2D.FlipH = false;
+            sprite2D.FlipH = false;
         }
         //GD.Print("old: "+oldDirection+" \n new: "+newDirection);
     }

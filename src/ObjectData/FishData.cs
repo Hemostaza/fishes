@@ -9,7 +9,7 @@ public partial class FishData : Resource
     public String Name;
 
     [Export]
-    public SpriteFrames sprites;
+    public Texture2D sprites;
     [Export]
     public int maxSize;
     [Export]

@@ -74,12 +74,12 @@ public partial class TabContainerController : Panel
     public void ClosePanel(){
         Position += new Vector2(170,0);
         isShowed = false;
-        if(activeTab!=-1){
-            tabs[activeTab].Visible = false;
-            if(buttons[activeTab].ButtonPressed)
-                buttons[activeTab].SetPressedNoSignal(false);
-            activeTab=-1;
-        }
+        // if(activeTab!=-1){
+        //     tabs[activeTab].Visible = false;
+        //     if(buttons[activeTab].ButtonPressed)
+        //         buttons[activeTab].SetPressedNoSignal(false);
+        //     activeTab=-1;
+        // }
         togglePanelButton.Icon = openIco;
     }
 }

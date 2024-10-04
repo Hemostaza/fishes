@@ -16,6 +16,10 @@ public partial class TankController : Node
     RandomNumberGenerator rng; 
 
     PlayerStatus playerStatus;
+
+    [Signal]
+    public delegate void onActiveFishChangeEventHandler(Fish fish);
+
     public override void _Ready()
     {
         Instance = this;
@@ -27,6 +31,7 @@ public partial class TankController : Node
         rng = new RandomNumberGenerator();
         //GD.Print("FishScene");
         tank = (Node2D) GetNode("/root/CHUJ/Tank");
+        
     }
 
     public Node2D GetTank(){
@@ -108,11 +113,15 @@ public partial class TankController : Node
         return activeFish;
     }
     public void SetActiveFish(Fish fish){
-        if(activeFish!=null){
+        
+        try{
             activeFish.ZIndex -= 10;
+        }catch (Exception){
+            return;
         }
         activeFish = fish;
         activeFish.ZIndex += 10;
+        EmitSignal(SignalName.onActiveFishChange,activeFish);
         //emit signal on tab?
     }
 

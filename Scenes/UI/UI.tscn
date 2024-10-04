@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ytqemlynj8g1"]
+[gd_scene load_steps=25 format=3 uid="uid://ytqemlynj8g1"]
 
 [ext_resource type="Theme" uid="uid://c5wp5trs7n07o" path="res://Themes/GUI.tres" id="1_l3t2i"]
 [ext_resource type="Theme" uid="uid://cracvhtucxb7y" path="res://TabTheme.tres" id="2_4k0wq"]
@@ -11,10 +11,12 @@
 [ext_resource type="StyleBox" uid="uid://ckeremn1iu8f4" path="res://Themes/StyleBoxTextures/panelConcave.tres" id="6_4v3pe"]
 [ext_resource type="Script" path="res://src/UI/FishShopTab.cs" id="6_fs1tv"]
 [ext_resource type="Texture2D" uid="uid://ldwyrhwc5j14" path="res://Assets/Sprites/GUI/New Piskel (5)/closetab_icon.png" id="6_ii81n"]
+[ext_resource type="LabelSettings" uid="uid://cxfwny8ea4kr8" path="res://Themes/FontSettings.tres" id="9_bbk6n"]
 [ext_resource type="StyleBox" uid="uid://giitlokyo6tb" path="res://Themes/StyleBoxTextures/panelConcaveBlue.tres" id="9_lolq5"]
 [ext_resource type="SpriteFrames" uid="uid://bbb33rl37olbl" path="res://Resources/Fish/Sprites/defaultSprites.tres" id="9_x4bep"]
 [ext_resource type="Texture2D" uid="uid://8ru5680oxyvl" path="res://Assets/Sprites/GUI/icons/ico16.png" id="12_5xsvh"]
 [ext_resource type="Texture2D" uid="uid://cyobn2kmx3y7" path="res://iconAtlas.tres" id="13_eq1gq"]
+[ext_resource type="Script" path="res://src/UI/FishInfoPanel.cs" id="13_in7la"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r42iy"]
 atlas = ExtResource("2_foepo")
@@ -39,10 +41,6 @@ texture_margin_left = 4.0
 texture_margin_top = 4.0
 texture_margin_right = 4.0
 texture_margin_bottom = 4.0
-
-[sub_resource type="LabelSettings" id="LabelSettings_w73ax"]
-line_spacing = 0.0
-font = ExtResource("5_se5e0")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1spae"]
 atlas = ExtResource("12_5xsvh")
@@ -128,7 +126,6 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
 [node name="FishShopTab" type="Panel" parent="Panel/NinePatchRect"]
-visible = false
 self_modulate = Color(1, 1, 1, 0)
 clip_contents = true
 custom_minimum_size = Vector2(150, 0)
@@ -151,47 +148,63 @@ offset_top = 5.0
 offset_bottom = 32.0
 grow_horizontal = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_54drk")
-text = "FishShop"
-label_settings = SubResource("LabelSettings_w73ax")
+text = "Shop"
+label_settings = ExtResource("9_bbk6n")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Panel" type="Panel" parent="Panel/NinePatchRect/FishShopTab" node_paths=PackedStringArray("buttonGrid")]
-custom_minimum_size = Vector2(130, 430)
+[node name="TabContainer" type="TabContainer" parent="Panel/NinePatchRect/FishShopTab"]
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 40.0
-offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("6_4v3pe")
+
+[node name="Fish" type="ScrollContainer" parent="Panel/NinePatchRect/FishShopTab/TabContainer" node_paths=PackedStringArray("buttonGrid")]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
 script = ExtResource("6_fs1tv")
 buttonScene = ExtResource("4_a08fm")
-buttonGrid = NodePath("ScrollContainer/GridContainer")
+buttonGrid = NodePath("GridContainer")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/NinePatchRect/FishShopTab/Panel"]
-custom_minimum_size = Vector2(145, 0)
-layout_mode = 1
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -65.0
-offset_top = 2.0
-offset_right = 65.0
-offset_bottom = -2.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="GridContainer" type="GridContainer" parent="Panel/NinePatchRect/FishShopTab/Panel/ScrollContainer"]
-custom_minimum_size = Vector2(130, 0)
+[node name="GridContainer" type="GridContainer" parent="Panel/NinePatchRect/FishShopTab/TabContainer/Fish"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_constants/h_separation = 14
 columns = 2
 
-[node name="FishInfoTab" type="Panel" parent="Panel/NinePatchRect"]
+[node name="Food" type="ScrollContainer" parent="Panel/NinePatchRect/FishShopTab/TabContainer" node_paths=PackedStringArray("buttonGrid")]
+visible = false
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+script = ExtResource("6_fs1tv")
+buttonScene = ExtResource("4_a08fm")
+buttonGrid = NodePath("GridContainer")
+
+[node name="GridContainer" type="GridContainer" parent="Panel/NinePatchRect/FishShopTab/TabContainer/Food"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 14
+columns = 2
+
+[node name="Misc" type="ScrollContainer" parent="Panel/NinePatchRect/FishShopTab/TabContainer" node_paths=PackedStringArray("buttonGrid")]
+visible = false
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+script = ExtResource("6_fs1tv")
+buttonScene = ExtResource("4_a08fm")
+buttonGrid = NodePath("GridContainer")
+
+[node name="GridContainer" type="GridContainer" parent="Panel/NinePatchRect/FishShopTab/TabContainer/Misc"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 14
+columns = 2
+
+[node name="FishInfoTab" type="Panel" parent="Panel/NinePatchRect" node_paths=PackedStringArray("maxHungerLabel", "maxE2CLabel")]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(160, 480)
@@ -204,6 +217,9 @@ offset_left = -80.0
 offset_right = 80.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("13_in7la")
+maxHungerLabel = NodePath("InfoPanel/VBoxContainer/maxHunger")
+maxE2CLabel = NodePath("InfoPanel/VBoxContainer/maxE2C")
 
 [node name="Label" type="Label" parent="Panel/NinePatchRect/FishInfoTab"]
 custom_minimum_size = Vector2(150, 25)
@@ -216,7 +232,7 @@ grow_horizontal = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_54drk")
 text = "Fish Info
 "
-label_settings = SubResource("LabelSettings_w73ax")
+label_settings = ExtResource("9_bbk6n")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -267,13 +283,28 @@ offset_bottom = 465.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("6_4v3pe")
 
-[node name="Label" type="Label" parent="Panel/NinePatchRect/FishInfoTab/InfoPanel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Hunger:
-HitToCoin
-regeneration coin"
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/NinePatchRect/FishInfoTab/InfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 5
+
+[node name="maxHunger" type="Label" parent="Panel/NinePatchRect/FishInfoTab/InfoPanel/VBoxContainer"]
+layout_mode = 2
+text = "Max hunger:"
+label_settings = ExtResource("9_bbk6n")
+
+[node name="maxE2C" type="Label" parent="Panel/NinePatchRect/FishInfoTab/InfoPanel/VBoxContainer"]
+layout_mode = 2
+text = "Max E2C:"
+label_settings = ExtResource("9_bbk6n")
 
 [node name="FoodTab" type="Panel" parent="Panel/NinePatchRect"]
 visible = false
@@ -299,7 +330,7 @@ offset_bottom = 32.0
 grow_horizontal = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_54drk")
 text = "Food"
-label_settings = SubResource("LabelSettings_w73ax")
+label_settings = ExtResource("9_bbk6n")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -319,7 +350,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_54drk")
 text = "Info"
-label_settings = SubResource("LabelSettings_w73ax")
+label_settings = ExtResource("9_bbk6n")
 horizontal_alignment = 1
 vertical_alignment = 1
 

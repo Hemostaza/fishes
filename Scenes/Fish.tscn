@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bxips6vkfxffr"]
+[gd_scene load_steps=20 format=3 uid="uid://bxips6vkfxffr"]
 
 [ext_resource type="Script" path="res://src/Fish.cs" id="1_fimy2"]
 [ext_resource type="Resource" uid="uid://2xp32elw8rdl" path="res://Resources/Fish/default.tres" id="2_najuh"]
 [ext_resource type="Script" path="res://src/StateMachine/StateMachine.cs" id="3_0hsun"]
 [ext_resource type="PackedScene" uid="uid://my0xkyo6xrn" path="res://Scenes/Coin.tscn" id="3_a8fvx"]
-[ext_resource type="SpriteFrames" uid="uid://bbb33rl37olbl" path="res://Resources/Fish/Sprites/defaultSprites.tres" id="3_xi0um"]
 [ext_resource type="Script" path="res://src/StateMachine/States/Fish/IdleState.cs" id="4_cy616"]
 [ext_resource type="Script" path="res://src/StateMachine/States/Fish/FeedingState.cs" id="5_6ya3w"]
 [ext_resource type="Script" path="res://src/StateMachine/States/Fish/DeadState.cs" id="9_u575r"]
@@ -12,11 +11,101 @@
 [ext_resource type="Script" path="res://src/Components/FishHealthComponent.cs" id="10_sonm6"]
 [ext_resource type="SpriteFrames" uid="uid://clax6hharwswk" path="res://Resources/Particles/particleSpriteFrames.tres" id="11_utjnb"]
 [ext_resource type="Script" path="res://src/Components/FishHungerComponent.cs" id="11_wkq0q"]
+[ext_resource type="Texture2D" uid="uid://dc6p03hfmx4u5" path="res://Assets/Sprites/Fishes/rybkaall.png" id="13_484ly"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x35se"]
 radius = 14.0
 
-[node name="Fish" type="Area2D" node_paths=PackedStringArray("healthComponent", "hungerComponent", "animatedSprite2D") groups=["fish"]]
+[sub_resource type="Animation" id="Animation_thyxe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_4vfad"]
+resource_name = "dead"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [16]
+}
+
+[sub_resource type="Animation" id="Animation_7oeth"]
+resource_name = "eat"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_eum74"]
+resource_name = "swimm"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_hy44p"]
+resource_name = "turn"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_id16o"]
+_data = {
+"RESET": SubResource("Animation_thyxe"),
+"dead": SubResource("Animation_4vfad"),
+"eat": SubResource("Animation_7oeth"),
+"swimm": SubResource("Animation_eum74"),
+"turn": SubResource("Animation_hy44p")
+}
+
+[node name="Fish" type="Area2D" node_paths=PackedStringArray("healthComponent", "hungerComponent", "animationPlayer", "sprite2D") groups=["fish"]]
 z_index = 10
 script = ExtResource("1_fimy2")
 fishData = ExtResource("2_najuh")
@@ -24,12 +113,8 @@ coinScene = ExtResource("3_a8fvx")
 particleFrames = ExtResource("11_utjnb")
 healthComponent = NodePath("HealthComponent")
 hungerComponent = NodePath("HungerComponent")
-animatedSprite2D = NodePath("AnimatedSprite2D")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource("3_xi0um")
-animation = &"turn"
-flip_h = true
+animationPlayer = NodePath("AnimationPlayer")
+sprite2D = NodePath("Sprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -58,3 +143,17 @@ spriteFrames = ExtResource("11_utjnb")
 
 [node name="HungerComponent" type="Node" parent="."]
 script = ExtResource("11_wkq0q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("13_484ly")
+flip_h = true
+hframes = 4
+vframes = 5
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_id16o")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

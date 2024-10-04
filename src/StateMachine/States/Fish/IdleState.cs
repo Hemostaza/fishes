@@ -44,7 +44,7 @@ public partial class IdleState : State
     public override void PhysicsUpdate(double delta)
     {
         
-        if(animatedSprite2D.Animation == "swimm"){
+        if(animationPlayer.CurrentAnimation == "swimm"){
             ChangeSwimm();
             swimmTime -= delta;
             parent.Position += swimmVector;

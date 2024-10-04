@@ -4,23 +4,25 @@ using System;
 public partial class Entity : Area2D
 {
     [Export]
-    public AnimatedSprite2D animatedSprite2D;
+    public AnimationPlayer animationPlayer;
+    [Export]
+    public Sprite2D sprite2D;
 
     bool mouseIn = false;
 
     public override void _Ready()
     {
         base._Ready();
-        animatedSprite2D.Play("swimm");
+        //animatedSprite2D.Play("swimm");
     }
 
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
     }
-
-    public AnimatedSprite2D GetAnimatedSprite2D(){
-        return animatedSprite2D;
+    public AnimationPlayer GetAnimationPlayer(){
+        GD.Print(animationPlayer);
+        return animationPlayer;
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -50,6 +52,10 @@ public partial class Entity : Area2D
     {
         base._MouseExit();
         mouseIn = false;
+    }
+
+    public virtual void Die(){
+        return;
     }
 
 }

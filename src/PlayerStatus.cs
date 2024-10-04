@@ -52,9 +52,21 @@ public partial class PlayerStatus : Node
         clickPower = 1;
         fishHealthRegeneration = 1;
         selectedFood = 0;
-
+        ProcessMode = Node.ProcessModeEnum.Always;
 
         //GD.Print(IsFishUnlocked("Default"));
+    }
+
+    bool paused = false;
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+        if (Input.IsKeyPressed(Key.Escape))
+        {
+            paused = !paused;
+            GD.Print("pauza");
+		    GetTree().Paused = paused;
+        }
     }
 
     public void NewGame(){

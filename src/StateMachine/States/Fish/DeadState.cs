@@ -17,9 +17,9 @@ public partial class DeadState : State
     {
         base.Enter();
         lingering=2;
-        animatedSprite2D.Modulate = new Color(1,1,1,0.5f);
-        animatedSprite2D.FlipV = true;
-        //animatedSprite2D.Play("dieded");
+        //animatedSprite2D.Modulate = new Color(1,1,1,0.5f);
+        //animatedSprite2D.Play("dead");
+        parent.Die();
         lingeringTimer.Start();
     }
     public override void Update(double delta)

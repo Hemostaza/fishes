@@ -8,7 +8,7 @@ public partial class FishHungerComponent : Node
     double hungerMeter;
     float hungerSpeed;
     bool starving;
-    AnimatedSprite2D fishSprites;
+    Sprite2D fishSprites;
 
     float maxSize;
     Fish fish;
@@ -21,7 +21,7 @@ public partial class FishHungerComponent : Node
     public void InitComponent(Fish fish){
         FishData data = fish.fishData;
         this.fish = fish;
-        fishSprites = fish.GetAnimatedSprite2D();
+        fishSprites = fish.sprite2D;
 
         favFood = data.favroiteFoodName;
 

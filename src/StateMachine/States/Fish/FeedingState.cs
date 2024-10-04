@@ -78,7 +78,7 @@ public partial class FeedingState : State
 
     public void SwimmToTarget(){
         if(target!=null){
-            if(animatedSprite2D.Animation=="swimm"){
+            if(animationPlayer.CurrentAnimation=="swimm"){
                 direction = fish.Position.DirectionTo(target.Position);
                 fish.SetNewDirection(direction);
                 parent.Position += direction * (fish.GetSpeed() * 2);
@@ -86,10 +86,10 @@ public partial class FeedingState : State
             else{
                 parent.Position += fish.oldDirection;
             }
-            if(fish.OverlapsArea(target) && animatedSprite2D.Animation=="swimm"){
+            if(fish.OverlapsArea(target) && animationPlayer.CurrentAnimation=="swimm"){
                 fish.GetHungerComponent().Eated(target);
                 target.QueueFree();
-                animatedSprite2D.Play("eat");
+                animationPlayer.Play("eat");
                 EmitSignal(SignalName.transitioned,this,"Idle");
             }
             

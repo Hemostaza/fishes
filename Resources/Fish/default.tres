@@ -1,13 +1,13 @@
 [gd_resource type="Resource" load_steps=4 format=3 uid="uid://2xp32elw8rdl"]
 
 [ext_resource type="Resource" uid="uid://dabxe8bqyvkda" path="res://Resources/Coin/goldCoin.tres" id="1_sx78k"]
+[ext_resource type="Texture2D" uid="uid://dc6p03hfmx4u5" path="res://Assets/Sprites/Fishes/rybkaall.png" id="3_31onq"]
 [ext_resource type="Script" path="res://src/ObjectData/FishData.cs" id="3_hjkyn"]
-[ext_resource type="SpriteFrames" uid="uid://bbb33rl37olbl" path="res://Resources/Fish/Sprites/defaultSprites.tres" id="5_mnbmf"]
 
 [resource]
 script = ExtResource("3_hjkyn")
 Name = "Default"
-sprites = ExtResource("5_mnbmf")
+sprites = ExtResource("3_31onq")
 maxSize = 2
 maxSpeed = 1.0
 carnivore = false
