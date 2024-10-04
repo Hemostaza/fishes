@@ -4,12 +4,14 @@ using System;
 public partial class Food : Area2D
 {
     Tween tween;
-    [Export]
-    AnimatedSprite2D animatedSprite2D;
+    Sprite2D sprite2D;
 
     FoodData foodData;
+    AnimationPlayer animationPlayer;
     public override void _Ready()
     {
+        animationPlayer = (AnimationPlayer)GetNode("AnimationPlayer");
+        animationPlayer.Play("float");
         base._Ready();
         //GetTree().CallGroup("fish", "FoodInTank");
         tween = GetTree().CreateTween();
@@ -20,13 +22,10 @@ public partial class Food : Area2D
         
     }
 
-    void InitFood(){
-        animatedSprite2D.SpriteFrames = foodData.spriteFrames;
-    }
-
     public void SetFoodData(FoodData foodData){
         this.foodData = foodData;
-        InitFood();
+        sprite2D = (Sprite2D)GetNode("Sprite2D");
+        sprite2D.Texture = foodData.sprites;
     }
 
     public FoodData GetFoodData(){

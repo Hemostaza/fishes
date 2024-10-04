@@ -32,7 +32,7 @@ public partial class FoodDataResources : Node
             foodDatas[i] = res;
             //GD.Print(res);
         }
-        foodDatas = foodDatas.OrderBy(item => item.price).ToArray();
+        foodDatas = foodDatas.OrderBy(item => item.value).ToArray();
         // foreach (var filePath in DirAccess.GetFilesAt(path)){
         //     FoodData res = (FoodData) GD.Load(path+"/"+filePath);
         //     FoodResources[res.Name] = res;

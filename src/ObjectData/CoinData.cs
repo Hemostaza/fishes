@@ -1,14 +1,7 @@
 using Godot;
 using System;
 [GlobalClass]
-public partial class CoinData : Resource
+public partial class CoinData : ObjectData
 {
-
-    [Export]
-    public SpriteFrames sprites;
-    [Export]
-    public int value;
-
-
-
+    
 }

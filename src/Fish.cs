@@ -15,8 +15,6 @@ public partial class Fish : Entity
     [Export]
     public PackedScene coinScene;
 
-    SpriteFrames sprites;
-
     public Vector2 newDirection;
     public Vector2 oldDirection;
 

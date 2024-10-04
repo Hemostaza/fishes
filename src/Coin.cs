@@ -10,20 +10,22 @@ public partial class Coin : Area2D
     int value;
 
     bool onBottom;
-    AnimatedSprite2D AnimatedSprite2D; //exportem?
+    Sprite2D sprite2D; //exportem?
+    AnimationPlayer animationPlayer;
     Tween tween;
 
     public void SetCoinData(CoinData coinData){
         this.coinData = coinData;
-        AnimatedSprite2D = (AnimatedSprite2D)GetNode("Sprite");
-        AnimatedSprite2D.SpriteFrames = coinData.sprites;
-
+        sprite2D = (Sprite2D)GetNode("Sprite2D");
+        sprite2D.Texture = coinData.sprites;
     }
 
     public override void _Ready()
     {
         value = coinData.value;
         onBottom = false;
+        animationPlayer = (AnimationPlayer)GetNode("AnimationPlayer");
+        animationPlayer.Play("drop");
         base._Ready();
     }
 

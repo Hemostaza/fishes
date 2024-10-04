@@ -64,7 +64,7 @@ public partial class TankController : Node
         
         FoodData foodData = FoodDataResources.Instance.GetFoodDataByIndex(index);
 
-        if(playerStatus.GetStats("money").As<int>()<foodData.price){
+        if(playerStatus.GetStats("money").As<int>()<foodData.value){
             //dzwiek ze nie ma pijondza i błyskanie pijondzów?
             GD.Print("ni ma pijondza: "+PlayerStatus.Instance.GetStats("money").As<int>());
             return;
@@ -78,7 +78,7 @@ public partial class TankController : Node
                 instance.Position = mousePos;
 
                 int money = playerStatus.GetStats("money").As<int>();
-                money-=foodData.price;
+                money-=foodData.value;
                 playerStatus.ChangeStats("money",money);
 
                 tank.AddChild(instance);

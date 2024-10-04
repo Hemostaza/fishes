@@ -3,13 +3,10 @@ using Godot.Collections;
 using System;
 using System.Collections.Generic;
 
-public partial class FishData : Resource
+public partial class FishData : ObjectData
 {
-    [Export]
-    public String Name;
 
-    [Export]
-    public Texture2D sprites;
+
     [Export]
     public int maxSize;
     [Export]
@@ -30,10 +27,6 @@ public partial class FishData : Resource
     [Export]
     float minSize;
 
-    [Export]
-    public int value;
-    [Export]
-    public Texture2D icon;
 
     //Ile głodu wytrzyma
     [Export]
@@ -58,9 +51,6 @@ public partial class FishData : Resource
         return new Vector2(size,size);
     }
 
-    public override string ToString()
-    {
-        return "\n Name: "+ Name +"\n Value: "+value;
-    }
+    
 
 }

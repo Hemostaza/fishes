@@ -1,45 +1,11 @@
-[gd_resource type="Resource" script_class="CoinData" load_steps=8 format=3 uid="uid://dabxe8bqyvkda"]
+[gd_resource type="Resource" script_class="CoinData" load_steps=3 format=3 uid="uid://dabxe8bqyvkda"]
 
 [ext_resource type="Script" path="res://src/ObjectData/CoinData.cs" id="1_0frvk"]
 [ext_resource type="Texture2D" uid="uid://ct7003jixuh32" path="res://Assets/Sprites/New Piskel (47) (3).png" id="2_7cdri"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hmsjt"]
-atlas = ExtResource("2_7cdri")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y33g1"]
-atlas = ExtResource("2_7cdri")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ys301"]
-atlas = ExtResource("2_7cdri")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mf075"]
-atlas = ExtResource("2_7cdri")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_isy6g"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hmsjt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y33g1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ys301")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mf075")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [resource]
 script = ExtResource("1_0frvk")
-sprites = SubResource("SpriteFrames_isy6g")
+Name = "c"
+sprites = ExtResource("2_7cdri")
 value = 100
+spriteSize = Vector2(32, 32)

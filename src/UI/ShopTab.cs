@@ -31,7 +31,7 @@ public partial class ShopTab : Control
             FishData[] fishDatas = fishDataResources.GetFishDatas();
             for(int i = 0; i<fishDatas.Length;i++){
                 ShopButton instance = (ShopButton) buttonScene.Instantiate();
-                instance.SetButtonData(i,fishDatas[i].value,fishDatas[i].icon);
+                //instance.SetButtonData(i,fishDatas[i].value,fishDatas[i].sprites);
                 ShopButtons.Add(instance);
                 buttonGrid.AddChild(instance);
             }

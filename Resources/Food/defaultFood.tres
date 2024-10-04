@@ -1,11 +1,11 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://bqt61titry2mq"]
 
 [ext_resource type="Script" path="res://src/ObjectData/FoodData.cs" id="1_v825r"]
-[ext_resource type="SpriteFrames" uid="uid://crlaqvircib06" path="res://Resources/Food/Sprites/defaultFoodSprites.tres" id="2_o8msy"]
+[ext_resource type="Texture2D" uid="uid://bburk2o30dyua" path="res://Assets/Sprites/Food1.png" id="2_kht8v"]
 
 [resource]
 script = ExtResource("1_v825r")
-Name = "defaultFood"
 nutrition = 5.0
-price = 50
-spriteFrames = ExtResource("2_o8msy")
+Name = "defaultFood"
+sprites = ExtResource("2_kht8v")
+value = 5
