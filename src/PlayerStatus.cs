@@ -48,7 +48,7 @@ public partial class PlayerStatus : Node
         NewGame();
         //new game
         Instance = this;
-        maxFoodCount = 1;
+        maxFoodCount = 3;
         clickPower = 1;
         fishHealthRegeneration = 1;
         selectedFood = 0;

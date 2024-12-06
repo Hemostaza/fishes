@@ -9,3 +9,4 @@ Name = "c"
 sprites = ExtResource("2_7cdri")
 value = 100
 spriteSize = Vector2(32, 32)
+spritesCount = 4

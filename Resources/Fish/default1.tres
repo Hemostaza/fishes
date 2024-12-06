@@ -6,8 +6,6 @@
 
 [resource]
 script = ExtResource("2_xujqs")
-Name = "Default1"
-sprites = ExtResource("3_2j24u")
 maxSize = 2
 maxSpeed = 1.0
 carnivore = false
@@ -15,8 +13,12 @@ favroiteFoodName = "defaultFood"
 favroiteFoodBonus = 0
 coinDatas = Array[Object]([ExtResource("1_gefg1")])
 minSize = 1.0
-value = 1
 hungerMeter = 10
 hungerSpeed = 5.0
 maxHealth = 1.0
 healthRegen = 1.0
+Name = "Default1"
+sprites = ExtResource("3_2j24u")
+value = 1
+spriteSize = Vector2(32, 32)
+spritesCount = 4

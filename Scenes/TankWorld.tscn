@@ -1,14 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bg56oktm8pna5"]
+[gd_scene load_steps=3 format=3 uid="uid://bg56oktm8pna5"]
 
 [ext_resource type="PackedScene" uid="uid://bxips6vkfxffr" path="res://Scenes/Fish.tscn" id="1_k76qi"]
 [ext_resource type="PackedScene" uid="uid://dlti5fu4oq66b" path="res://Scenes/Tank.tscn" id="2_vrscw"]
-[ext_resource type="PackedScene" uid="uid://ytqemlynj8g1" path="res://Scenes/UI/UI.tscn" id="3_7fcqv"]
 
 [node name="CHUJ" type="Node2D"]
-
-[node name="Control" parent="." instance=ExtResource("3_7fcqv")]
-z_index = 100
-mouse_filter = 1
 
 [node name="TankOld" parent="." instance=ExtResource("2_vrscw")]
 visible = false

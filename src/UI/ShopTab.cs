@@ -28,10 +28,13 @@ public partial class ShopTab : Control
         //GD.Print(fishDataResources.fishDatasByValue[0]);
         //wyjebac tablice i uzyc GetFishDataByIndex() z fish data resources
         if(buttonScene!=null){
-            FishData[] fishDatas = fishDataResources.GetFishDatas();
+            ObjectData[] fishDatas = fishDataResources.GetFishDatas();
             for(int i = 0; i<fishDatas.Length;i++){
                 ShopButton instance = (ShopButton) buttonScene.Instantiate();
-                //instance.SetButtonData(i,fishDatas[i].value,fishDatas[i].sprites);
+                AtlasTexture atlasTexture = new AtlasTexture();
+                atlasTexture.Atlas = fishDatas[i].sprites;
+                atlasTexture.Region = new Rect2(new Vector2(0, 0), new Vector2(32,32));
+                instance.SetButtonData(i,fishDatas[i].value,atlasTexture);
                 ShopButtons.Add(instance);
                 buttonGrid.AddChild(instance);
             }

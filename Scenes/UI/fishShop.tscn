@@ -1,0 +1,98 @@
+[gd_scene load_steps=6 format=3 uid="uid://n4xqcu5ama0w"]
+
+[ext_resource type="LabelSettings" uid="uid://cxfwny8ea4kr8" path="res://Themes/FontSettings.tres" id="1_8oquf"]
+[ext_resource type="Script" path="res://src/UI/FishShopTab.cs" id="2_t6x8x"]
+[ext_resource type="PackedScene" uid="uid://fsumc22n7wwf" path="res://Scenes/UI/Button.tscn" id="3_oqfp7"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0c3v5"]
+load_path = "res://.godot/imported/sprite_02.png-37af577568a23a8f0530112871daad04.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_54drk"]
+content_margin_left = 2.0
+content_margin_top = 5.0
+content_margin_right = 2.0
+content_margin_bottom = 1.0
+texture = SubResource("CompressedTexture2D_0c3v5")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[node name="FishShopTab" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+clip_contents = true
+custom_minimum_size = Vector2(150, 0)
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_right = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(150, 25)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 5.0
+offset_bottom = 32.0
+grow_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_54drk")
+text = "Shop"
+label_settings = ExtResource("1_8oquf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TabContainer" type="TabContainer" parent="."]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Fish" type="ScrollContainer" parent="TabContainer" node_paths=PackedStringArray("buttonGrid")]
+visible = false
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+script = ExtResource("2_t6x8x")
+buttonScene = ExtResource("3_oqfp7")
+buttonGrid = NodePath("")
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Fish"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 14
+columns = 2
+
+[node name="Food" type="ScrollContainer" parent="TabContainer" node_paths=PackedStringArray("buttonGrid")]
+visible = false
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+script = ExtResource("2_t6x8x")
+buttonScene = ExtResource("3_oqfp7")
+buttonGrid = NodePath("")
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Food"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 14
+columns = 2
+
+[node name="Misc" type="ScrollContainer" parent="TabContainer" node_paths=PackedStringArray("buttonGrid")]
+visible = false
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+script = ExtResource("2_t6x8x")
+buttonScene = ExtResource("3_oqfp7")
+buttonGrid = NodePath("")
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Misc"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 14
+columns = 2

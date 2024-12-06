@@ -1,0 +1,339 @@
+[gd_scene load_steps=16 format=3 uid="uid://c2lxygs6nkehl"]
+
+[ext_resource type="LabelSettings" uid="uid://cxfwny8ea4kr8" path="res://Themes/FontSettings.tres" id="1_4d5ym"]
+[ext_resource type="Script" path="res://src/UI/FishShopTab.cs" id="2_t8h2g"]
+[ext_resource type="PackedScene" uid="uid://fsumc22n7wwf" path="res://Scenes/UI/Button.tscn" id="3_xup3f"]
+[ext_resource type="Script" path="res://src/UI/FishInfoPanel.cs" id="4_0gkbe"]
+[ext_resource type="StyleBox" uid="uid://giitlokyo6tb" path="res://Themes/StyleBoxTextures/panelConcaveBlue.tres" id="5_mklj8"]
+[ext_resource type="SpriteFrames" uid="uid://bbb33rl37olbl" path="res://Resources/Fish/Sprites/defaultSprites.tres" id="6_sn5gf"]
+[ext_resource type="StyleBox" uid="uid://ckeremn1iu8f4" path="res://Themes/StyleBoxTextures/panelConcave.tres" id="7_83677"]
+[ext_resource type="Theme" uid="uid://cracvhtucxb7y" path="res://TabTheme.tres" id="8_cmwn5"]
+[ext_resource type="Texture2D" uid="uid://8ru5680oxyvl" path="res://Assets/Sprites/GUI/icons/ico16.png" id="9_cmgt1"]
+[ext_resource type="Texture2D" uid="uid://cyobn2kmx3y7" path="res://iconAtlas.tres" id="10_bjci8"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_f4xlo"]
+load_path = "res://.godot/imported/sprite_00.png-507aefe9f8f541ec7e8e4991775285b3.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0c3v5"]
+load_path = "res://.godot/imported/sprite_02.png-37af577568a23a8f0530112871daad04.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_54drk"]
+content_margin_left = 2.0
+content_margin_top = 5.0
+content_margin_right = 2.0
+content_margin_bottom = 1.0
+texture = SubResource("CompressedTexture2D_0c3v5")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1spae"]
+atlas = ExtResource("9_cmgt1")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mqw34"]
+atlas = ExtResource("9_cmgt1")
+region = Rect2(16, 0, 16, 16)
+
+[node name="NinePatchRect" type="NinePatchRect"]
+custom_minimum_size = Vector2(180, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_right = -550.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CompressedTexture2D_f4xlo")
+patch_margin_left = 15
+patch_margin_top = 13
+patch_margin_right = 15
+patch_margin_bottom = 13
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="FishShopTab" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+clip_contents = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_right = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="FishShopTab"]
+custom_minimum_size = Vector2(150, 25)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 5.0
+offset_bottom = 32.0
+grow_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_54drk")
+text = "Shop"
+label_settings = ExtResource("1_4d5ym")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TabContainer" type="TabContainer" parent="FishShopTab"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Fish" type="ScrollContainer" parent="FishShopTab/TabContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+script = ExtResource("2_t8h2g")
+buttonScene = ExtResource("3_xup3f")
+
+[node name="GridContainer" type="GridContainer" parent="FishShopTab/TabContainer/Fish"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 14
+columns = 2
+
+[node name="Food" type="ScrollContainer" parent="FishShopTab/TabContainer"]
+visible = false
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+script = ExtResource("2_t8h2g")
+buttonScene = ExtResource("3_xup3f")
+
+[node name="GridContainer" type="GridContainer" parent="FishShopTab/TabContainer/Food"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 14
+columns = 2
+
+[node name="Misc" type="ScrollContainer" parent="FishShopTab/TabContainer"]
+visible = false
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+script = ExtResource("2_t8h2g")
+buttonScene = ExtResource("3_xup3f")
+
+[node name="GridContainer" type="GridContainer" parent="FishShopTab/TabContainer/Misc"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 14
+columns = 2
+
+[node name="FishInfoTab" type="Panel" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(160, 480)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_right = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_0gkbe")
+
+[node name="Label" type="Label" parent="FishInfoTab"]
+custom_minimum_size = Vector2(150, 25)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 5.0
+offset_bottom = 32.0
+grow_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_54drk")
+text = "Fish Info
+"
+label_settings = ExtResource("1_4d5ym")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FishGraph" type="Panel" parent="FishInfoTab"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_top = 39.0
+offset_right = 80.0
+offset_bottom = 199.0
+grow_horizontal = 2
+theme_override_styles/panel = ExtResource("5_mklj8")
+
+[node name="Control" type="Control" parent="FishInfoTab/FishGraph"]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -78.0
+offset_right = 82.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="FishInfoTab/FishGraph/Control"]
+position = Vector2(6, 6)
+scale = Vector2(4.5, 4.5)
+sprite_frames = ExtResource("6_sn5gf")
+animation = &"eat"
+centered = false
+
+[node name="InfoPanel" type="Panel" parent="FishInfoTab"]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_top = 205.0
+offset_right = 80.0
+offset_bottom = 465.0
+grow_horizontal = 2
+theme_override_styles/panel = ExtResource("7_83677")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FishInfoTab/InfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 5
+
+[node name="maxHunger" type="Label" parent="FishInfoTab/InfoPanel/VBoxContainer"]
+layout_mode = 2
+text = "Max hunger:"
+label_settings = ExtResource("1_4d5ym")
+
+[node name="maxE2C" type="Label" parent="FishInfoTab/InfoPanel/VBoxContainer"]
+layout_mode = 2
+text = "Max E2C:"
+label_settings = ExtResource("1_4d5ym")
+
+[node name="FoodTab" type="Panel" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(160, 480)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_right = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="FoodTab"]
+custom_minimum_size = Vector2(150, 25)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 5.0
+offset_bottom = 32.0
+grow_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_54drk")
+text = "Food"
+label_settings = ExtResource("1_4d5ym")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="FoodTab"]
+custom_minimum_size = Vector2(150, 25)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = 10.0
+offset_right = 75.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_54drk")
+text = "Info"
+label_settings = ExtResource("1_4d5ym")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="FoodTab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 40.0
+offset_bottom = -240.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("7_83677")
+
+[node name="Panel2" type="Panel" parent="FoodTab"]
+custom_minimum_size = Vector2(160, 50)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -190.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = ExtResource("7_83677")
+
+[node name="TabButtons" type="GridContainer" parent="."]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -79.0
+offset_right = 3.0
+offset_bottom = 125.0
+grow_vertical = 2
+theme = ExtResource("8_cmwn5")
+
+[node name="ShopBtn" type="Button" parent="TabButtons"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+toggle_mode = true
+icon = SubResource("AtlasTexture_1spae")
+icon_alignment = 1
+expand_icon = true
+
+[node name="InfoBtn" type="Button" parent="TabButtons"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+toggle_mode = true
+icon = SubResource("AtlasTexture_mqw34")
+icon_alignment = 1
+expand_icon = true
+
+[node name="FoodBtn" type="Button" parent="TabButtons"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("10_bjci8")
+icon_alignment = 1
+expand_icon = true

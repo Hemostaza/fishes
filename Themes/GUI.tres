@@ -3,9 +3,9 @@
 [ext_resource type="StyleBox" uid="uid://bd28ul7lfbnms" path="res://Themes/StyleBoxTextures/button1Disabled.tres" id="1_m34sv"]
 [ext_resource type="StyleBox" uid="uid://baldgcgcftppa" path="res://Themes/StyleBoxTextures/button1Hover.tres" id="2_5qlfv"]
 [ext_resource type="StyleBox" uid="uid://2nrer8xxyr0c" path="res://Themes/StyleBoxTextures/button1Normal.tres" id="3_p2bxy"]
-[ext_resource type="Texture2D" uid="uid://cfivysp2tcu41" path="res://Assets/Sprites/GUI/tab_disabled.png" id="4_cjis4"]
+[ext_resource type="Texture2D" uid="uid://cfivysp2tcu41" path="res://Assets/Sprites/GUI/old/tab_disabled.png" id="4_cjis4"]
 [ext_resource type="StyleBox" uid="uid://be7gtlegf2w12" path="res://Themes/StyleBoxTextures/button1Pressed.tres" id="4_rbms7"]
-[ext_resource type="Texture2D" uid="uid://doau1451e2vpk" path="res://Assets/Sprites/GUI/tab_hover.png" id="5_h304n"]
+[ext_resource type="Texture2D" uid="uid://doau1451e2vpk" path="res://Assets/Sprites/GUI/old/tab_hover.png" id="5_h304n"]
 [ext_resource type="FontFile" uid="uid://cdjcinofxacyd" path="res://Assets/Fonts/Minecraft.ttf" id="5_rbx6k"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7o21m"]
