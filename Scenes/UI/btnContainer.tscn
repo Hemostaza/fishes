@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://dm5lguld5inu7"]
+
+[ext_resource type="Theme" uid="uid://n22dld78hiwc" path="res://foodBtnLocked.tres" id="1_vphiy"]
+[ext_resource type="Texture2D" uid="uid://kkpcyp02rurh" path="res://oldFiles/Old/coi.png" id="2_6v3fj"]
+[ext_resource type="Texture2D" uid="uid://crcaxqprpwfgw" path="res://oldFiles/Old/roundConcaveField.png" id="3_ak10q"]
+[ext_resource type="FontFile" uid="uid://cdjcinofxacyd" path="res://Assets/Fonts/Minecraft.ttf" id="4_oypfh"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l3o2q"]
+texture = ExtResource("3_ak10q")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_6wkb1"]
+font = ExtResource("4_oypfh")
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="BtnContainer" type="VBoxContainer"]
+theme_override_constants/separation = 0
+
+[node name="Btn" type="Button" parent="."]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme = ExtResource("1_vphiy")
+toggle_mode = true
+button_pressed = true
+icon = ExtResource("2_6v3fj")
+expand_icon = true
+
+[node name="Panel2" type="Panel" parent="."]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_l3o2q")
+
+[node name="Value" type="Label" parent="Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 30.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+text = "9999"
+label_settings = SubResource("LabelSettings_6wkb1")
+horizontal_alignment = 1
+vertical_alignment = 1

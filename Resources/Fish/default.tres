@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" uid="uid://dabxe8bqyvkda" path="res://Resources/Coin/goldCoin.tres" id="1_sx78k"]
 [ext_resource type="Texture2D" uid="uid://dc6p03hfmx4u5" path="res://Assets/Sprites/Fishes/rybkaall.png" id="3_31onq"]
-[ext_resource type="Script" path="res://src/ObjectData/FishData.cs" id="3_hjkyn"]
+[ext_resource type="Script" uid="uid://cc67p7eewfa2j" path="res://src/ObjectData/FishData.cs" id="3_hjkyn"]
 
 [resource]
 script = ExtResource("3_hjkyn")

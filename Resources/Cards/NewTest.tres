@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ActionTestFish" load_steps=3 format=3 uid="uid://ex0na87wfr3j"]
+
+[ext_resource type="Script" uid="uid://fmdgqa346f6m" path="res://src/Cards/CardActions/ActionTestFish.cs" id="1_dlvyc"]
+[ext_resource type="Texture2D" uid="uid://b51h1djqpje0f" path="res://oldFiles/Old/buttonHover.png" id="2_w2ilc"]
+
+[resource]
+script = ExtResource("1_dlvyc")
+cardName = "Test 2"
+cardStrenght = 2
+cardDescription = "Kolejna karta z dupy"
+texture = ExtResource("2_w2ilc")
+metadata/_custom_type_script = "uid://fmdgqa346f6m"

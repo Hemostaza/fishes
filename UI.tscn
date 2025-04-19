@@ -1,0 +1,210 @@
+[gd_scene load_steps=16 format=3 uid="uid://b7g7i80jiprah"]
+
+[ext_resource type="Script" uid="uid://cp50uxqht56g8" path="res://src/Cards/CardController.cs" id="1_b3bc3"]
+[ext_resource type="Script" uid="uid://bpkcu3reou3a3" path="res://src/UI/CardsObjects/CardField.cs" id="2_g6l6n"]
+[ext_resource type="Resource" uid="uid://bh0xtg7bqb14e" path="res://Resources/Cards/TestCard.tres" id="3_g6l6n"]
+[ext_resource type="Resource" uid="uid://ex0na87wfr3j" path="res://Resources/Cards/NewTest.tres" id="3_qui0h"]
+[ext_resource type="Script" uid="uid://d1jwlts5l8hw7" path="res://src/UI/CardsObjects/PlayerHandCardField.cs" id="4_27c8x"]
+[ext_resource type="PackedScene" uid="uid://c3dm0vycrtjn1" path="res://Scenes/Cards/Card.tscn" id="5_27c8x"]
+[ext_resource type="PackedScene" uid="uid://bxips6vkfxffr" path="res://Scenes/Entities/Fish.tscn" id="5_c6dx3"]
+[ext_resource type="Script" uid="uid://bxpto4ogcs31v" path="res://src/UI/CardsObjects/CardDeck.cs" id="5_vrfts"]
+[ext_resource type="Texture2D" uid="uid://bijkpfi1tsr6p" path="res://Assets/Sprites/Cards/card.png" id="6_0mc3e"]
+[ext_resource type="Script" uid="uid://cowg0ywij0ppr" path="res://src/UI/CardsObjects/PlayedCardsField.cs" id="6_i1vam"]
+[ext_resource type="FontFile" uid="uid://cjxg7dxj8m6qg" path="res://Assets/Fonts/7x5.ttf" id="7_2n5f6"]
+[ext_resource type="PackedScene" uid="uid://bjjt52l22wlsr" path="res://Scenes/Cards/NewCard.tscn" id="11_n8582"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_27c8x"]
+font = ExtResource("7_2n5f6")
+
+[sub_resource type="LabelSettings" id="LabelSettings_i1vam"]
+font = ExtResource("7_2n5f6")
+font_size = 32
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q77pa"]
+
+[node name="Control" type="Control" node_paths=PackedStringArray("playerDeck", "discardedDeck", "playedCardsField", "playerField", "cardsInPlay")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+script = ExtResource("1_b3bc3")
+playerDeck = NodePath("PlayerDeck")
+playerCards = Array[Object]([ExtResource("3_qui0h"), ExtResource("3_qui0h"), ExtResource("3_g6l6n"), ExtResource("3_g6l6n")])
+discardedDeck = NodePath("Discarded")
+cardScene = ExtResource("5_27c8x")
+playedCardsField = NodePath("PlayedCards")
+playerField = NodePath("PlayerHand")
+cardsInPlay = NodePath("InPlay")
+fishScene = ExtResource("5_c6dx3")
+
+[node name="PlayerHand" type="Panel" parent="." node_paths=PackedStringArray("target", "discardBtn")]
+layout_mode = 0
+offset_left = 348.0
+offset_top = 530.0
+offset_right = 942.0
+offset_bottom = 702.0
+mouse_filter = 1
+script = ExtResource("4_27c8x")
+target = NodePath("../PlayedCards")
+discardBtn = NodePath("Button")
+cardScene = ExtResource("5_27c8x")
+
+[node name="HFlowContainer" type="HFlowContainer" parent="PlayerHand"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="PlayerHand"]
+z_index = 1
+layout_mode = 2
+offset_left = -86.0
+offset_top = -140.0
+offset_right = -3.0
+offset_bottom = -104.0
+
+[node name="FoodDeck" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 138.0
+offset_bottom = 174.0
+
+[node name="InPlay" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 10.0
+offset_right = 970.0
+offset_bottom = 182.0
+script = ExtResource("2_g6l6n")
+
+[node name="cipa" type="HFlowContainer" parent="InPlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Discarded" type="Button" parent="." node_paths=PackedStringArray("target")]
+layout_mode = 0
+offset_left = 1130.0
+offset_top = 4.0
+offset_right = 1272.0
+offset_bottom = 198.0
+script = ExtResource("5_vrfts")
+target = NodePath("../PlayerHand")
+maxDrawCount = 0
+
+[node name="TextureRect" type="TextureRect" parent="Discarded"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.5
+offset_top = -87.5
+offset_right = 62.5
+offset_bottom = 87.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_0mc3e")
+
+[node name="CardsLeft" type="Label" parent="Discarded"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 160.0
+offset_right = 136.0
+offset_bottom = 183.0
+text = "5"
+label_settings = SubResource("LabelSettings_27c8x")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DrawsLeft" type="Label" parent="Discarded"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 64.0
+offset_right = 96.0
+offset_bottom = 118.0
+text = "4"
+label_settings = SubResource("LabelSettings_i1vam")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayedCards" type="Panel" parent="." node_paths=PackedStringArray("target")]
+layout_mode = 0
+offset_left = 418.0
+offset_top = 404.0
+offset_right = 852.0
+offset_bottom = 516.0
+script = ExtResource("6_i1vam")
+target = NodePath("../PlayerHand")
+
+[node name="HFlowContainer" type="HFlowContainer" parent="PlayedCards"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerDeck" type="Button" parent="." node_paths=PackedStringArray("target")]
+layout_mode = 0
+offset_left = 174.0
+offset_top = 522.0
+offset_right = 312.0
+offset_bottom = 706.0
+theme_override_constants/outline_size = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_q77pa")
+script = ExtResource("5_vrfts")
+target = NodePath("../PlayerHand")
+maxDrawCount = 2
+newScene = ExtResource("11_n8582")
+
+[node name="TextureRect" type="TextureRect" parent="PlayerDeck"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.5
+offset_top = -87.5
+offset_right = 62.5
+offset_bottom = 87.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_0mc3e")
+
+[node name="CardsLeft" type="Label" parent="PlayerDeck"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 160.0
+offset_right = 136.0
+offset_bottom = 183.0
+text = "5"
+label_settings = SubResource("LabelSettings_27c8x")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DrawsLeft" type="Label" parent="PlayerDeck"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 64.0
+offset_right = 96.0
+offset_bottom = 118.0
+text = "4"
+label_settings = SubResource("LabelSettings_i1vam")
+horizontal_alignment = 1
+vertical_alignment = 1

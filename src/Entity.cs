@@ -7,6 +7,10 @@ public partial class Entity : Area2D
     public AnimationPlayer animationPlayer;
     [Export]
     public Sprite2D sprite2D;
+    [Export]
+    ObjectData objectData;
+
+    public Card linkedCard;
 
     bool mouseIn = false;
 
@@ -16,6 +20,10 @@ public partial class Entity : Area2D
         //animatedSprite2D.Play("swimm");
     }
 
+    public virtual void LinkCard(Card card){
+        linkedCard = card;
+    }
+
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
@@ -23,6 +31,10 @@ public partial class Entity : Area2D
     public AnimationPlayer GetAnimationPlayer(){
         GD.Print(animationPlayer);
         return animationPlayer;
+    }
+
+    virtual public void Spawn(ObjectData objectData){
+        
     }
 
     public override void _UnhandledInput(InputEvent @event)

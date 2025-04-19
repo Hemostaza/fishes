@@ -36,6 +36,7 @@ public partial class DeadState : State
     }
 
     void StopThat(){
+
         parent.QueueFree();
     }
 

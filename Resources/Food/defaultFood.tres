@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://bqt61titry2mq"]
 
-[ext_resource type="Script" path="res://src/ObjectData/FoodData.cs" id="1_v825r"]
-[ext_resource type="Texture2D" uid="uid://bburk2o30dyua" path="res://Assets/Sprites/Food1.png" id="2_kht8v"]
+[ext_resource type="Script" uid="uid://du86xwqytdffn" path="res://src/ObjectData/FoodData.cs" id="1_v825r"]
+[ext_resource type="Texture2D" uid="uid://bburk2o30dyua" path="res://Assets/Sprites/Food/Food1.png" id="2_kht8v"]
 
 [resource]
 script = ExtResource("1_v825r")

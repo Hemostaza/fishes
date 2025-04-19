@@ -67,9 +67,9 @@ public partial class Fish : Entity
         //SpawnFish();
     }
 
-    public void SpawnFish(FishData data){
+    public override void Spawn(ObjectData data){
         //spadanie do akwarium
-        fishData = data;
+        fishData = (FishData) data;
 
         Scale = fishData.spawnSize();
         

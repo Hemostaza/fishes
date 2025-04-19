@@ -1,0 +1,61 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://n22dld78hiwc"]
+
+[ext_resource type="Texture2D" uid="uid://eh4vfmcanugy" path="res://oldFiles/Old/butonIconDisabled.png" id="1_qxn24"]
+[ext_resource type="Texture2D" uid="uid://hcbfwh8dswnr" path="res://oldFiles/Old/buttonLockedHover.png" id="2_ftbvw"]
+[ext_resource type="Texture2D" uid="uid://xm0j1yb3dwpw" path="res://oldFiles/Old/buttonLockedNormal.png" id="3_ap6rx"]
+[ext_resource type="Texture2D" uid="uid://d4hgn8lalldij" path="res://oldFiles/Old/buttonLockedPressed.png" id="4_35u37"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tv5g5"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("1_qxn24")
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.0
+texture_margin_bottom = 7.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kgnf4"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_ftbvw")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_72ee8"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("3_ap6rx")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ps80t"]
+content_margin_left = 9.0
+content_margin_top = 9.0
+content_margin_right = 7.0
+content_margin_bottom = 7.0
+texture = ExtResource("4_35u37")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[resource]
+Button/colors/icon_focus_color = Color(1, 1, 1, 0.666667)
+Button/colors/icon_hover_color = Color(1, 1, 1, 0.666667)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 0.784314)
+Button/colors/icon_normal_color = Color(1, 1, 1, 0.666667)
+Button/colors/icon_pressed_color = Color(0.862745, 0.862745, 0.862745, 0.666667)
+Button/styles/disabled = SubResource("StyleBoxTexture_tv5g5")
+Button/styles/hover = SubResource("StyleBoxTexture_kgnf4")
+Button/styles/normal = SubResource("StyleBoxTexture_72ee8")
+Button/styles/pressed = SubResource("StyleBoxTexture_ps80t")

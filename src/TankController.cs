@@ -23,8 +23,8 @@ public partial class TankController : Node
     public override void _Ready()
     {
         Instance = this;
-        fishScene = ResourceLoader.Load<PackedScene>("res://Scenes/Fish.tscn");
-        foodScene = ResourceLoader.Load<PackedScene>("res://Scenes/Food.tscn");
+        fishScene = ResourceLoader.Load<PackedScene>("res://Scenes/Entities/Fish.tscn");
+        foodScene = ResourceLoader.Load<PackedScene>("res://Scenes/Entities/Food.tscn");
 
         playerStatus = PlayerStatus.Instance;
 
@@ -50,7 +50,7 @@ public partial class TankController : Node
 
             FishData fishData = FishDataResources.Instance.GetFishDataByIndex(index);
             //instance.SetFishData(fishData);
-            instance.SpawnFish(fishData);
+            instance.Spawn(fishData);
             instance.Position = spawnPos;
             tank.AddChild(instance);
             

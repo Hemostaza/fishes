@@ -10,7 +10,6 @@ public partial class IdleState : State
     private double swimmTime;
     private Vector2 swimmVector = Vector2.Left;
     private Vector2 oldVector;
-    
 
     Fish fish;
 

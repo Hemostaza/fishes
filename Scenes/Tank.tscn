@@ -1,17 +1,17 @@
 [gd_scene load_steps=6 format=3 uid="uid://dlti5fu4oq66b"]
 
-[ext_resource type="Texture2D" uid="uid://bwfk1a3mr4nwn" path="res://Assets/Sprites/Tank.png" id="1_8mi47"]
+[ext_resource type="Texture2D" uid="uid://bwfk1a3mr4nwn" path="res://oldFiles/Old/Tank.png" id="1_ejdcd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c02jh"]
-atlas = ExtResource("1_8mi47")
+atlas = ExtResource("1_ejdcd")
 region = Rect2(0, 0, 640, 360)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x4abp"]
-atlas = ExtResource("1_8mi47")
+atlas = ExtResource("1_ejdcd")
 region = Rect2(0, 360, 640, 360)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oj7ti"]
-atlas = ExtResource("1_8mi47")
+atlas = ExtResource("1_ejdcd")
 region = Rect2(0, 720, 640, 360)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bja6b"]

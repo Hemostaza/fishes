@@ -42,4 +42,9 @@ public partial class FishDataResources : Node
     public String GetFishNameByIndex(int index){
         return fishDatas[index].Name;
     }
+
+    public FishData GetFishDataByName(String name){
+        return fishDatas[0];
+    }
+
 }
