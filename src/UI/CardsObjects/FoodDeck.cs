@@ -1,6 +1,6 @@
 using Godot;
 using System;
 
-public partial class FoodDeck : Node
+public partial class FoodDeck : CardDeck
 {
 }

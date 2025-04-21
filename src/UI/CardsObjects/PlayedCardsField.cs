@@ -7,7 +7,10 @@ public partial class PlayedCardsField : CardField
     CardField target;
     public override void CardPressed(Card card)
     {
-        card.ChangeCardField(target);
+        //card.ChangeCardField(target);
         //SendCard(card, target);
+        RemoveCard(card);
+        target.AddCard(card);
+
     }
 }

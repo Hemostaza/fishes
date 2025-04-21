@@ -33,9 +33,9 @@ public abstract partial class CardResource : Resource
     public int GetMaxTurnCount(){
         return maxTurnCount;
     }
-    public abstract void Action(CardController cardController,Card parent);
+    public abstract void Action();
 
-    public abstract void EndTrun(CardController cardController, Card parent);
+    public abstract void EndTrun();
     public virtual void OnPlayed(CardController cardController, Card parent){
         
         this.cardController = cardController;

@@ -12,7 +12,7 @@ public partial class PlayerHandCardField : CardField
     {
         base._Ready();
         //SetContainer(GetChild(1));
-        discardBtn.Pressed += () => DiscardCard(activeCard);
+        //discardBtn.Pressed += () => DiscardCard(activeCard);
     }
 
     public override void AddCard(Card card)
@@ -59,7 +59,9 @@ public partial class PlayerHandCardField : CardField
 
     public override void CardPressed(Card card)
     {
-        card.ChangeCardField(target);
+        RemoveCard(card);
+        target.AddCard(card);
+        //card.ChangeCardField(target);
         //SendCard(card, target);
     }
 

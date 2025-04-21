@@ -1,6 +1,6 @@
 using Godot;
 using System;
 
-public partial class DiscardedDeck : Node
+public partial class DiscardedDeck : CardDeck
 {
 }

@@ -28,48 +28,12 @@ public partial class DoActionsState : GameState
     {
         base.Enter();
 
-        // Card cardInstance = (Card)cardScene.Instantiate();
-        // cardInstance.CreateCard(cr);
-
-
         actionTime = 3.0;
         GD.Print(this.Name);
         cardController.DisableDecks(true);
         cardController.PlayCards();
-        //cardController.GetCardsInPlayField().SortChildren();
-        // CardField played = cardController.GetPlayedCardsField();
-        // CardField inPlay = cardController.GetCardsInPlayField();
-        //dictionary = cardController.getcardsInPlay();
-
-        //SPawn FIshes
-        // Array<Node> children = played.GetCardContainer().GetChildren();
-
-        // //SPawnuj nowe RYBY
-        // foreach (Card c in children)
-        // {
-        //     //if c is card
-        //     //if()
-        //     //load Resource to entity by card Name
-        //     //spawn entity
-        //     String cardName = c.GetResource().GetCardName();
-        //     FishData fishData = FishDataResources.Instance.GetFishDataByName(cardName);
-        //     if (fishData == null)
-        //     {
-        //         break;
-        //     }
-        //     Entity instance = (Fish)fishScene.Instantiate();
-        //     instance.Spawn(fishData);
-        //     AddChild(instance);
-        //     instance.LinkCard(c);
-        //     cardLink.Add(c, instance);
-        //     //if(fishres has string)
-        //     //spawn fish
-        // }
-
-        // played.SendAllCards(inPlay);
         DoActions();
     }
-
 
     public override void Update(double delta)
     {
@@ -100,7 +64,8 @@ public partial class DoActionsState : GameState
         }
     }
 
-    public void EndTurns(){
+    public void EndTurns()
+    {
         CardField inPlay = cardController.GetCardsInPlayField();
         foreach (Card card in inPlay.GetCardContainer().GetChildren())
         {

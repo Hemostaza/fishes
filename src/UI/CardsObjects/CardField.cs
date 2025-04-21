@@ -6,8 +6,6 @@ using Godot.Collections;
 public partial class CardField : Control
 {
     int maxCards = 0;
-    [Export]
-    public PackedScene cardScene;
 
     Node cardContainer;
 
@@ -40,12 +38,6 @@ public partial class CardField : Control
         return cards;
     }
 
-    virtual public void SendCard(Card card, CardField target)
-    {
-        cardContainer.RemoveChild(card);
-        target.AddCard(card);
-    }
-
     virtual public Card FindFirstCard(String cardName){
         Array<Node> nodes = cardContainer.GetChildren();
         foreach(Card c in nodes){
@@ -56,26 +48,15 @@ public partial class CardField : Control
         return null;
     }
 
-    // virtual public void SendAllCards(CardField target)
+    // public void DiscardCard(Card card)
     // {
-    //     List<Card> cards = [.. cardContainer.GetChildren().Cast<Card>()];
-    //     foreach (Card c in cards)
-    //     {
-    //         cardContainer.RemoveChild(c);
-    //         target.AddCardSorted(c);
-    //         //target.cardContainer.AddChild(c);
-    //     }
+    //     CardResource res = card.GetResource();
+    //     card.Free();
+
+    //     CardDeck discarded = (CardDeck)GetParent().GetNode("Discarded");
+    //     discarded.AddCardFirst(res);
+
     // }
-
-    public void DiscardCard(Card card)
-    {
-        CardResource res = card.GetResource();
-        card.Free();
-
-        CardDeck discarded = (CardDeck)GetParent().GetNode("Discarded");
-        discarded.AddCardFirst(res);
-
-    }
 
     virtual public void OnMouseEntered(Card card)
     {
@@ -87,46 +68,33 @@ public partial class CardField : Control
 
     virtual public void CardPressed(Card card)
     {
-        GD.Print("wuj");
+
     }
 
     virtual public void Disable(bool disable)
     {
         foreach (Card c in GetChild(0).GetChildren())
         {
-            c.Disabled = disable;
             c.Disable(disable);
         }
     }
-
-    // virtual public void SortChildren()
-    // {
-    //     Array<Card> cards = [.. GetChild(0).GetChildren().Cast<Card>()];
+    virtual public void AddCardSorted(Card card)
+    {
         
-    //     foreach(Node n in GetChildren()){
-    //         RemoveChild(n);
-    //     }
-    //     foreach(Card c in cards){
-
-    //     }
-    // }
-
-    // virtual public void AddCardSorted(Card card)
-    // {
-    //     List<Card> cards = [.. GetChild(0).GetChildren().Cast<Card>()];
-    //     int index = 0;
-    //     foreach (Card c in cards)
-    //     {
-    //         int cardStr = card.GetResource().GetCardStrenght();
-    //         int cStr = c.GetResource().GetCardStrenght();
-    //         if (cardStr < cStr)
-    //         {
-    //             break;
-    //         }
-    //         index++;
-    //     }
-    //     cardContainer.AddChild(card);
-    //     cardContainer.MoveChild(card,index);
-    // }
+        List<Card> cards = [.. GetChild(0).GetChildren().Cast<Card>()];
+        int index = 0;
+        foreach (Card c in cards)
+        {
+            int cardStr = card.GetResource().GetCardStrenght();
+            int cStr = c.GetResource().GetCardStrenght();
+            if (cardStr < cStr)
+            {
+                break;
+            }
+            index++;
+        }
+        cardContainer.AddChild(card);
+        cardContainer.MoveChild(card,index);
+    }
 
 }

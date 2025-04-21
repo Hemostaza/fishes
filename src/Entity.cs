@@ -10,7 +10,7 @@ public partial class Entity : Area2D
     [Export]
     ObjectData objectData;
 
-    public Card linkedCard;
+    //public Card linkedCard;
 
     bool mouseIn = false;
 
@@ -20,8 +20,12 @@ public partial class Entity : Area2D
         //animatedSprite2D.Play("swimm");
     }
 
-    public virtual void LinkCard(Card card){
-        linkedCard = card;
+    // public virtual void LinkCard(Card card){
+    //     linkedCard = card;
+    // }
+
+    public void OnCardDestory(){
+        QueueFree();
     }
 
     public override void _PhysicsProcess(double delta)

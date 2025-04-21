@@ -6,30 +6,38 @@ using System.Reflection.Metadata.Ecma335;
 public partial class ActionTestFish : CardResource
 {
 
-    // CardController cardController;
-    // Card parent;
-
     //Karta gupika:
+    [Export]
+    PackedScene fishScene;
+
+    Entity linkedEntity;
 
     public override void OnPlayed(CardController cardController, Card parent)
     {
         base.OnPlayed(cardController, parent);
-        // FishData fishData = FishDataResources.Instance.GetFishDataByName(GetCardName());
-        // if (fishData != null)
-        // {
-        //     Fish instance = (Fish)cardController.fishScene.Instantiate();
-        //     instance.Spawn(fishData);
-        //     instance.TreeExited += () => cardController.OnEntityExit(instance);
+        FishData fishData = FishDataResources.Instance.GetFishDataByName(GetCardName());
+        if (fishData != null)
+        {
+            Fish spawnedEntity = (Fish) fishScene.Instantiate();
+            spawnedEntity.Spawn(fishData);
+            
 
-        //     cardController.GetParent().AddChild(instance);
+            cardController.GetParent().AddChild(spawnedEntity);
+            //Polowicznie zbędne ale chuj
+            spawnedEntity.TreeExited += OnEntityDestroyed;
 
-        //     instance.LinkCard(parent);
-        //     cardController.GetLinkedCards().Add(parent,instance);
-        // }
-        parent.ChangeCardField(cardController.GetCardsInPlayField());
+            parent.TreeExiting += spawnedEntity.OnCardDestory;
+
+            linkedEntity = spawnedEntity;
+        }
     }
 
-    public override void Action(CardController old, Card old2)
+    public void OnEntityDestroyed(){
+        linkedEntity.TreeExited -= linkedEntity.OnCardDestory;
+        cardController.DiscardCard(parent);
+    }
+
+    public override void Action()
     {
         Card jedzenie = cardController.FindInPlayedCards("Jedzenie");
         if (jedzenie == null)
@@ -39,27 +47,18 @@ public partial class ActionTestFish : CardResource
         else
         {
             GD.Print("Jest jedzenie");
-            Fish ryba = (Fish)cardController.GetLinkedEntity(parent);
-            //ryba.Sethungry;
         }
-        Card innaryba = cardController.FindInPlayedCards("Ryba");
+        Card innaryba = cardController.FindInPlayedCards("Test 2");
         if (innaryba != null)
         {
-            Fish ryba = (Fish)cardController.GetLinkedEntity(innaryba);
+            GD.Print(innaryba);
+           // Fish ryba = (Fish)cardController.GetLinkedEntity(innaryba);
         }
-        // GD.Print("kurasa");
-        // GD.Print(cardController.GetLinkedCards()[parent]);
-        // GD.Print(cardController.GetCardsInPlayField().GetCards().Contains(parent));
-        // GD.Print(cardController.FindInPlayedCards("Jedzenie"));
-        // cardController.DiscardCard(parent);
-        //if cardcontroller cardsInPlay.contains food
-        //parent set hungry goes eating
-        //else
-        //parent set dieded
     }
 
-    public override void EndTrun(CardController old, Card old2)
+    public override void EndTrun()
     {
+        linkedEntity.TreeExited -= OnEntityDestroyed;
         cardController.DiscardCard(parent);
     }
 }

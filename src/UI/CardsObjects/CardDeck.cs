@@ -46,7 +46,7 @@ public partial class CardDeck : Button
             }
             else AddCardLast(cr);
         }
-        
+
         cardsLeftInDeck.Text = cards.Count.ToString();
     }
 
@@ -80,26 +80,14 @@ public partial class CardDeck : Button
 
     public void DrawCard(CardField target)
     {
-
-        // NewCardTest card = new NewCardTest();
-        // NewCard c = card;
-        // card.SetCardInfo("Cipa",1,"chuje");
-
-        // NewCardObject newCardObject = (NewCardObject) newScene.Instantiate();
-        // newCardObject.CreateCard(c);
-        // target.GetChild(0).AddChild(newCardObject);
-
-        // newCardObject.DoAction();
-
         try
         {
             CardResource card = cards.First.Value;
 
-            Card cardInstance = (Card) cardScene.Instantiate();
+            Card cardInstance = (Card)cardScene.Instantiate();
             cardInstance.CreateCard(card);
-            cardInstance.ChangeCardField(target);
-            //target.AddCard(cardInstance);
-            
+            target.AddCard(cardInstance);
+
             ChangeCurrentDraw(1);
             cards.RemoveFirst();
             cardsLeftInDeck.Text = cards.Count.ToString();
