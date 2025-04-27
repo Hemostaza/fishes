@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b7g7i80jiprah"]
+[gd_scene load_steps=49 format=3 uid="uid://b7g7i80jiprah"]
 
 [ext_resource type="Script" uid="uid://cp50uxqht56g8" path="res://src/UI/CardController.cs" id="1_b3bc3"]
 [ext_resource type="Script" uid="uid://bpkcu3reou3a3" path="res://src/UI/CardsObjects/CardField.cs" id="2_g6l6n"]
@@ -74,6 +74,50 @@ _bundled = {
 "version": 3
 }
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_foiwe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3ujc7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5xurb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_taqas"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d5rvm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qo1pa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_40r0a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ly2lw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3mirh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_coxox"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0wyng"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jtt4m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_asf2l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6yyuk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ajnb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vwijv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1r4vt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1oyfl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_51slc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rknla"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qwmcr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ijs1t"]
+
 [node name="Control" type="Control" node_paths=PackedStringArray("playerDeck", "discardedDeck", "newlyPlayedField", "playerField", "inPlayField")]
 layout_mode = 3
 anchors_preset = 15
@@ -94,16 +138,16 @@ newlyPlayedField = NodePath("PlayedCards")
 playerField = NodePath("PlayerHand")
 inPlayField = NodePath("InPlay")
 
-[node name="PlayerHand" type="Panel" parent="." node_paths=PackedStringArray("target", "discardBtn")]
+[node name="PlayerHand" type="Panel" parent="." node_paths=PackedStringArray("target", "btnCOntainer")]
 layout_mode = 0
-offset_left = 348.0
-offset_top = 530.0
-offset_right = 942.0
-offset_bottom = 702.0
+offset_left = 350.0
+offset_top = 508.0
+offset_right = 944.0
+offset_bottom = 680.0
 mouse_filter = 1
 script = ExtResource("4_27c8x")
 target = NodePath("../PlayedCards")
-discardBtn = NodePath("Button")
+btnCOntainer = NodePath("../VBoxContainer")
 
 [node name="HFlowContainer" type="HFlowContainer" parent="PlayerHand"]
 layout_mode = 1
@@ -114,14 +158,6 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Button" type="Button" parent="PlayerHand"]
-z_index = 1
-layout_mode = 2
-offset_left = 288.0
-offset_top = 70.0
-offset_right = 371.0
-offset_bottom = 106.0
-
 [node name="FoodDeck" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 8.0
@@ -131,10 +167,11 @@ offset_bottom = 174.0
 
 [node name="InPlay" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 296.0
-offset_top = 10.0
-offset_right = 970.0
-offset_bottom = 182.0
+offset_left = 472.0
+offset_top = 18.0
+offset_right = 1146.0
+offset_bottom = 168.0
+scale = Vector2(0.5, 0.5)
 script = ExtResource("2_g6l6n")
 
 [node name="cipa" type="HFlowContainer" parent="InPlay"]
@@ -194,10 +231,11 @@ vertical_alignment = 1
 
 [node name="PlayedCards" type="Panel" parent="." node_paths=PackedStringArray("target")]
 layout_mode = 0
-offset_left = 418.0
-offset_top = 404.0
-offset_right = 852.0
-offset_bottom = 516.0
+offset_left = 512.0
+offset_top = 416.0
+offset_right = 946.0
+offset_bottom = 566.0
+scale = Vector2(0.5, 0.5)
 script = ExtResource("6_i1vam")
 target = NodePath("../PlayerHand")
 
@@ -258,3 +296,51 @@ text = "4"
 label_settings = SubResource("LabelSettings_i1vam")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="VBoxContainer" type="VSplitContainer" parent="."]
+custom_minimum_size = Vector2(125, 175)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1556.0
+offset_top = 260.0
+offset_right = 401.0
+offset_bottom = -285.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 120
+dragging_enabled = false
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_foiwe")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_3ujc7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_5xurb")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_taqas")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_d5rvm")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_qo1pa")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_40r0a")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_ly2lw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_3mirh")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_coxox")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0wyng")
+text = "Play"
+
+[node name="Discard" type="Button" parent="VBoxContainer"]
+z_index = 1
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jtt4m")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_asf2l")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_6yyuk")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7ajnb")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_vwijv")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_1r4vt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_1oyfl")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_51slc")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_rknla")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_qwmcr")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ijs1t")
+text = "Discard"

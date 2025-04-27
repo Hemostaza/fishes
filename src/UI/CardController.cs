@@ -18,9 +18,19 @@ public partial class CardController : Node
     [Export]
     CardField newlyPlayedField;
     [Export]
-    CardField playerField;
+    PlayerHandCardField playerField;
     [Export]
     CardField inPlayField;
+    
+    // [Export]
+    // Button discardBtn;
+
+
+    //Karta wysyła sygnał że się wypierdala na ryj i odrzuca
+    //Przyjmuje sygnał i wykonuej funkcje discardCard na karcie która sygnał wysłała?
+    //Moze polekart wysyłą sygnał o dobrzuceniu kary mowiac ktora karte wyjebao
+
+
 
     void populateDecks()
     {
@@ -32,13 +42,16 @@ public partial class CardController : Node
         base._Ready();
         populateDecks();
         playerDeck.cardScene = cardScene;
+        playerField.discardedFromHand += DiscardCard;
+        //discardBtn.Pressed += DiscardAction;
     }
 
-    public void DisableDecks(bool disabled)
+    public void DisableInput(bool disabled)
     {
         playerDeck.Disabled = disabled;
         playerField.Disable(disabled);
         newlyPlayedField.Disable(disabled);
+        playerField.DisableButtons(disabled);
 
     }
 
@@ -67,6 +80,14 @@ public partial class CardController : Node
         CardResource cardResource = card.GetResource();
         card.QueueFree();
         discardedDeck.AddCardFirst(cardResource);
+    }
+
+    public void DiscardAction(){
+        
+        //Card dicardedCard = (Card) discardBtn.GetParent();
+        //dicardedCard.RemoveChild(discardBtn);
+        // DiscardCard(((PlayerHandCardField)playerField).GetActiveCard());
+        // ((PlayerHandCardField)playerField).SetActiveCard(null);
     }
 
 

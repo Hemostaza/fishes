@@ -68,7 +68,8 @@ public partial class CardField : Control
 
     virtual public void CardPressed(Card card)
     {
-
+    }
+    virtual public void CardUnFocused(){
     }
 
     virtual public void Disable(bool disable)

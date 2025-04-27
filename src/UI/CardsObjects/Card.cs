@@ -29,7 +29,7 @@ public partial class Card : Control
         cardNameLabel.Text = resource.GetCardName();
         cardPowerLabel.Text = resource.GetCardStrenght().ToString();
         cardDescriptionLabel.Text = resource.GetCardDescription();
-        turnLived=0;
+        turnLived = 0;
         disabled = false;
         this.MouseEntered += OnMouseEntered;
         this.MouseExited += OnMouseExited;
@@ -49,7 +49,8 @@ public partial class Card : Control
         return cardResource.ToString();
     }
 
-    public void OnPlayed(CardController cardController){
+    public void OnPlayed(CardController cardController)
+    {
         //jak zagrana karta zostaje:   
         cardResource.OnPlayed(cardController, this);
     }
@@ -59,7 +60,8 @@ public partial class Card : Control
         //Ruszaj sie lewo prawo albo sraj 
         cardResource.Action();
     }
-    public void EndTrun(CardController cardController){
+    public void EndTrun(CardController cardController)
+    {
         cardResource.EndTrun();
     }
 
@@ -77,23 +79,24 @@ public partial class Card : Control
         cardField.OnMouseExited(this);
     }
 
-    public override void _GuiInput(InputEvent @event)
+    // public override void _GuiInput(InputEvent @event)
+    // {
+    //     base._GuiInput(@event);
+    //     if (@event is InputEventMouseButton mouseButton && mouseIn)
+    //     {
+
+    //         if (mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Left && disabled==false)
+    //         {
+    //             //GD.Print(field.Name);
+    //             CardField cardField = (CardField)GetParent().GetParent();
+    //             GD.Print(cardField.Name);
+    //             cardField.CardPressed(this);
+    //         }
+    //     }
+    // }
+
+    public void Disable(bool val)
     {
-        base._GuiInput(@event);
-        if (@event is InputEventMouseButton mouseButton && mouseIn)
-        {
-
-            if (mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Left && disabled==false)
-            {
-                //GD.Print(field.Name);
-                CardField cardField = (CardField)GetParent().GetParent();
-                GD.Print(cardField.Name);
-                cardField.CardPressed(this);
-            }
-        }
-    }
-
-    public void Disable(bool val){
         disabled = val;
     }
 

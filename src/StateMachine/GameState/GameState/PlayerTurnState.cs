@@ -18,7 +18,7 @@ public partial class PlayerTurnState : GameState
         base.Enter();
         turnTime = 3.0;
         GD.Print(this.Name);
-        cardController.DisableDecks(false);
+        cardController.DisableInput(false);
         cardController.ResetDrawCount();
     }
 

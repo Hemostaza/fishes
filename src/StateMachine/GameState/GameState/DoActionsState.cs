@@ -30,7 +30,7 @@ public partial class DoActionsState : GameState
 
         actionTime = 3.0;
         GD.Print(this.Name);
-        cardController.DisableDecks(true);
+        cardController.DisableInput(true);
         cardController.PlayCards();
         DoActions();
     }
