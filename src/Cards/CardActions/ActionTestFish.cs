@@ -26,13 +26,14 @@ public partial class ActionTestFish : CardResource
             //Polowicznie zbędne ale chuj
             spawnedEntity.TreeExited += OnEntityDestroyed;
 
-            parent.TreeExiting += spawnedEntity.OnCardDestory;
+            //parent.TreeExiting += spawnedEntity.OnCardDestory;
 
             linkedEntity = spawnedEntity;
         }
     }
 
     public void OnEntityDestroyed(){
+    
         linkedEntity.TreeExited -= linkedEntity.OnCardDestory;
         cardController.DiscardCard(parent);
     }
@@ -59,6 +60,7 @@ public partial class ActionTestFish : CardResource
     public override void EndTrun()
     {
         linkedEntity.TreeExited -= OnEntityDestroyed;
+        linkedEntity.QueueFree();
         cardController.DiscardCard(parent);
     }
 }

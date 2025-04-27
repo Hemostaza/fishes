@@ -16,12 +16,14 @@ public partial class CardController : Node
     [Export]
     PackedScene cardScene;
     [Export]
+    PackedScene newCardScene;
+    [Export]
     CardField newlyPlayedField;
     [Export]
     PlayerHandCardField playerField;
     [Export]
     CardField inPlayField;
-    
+
     // [Export]
     // Button discardBtn;
 
@@ -82,8 +84,9 @@ public partial class CardController : Node
         discardedDeck.AddCardFirst(cardResource);
     }
 
-    public void DiscardAction(){
-        
+    public void DiscardAction()
+    {
+
         //Card dicardedCard = (Card) discardBtn.GetParent();
         //dicardedCard.RemoveChild(discardBtn);
         // DiscardCard(((PlayerHandCardField)playerField).GetActiveCard());

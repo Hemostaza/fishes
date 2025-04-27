@@ -84,8 +84,7 @@ public partial class CardDeck : Button
     {
         try
         {
-            CardResource card = cards.First.Value;
-
+            CardResource card = (CardResource) cards.First.Value.Duplicate();
             Card cardInstance = (Card)cardScene.Instantiate();
             cardInstance.CreateCard(card);
             target.AddCard(cardInstance);

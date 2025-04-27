@@ -1,10 +1,11 @@
-[gd_scene load_steps=49 format=3 uid="uid://b7g7i80jiprah"]
+[gd_scene load_steps=50 format=3 uid="uid://b7g7i80jiprah"]
 
 [ext_resource type="Script" uid="uid://cp50uxqht56g8" path="res://src/UI/CardController.cs" id="1_b3bc3"]
 [ext_resource type="Script" uid="uid://bpkcu3reou3a3" path="res://src/UI/CardsObjects/CardField.cs" id="2_g6l6n"]
 [ext_resource type="Resource" uid="uid://bh0xtg7bqb14e" path="res://Resources/Cards/TestCard.tres" id="3_g6l6n"]
 [ext_resource type="Resource" uid="uid://ex0na87wfr3j" path="res://Resources/Cards/NewTest.tres" id="3_qui0h"]
 [ext_resource type="Script" uid="uid://d1jwlts5l8hw7" path="res://src/UI/CardsObjects/PlayerHandCardField.cs" id="4_27c8x"]
+[ext_resource type="PackedScene" uid="uid://idbjlx11coiy" path="res://Scenes/Cards/NewCard.tscn" id="5_3ujc7"]
 [ext_resource type="PackedScene" uid="uid://c3dm0vycrtjn1" path="res://Scenes/Cards/Card.tscn" id="5_27c8x"]
 [ext_resource type="Script" uid="uid://bxpto4ogcs31v" path="res://src/UI/CardsObjects/CardDeck.cs" id="5_vrfts"]
 [ext_resource type="Texture2D" uid="uid://bijkpfi1tsr6p" path="res://Assets/Sprites/Cards/card.png" id="6_0mc3e"]
@@ -134,6 +135,7 @@ playerCards = Array[Object]([ExtResource("3_qui0h"), ExtResource("3_qui0h"), Ext
 playerDeck = NodePath("PlayerDeck")
 discardedDeck = NodePath("Discarded")
 cardScene = ExtResource("5_27c8x")
+newCardScene = ExtResource("5_3ujc7")
 newlyPlayedField = NodePath("PlayedCards")
 playerField = NodePath("PlayerHand")
 inPlayField = NodePath("InPlay")
