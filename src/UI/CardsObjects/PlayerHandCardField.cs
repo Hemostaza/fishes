@@ -9,7 +9,7 @@ public partial class PlayerHandCardField : CardField
     [Export]
     Control btnCOntainer;
     Button playBtn;
-    Button discardBtn;
+    TextureButton discardBtn;
 
     Card focusedCard;
 
@@ -20,7 +20,7 @@ public partial class PlayerHandCardField : CardField
     {
         base._Ready();
         playBtn = (Button)btnCOntainer.GetChild(0);
-        discardBtn = (Button)btnCOntainer.GetChild(1);
+        discardBtn = (TextureButton)btnCOntainer.GetChild(1);
         playBtn.Pressed += PlayCard;
         discardBtn.Pressed += DiscardCard;
     }
@@ -64,6 +64,12 @@ public partial class PlayerHandCardField : CardField
         EmitSignal(SignalName.discardedFromHand, focusedCard);
         SetActiveCard(null);
     }
+
+    public override void CardPressed(Card card)
+    {
+        base.CardPressed(card);
+    }
+
 
     public void PlayCard()
     {

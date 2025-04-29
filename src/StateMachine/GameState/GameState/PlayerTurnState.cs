@@ -7,10 +7,13 @@ public partial class PlayerTurnState : GameState
     double turnTime = 3.0;
     [Export]
     CardController cardController;
+    Button nextTurn;
 
     public override void InitState()
     {
         base.InitState();
+        nextTurn = (Button) cardController.GetNode("NextTurn");
+        nextTurn.Pressed += NextTurn;
     }
 
     public override void Enter()
@@ -28,8 +31,12 @@ public partial class PlayerTurnState : GameState
         turnTime-=delta;
 
         if(turnTime<=0){
-             EmitSignal(SignalName.transitionedGameState,this,"ActionTimeState");
+            //EmitSignal(SignalName.transitionedGameState,this,"ActionTimeState");
         }
+    }
+
+    public void NextTurn(){
+        EmitSignal(SignalName.transitionedGameState,this,"ActionTimeState");
     }
 
 }

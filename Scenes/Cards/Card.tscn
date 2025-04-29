@@ -138,6 +138,7 @@ offset_right = -3.0
 offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_colors/default_color = Color(0.511719, 0.246094, 0.222656, 1)
 theme_override_fonts/normal_font = ExtResource("4_j526q")
 theme_override_font_sizes/normal_font_size = 8

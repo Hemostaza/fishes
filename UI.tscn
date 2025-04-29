@@ -1,11 +1,10 @@
-[gd_scene load_steps=50 format=3 uid="uid://b7g7i80jiprah"]
+[gd_scene load_steps=39 format=3 uid="uid://b7g7i80jiprah"]
 
 [ext_resource type="Script" uid="uid://cp50uxqht56g8" path="res://src/UI/CardController.cs" id="1_b3bc3"]
 [ext_resource type="Script" uid="uid://bpkcu3reou3a3" path="res://src/UI/CardsObjects/CardField.cs" id="2_g6l6n"]
 [ext_resource type="Resource" uid="uid://bh0xtg7bqb14e" path="res://Resources/Cards/TestCard.tres" id="3_g6l6n"]
 [ext_resource type="Resource" uid="uid://ex0na87wfr3j" path="res://Resources/Cards/NewTest.tres" id="3_qui0h"]
 [ext_resource type="Script" uid="uid://d1jwlts5l8hw7" path="res://src/UI/CardsObjects/PlayerHandCardField.cs" id="4_27c8x"]
-[ext_resource type="PackedScene" uid="uid://idbjlx11coiy" path="res://Scenes/Cards/NewCard.tscn" id="5_3ujc7"]
 [ext_resource type="PackedScene" uid="uid://c3dm0vycrtjn1" path="res://Scenes/Cards/Card.tscn" id="5_27c8x"]
 [ext_resource type="Script" uid="uid://bxpto4ogcs31v" path="res://src/UI/CardsObjects/CardDeck.cs" id="5_vrfts"]
 [ext_resource type="Texture2D" uid="uid://bijkpfi1tsr6p" path="res://Assets/Sprites/Cards/card.png" id="6_0mc3e"]
@@ -14,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://ddu0m6d4imi1l" path="res://Assets/Sprites/Cards/ramka.png" id="12_3ujc7"]
 [ext_resource type="Texture2D" uid="uid://dc6p03hfmx4u5" path="res://Assets/Sprites/Fishes/rybkaall.png" id="13_5xurb"]
 [ext_resource type="Texture2D" uid="uid://bhspbor5nt77y" path="res://Assets/Sprites/Cards/zawartosc.png" id="14_taqas"]
+[ext_resource type="Texture2D" uid="uid://cjln5f7nnhos3" path="res://Assets/Sprites/Cards/discardBtn.png" id="15_3ujc7"]
 [ext_resource type="LabelSettings" uid="uid://oxfnve7kkrm1" path="res://Resources/LabelSettingsPower.tres" id="15_d5rvm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_27c8x"]
@@ -97,45 +97,23 @@ _bundled = {
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0wyng"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jtt4m"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_asf2l"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6yyuk"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ajnb"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vwijv"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1r4vt"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1oyfl"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_51slc"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rknla"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qwmcr"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ijs1t"]
-
 [node name="Control" type="Control" node_paths=PackedStringArray("playerDeck", "discardedDeck", "newlyPlayedField", "playerField", "inPlayField")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 640.0
+offset_left = -1.0
+offset_right = 639.0
 offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 mouse_filter = 2
 script = ExtResource("1_b3bc3")
-playerCards = Array[Object]([ExtResource("3_qui0h"), ExtResource("3_qui0h"), ExtResource("3_g6l6n"), ExtResource("3_g6l6n")])
+playerCards = Array[Object]([ExtResource("3_qui0h"), ExtResource("3_qui0h"), ExtResource("3_g6l6n"), ExtResource("3_g6l6n"), ExtResource("3_qui0h"), ExtResource("3_qui0h"), ExtResource("3_g6l6n")])
 playerDeck = NodePath("PlayerDeck")
 discardedDeck = NodePath("Discarded")
 cardScene = ExtResource("5_27c8x")
-newCardScene = ExtResource("5_3ujc7")
 newlyPlayedField = NodePath("PlayedCards")
 playerField = NodePath("PlayerHand")
 inPlayField = NodePath("InPlay")
@@ -151,7 +129,7 @@ script = ExtResource("4_27c8x")
 target = NodePath("../PlayedCards")
 btnCOntainer = NodePath("../VBoxContainer")
 
-[node name="HFlowContainer" type="HFlowContainer" parent="PlayerHand"]
+[node name="HFlowContainer" type="HBoxContainer" parent="PlayerHand"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -241,13 +219,15 @@ scale = Vector2(0.5, 0.5)
 script = ExtResource("6_i1vam")
 target = NodePath("../PlayerHand")
 
-[node name="HFlowContainer" type="HFlowContainer" parent="PlayedCards"]
+[node name="HFlowContainer" type="HBoxContainer" parent="PlayedCards"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -216.0
+offset_right = 216.0
+offset_bottom = 175.0
 grow_horizontal = 2
-grow_vertical = 2
 
 [node name="PlayerDeck" type="Button" parent="." node_paths=PackedStringArray("target")]
 layout_mode = 0
@@ -259,7 +239,7 @@ theme_override_constants/outline_size = 0
 theme_override_styles/focus = SubResource("StyleBoxEmpty_q77pa")
 script = ExtResource("5_vrfts")
 target = NodePath("../PlayerHand")
-maxDrawCount = 2
+maxDrawCount = 10
 newScene = SubResource("PackedScene_40r0a")
 
 [node name="TextureRect" type="TextureRect" parent="PlayerDeck"]
@@ -300,18 +280,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="VBoxContainer" type="VSplitContainer" parent="."]
-custom_minimum_size = Vector2(125, 175)
+custom_minimum_size = Vector2(125, 190)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1556.0
-offset_top = 260.0
-offset_right = 401.0
-offset_bottom = -285.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 674.0
+offset_top = 140.0
+offset_right = 799.0
+offset_bottom = 330.0
 grow_horizontal = 2
-grow_vertical = 2
-split_offset = 120
+split_offset = 460
 dragging_enabled = false
 
 [node name="Play" type="Button" parent="VBoxContainer"]
@@ -328,21 +307,21 @@ theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_ly2lw")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_3mirh")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_coxox")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_0wyng")
-text = "Play"
 
-[node name="Discard" type="Button" parent="VBoxContainer"]
+[node name="Discard" type="TextureButton" parent="VBoxContainer"]
 z_index = 1
 layout_mode = 2
 mouse_filter = 1
-theme_override_styles/focus = SubResource("StyleBoxEmpty_jtt4m")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_asf2l")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_6yyuk")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_7ajnb")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_vwijv")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_1r4vt")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_1oyfl")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_51slc")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_rknla")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_qwmcr")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_ijs1t")
-text = "Discard"
+texture_normal = ExtResource("15_3ujc7")
+texture_pressed = ExtResource("15_3ujc7")
+texture_hover = ExtResource("15_3ujc7")
+texture_disabled = ExtResource("15_3ujc7")
+texture_focused = ExtResource("15_3ujc7")
+stretch_mode = 3
+
+[node name="NextTurn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1206.0
+offset_top = 650.0
+offset_right = 1258.0
+offset_bottom = 704.0

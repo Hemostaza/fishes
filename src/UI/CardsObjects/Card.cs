@@ -79,21 +79,19 @@ public partial class Card : Control
         cardField.OnMouseExited(this);
     }
 
-    // public override void _GuiInput(InputEvent @event)
-    // {
-    //     base._GuiInput(@event);
-    //     if (@event is InputEventMouseButton mouseButton && mouseIn)
-    //     {
+    public override void _GuiInput(InputEvent @event)
+    {
+        base._GuiInput(@event);
+        if (@event is InputEventMouseButton mouseButton && mouseIn)
+        {
 
-    //         if (mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Left && disabled==false)
-    //         {
-    //             //GD.Print(field.Name);
-    //             CardField cardField = (CardField)GetParent().GetParent();
-    //             GD.Print(cardField.Name);
-    //             cardField.CardPressed(this);
-    //         }
-    //     }
-    // }
+            if (mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Left && disabled==false)
+            {
+                CardField cardField = (CardField)GetParent().GetParent();
+                cardField.CardPressed(this);
+            }
+        }
+    }
 
     public void Disable(bool val)
     {
