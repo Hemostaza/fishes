@@ -5,7 +5,7 @@ using System.Text;
 
 public partial class CardDeck : Button
 {
-    LinkedList<CardResource> cards = new LinkedList<CardResource>();
+    public LinkedList<CardResource> cards = new LinkedList<CardResource>();
     RandomNumberGenerator rng = new RandomNumberGenerator();
     [Export]
     CardField target;
@@ -15,21 +15,30 @@ public partial class CardDeck : Button
     int currentDraw = 0;
 
     Label drawLeftLabel;
-    Label cardsLeftInDeck;
+    public int cardsLeftInDeck;
+    Label cardsLeftInDeckLabel;
 
     public PackedScene cardScene;
 
     [Export]
-    PackedScene newScene;
+    Texture2D emptyDeckTexture;
+    [Export]
+    Texture2D fullDeckTexture;
+
+    TextureRect textureRect;
 
     public override void _Ready()
     {
         base._Ready();
         drawLeftLabel = (Label)GetNode("DrawsLeft");
-        cardsLeftInDeck = (Label)GetNode("CardsLeft");
+        cardsLeftInDeckLabel = (Label)GetNode("CardsLeft");
         drawLeftLabel.Text = (maxDrawCount - currentDraw).ToString();
-        cardsLeftInDeck.Text = cards.Count.ToString();
+        cardsLeftInDeck = cards.Count;
+        cardsLeftInDeckLabel.Text = cardsLeftInDeck.ToString();
+        textureRect = (TextureRect)GetNode("TextureRect");
+        textureRect.Texture = fullDeckTexture;
 
+        UpdateCardUI();
     }
 
     public void PopulateDeck(CardResource[] cardResources)
@@ -42,28 +51,28 @@ public partial class CardDeck : Button
         {
             if (rng.RandiRange(0, 100) > 50)
             {
-                AddCardFirst(cr);
+                AddCard(cr, true);
             }
-            else AddCardLast(cr);
+            else AddCard(cr, false);
         }
-
-        cardsLeftInDeck.Text = cards.Count.ToString();
+        //UpdateCardUI();
+        // cardsLeftInDeck = cards.Count;
+        // cardsLeftInDeckLabel.Text = cardsLeftInDeck.ToString();
     }
 
-    public void AddCardLast(CardResource card)
+    public virtual void AddCard(CardResource card, bool fisrt)
     {
-        cards.AddLast(card);
-        cardsLeftInDeck.Text = cards.Count.ToString();
+        if (fisrt)
+        {
+            cards.AddFirst(card);
+        }
+        else
+        {
+            cards.AddLast(card);
+        }
+        UpdateCardUI();
+        //cardsLeftInDeckLabel.Text = cardsLeftInDeck.ToString();
     }
-
-    public void AddCardFirst(CardResource card)
-    {
-        cards.AddFirst(card);
-        cardsLeftInDeck.Text = cards.Count.ToString();
-    }
-
-    
-
     public override string ToString()
     {
         StringBuilder stringBuilder = new StringBuilder();
@@ -80,18 +89,19 @@ public partial class CardDeck : Button
         DrawCard(target);
     }
 
-    public void DrawCard(CardField target)
+    public virtual void DrawCard(CardField target)
     {
         try
         {
-            CardResource card = (CardResource) cards.First.Value.Duplicate();
+            CardResource card = (CardResource)cards.First.Value.Duplicate();
             Card cardInstance = (Card)cardScene.Instantiate();
             cardInstance.CreateCard(card);
             target.AddCard(cardInstance);
 
             ChangeCurrentDraw(1);
             cards.RemoveFirst();
-            cardsLeftInDeck.Text = cards.Count.ToString();
+            UpdateCardUI();//cardsLeftInDeckLabel.Text = cards.Count.ToString();
+            //textureRect.Texture = emptyDeckTexture;
         }
         catch (Exception e)
         {
@@ -129,5 +139,18 @@ public partial class CardDeck : Button
         drawLeftLabel.Text = (maxDrawCount - currentDraw).ToString();
     }
 
+    public virtual void UpdateCardUI()
+    {
+        cardsLeftInDeck = cards.Count;
+        if (cardsLeftInDeck <= 0)
+        {
+            textureRect.Texture = emptyDeckTexture;
+        }
+        else if (!textureRect.Texture.Equals(fullDeckTexture))
+        {
+            textureRect.Texture = fullDeckTexture;
+        }
+        cardsLeftInDeckLabel.Text = cardsLeftInDeck.ToString();
+    }
 
 }

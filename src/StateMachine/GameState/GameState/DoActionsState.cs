@@ -50,7 +50,6 @@ public partial class DoActionsState : GameState
     {
         base.Exit();
         EndTurns();
-
     }
 
 

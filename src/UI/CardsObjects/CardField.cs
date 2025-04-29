@@ -15,7 +15,8 @@ public partial class CardField : Control
         SetContainer(GetChild(0));
     }
 
-    public void SetContainer(Node noed){
+    public void SetContainer(Node noed)
+    {
         cardContainer = noed;
     }
 
@@ -24,11 +25,13 @@ public partial class CardField : Control
         cardContainer.AddChild(card);
     }
 
-    virtual public void RemoveCard(Card card){
+    virtual public void RemoveCard(Card card)
+    {
         cardContainer.RemoveChild(card);
     }
 
-    public Node GetCardContainer(){
+    public Node GetCardContainer()
+    {
         return cardContainer;
     }
 
@@ -38,10 +41,13 @@ public partial class CardField : Control
         return cards;
     }
 
-    virtual public Card FindFirstCard(String cardName){
+    virtual public Card FindFirstCard(String cardName)
+    {
         Array<Node> nodes = cardContainer.GetChildren();
-        foreach(Card c in nodes){
-            if(cardName.Equals(c.GetResource().GetCardName())){
+        foreach (Card c in nodes)
+        {
+            if (cardName.Equals(c.GetResource().GetCardName()))
+            {
                 return c;
             }
         }
@@ -69,19 +75,17 @@ public partial class CardField : Control
     virtual public void CardPressed(Card card)
     {
     }
-    virtual public void CardUnFocused(){
-    }
 
     virtual public void Disable(bool disable)
     {
         foreach (Card c in GetChild(0).GetChildren())
         {
-            c.Disable(disable);
+            c.Disabled(disable);
         }
     }
     virtual public void AddCardSorted(Card card)
     {
-        
+
         List<Card> cards = [.. GetChild(0).GetChildren().Cast<Card>()];
         int index = 0;
         foreach (Card c in cards)
@@ -95,7 +99,7 @@ public partial class CardField : Control
             index++;
         }
         cardContainer.AddChild(card);
-        cardContainer.MoveChild(card,index);
+        cardContainer.MoveChild(card, index);
     }
 
 }

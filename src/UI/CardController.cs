@@ -44,6 +44,7 @@ public partial class CardController : Node
         base._Ready();
         populateDecks();
         playerDeck.cardScene = cardScene;
+        discardedDeck.cardScene = cardScene;
         playerField.discardedFromHand += DiscardCard;
         //discardBtn.Pressed += DiscardAction;
     }
@@ -51,9 +52,9 @@ public partial class CardController : Node
     public void DisableInput(bool disabled)
     {
         playerDeck.Disabled = disabled;
+        discardedDeck.Disabled = disabled;
         playerField.Disable(disabled);
         newlyPlayedField.Disable(disabled);
-        playerField.DisableButtons(disabled);
 
     }
 
@@ -81,7 +82,7 @@ public partial class CardController : Node
     {
         CardResource cardResource = card.GetResource();
         card.QueueFree();
-        discardedDeck.AddCardFirst(cardResource);
+        discardedDeck.AddCard(cardResource,true);
     }
 
     public void DiscardAction()

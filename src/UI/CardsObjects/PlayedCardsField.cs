@@ -6,7 +6,7 @@ public partial class PlayedCardsField : CardField
     [Export]
     CardField target;
 
-    Vector2 offset = Vector2.Zero;
+    Vector2 offset = new Vector2(125 / 8, 150 / 8);
 
     Control duplicate;
     bool mouseIn;
@@ -15,8 +15,15 @@ public partial class PlayedCardsField : CardField
     {
         //card.ChangeCardField(target);
         //SendCard(card, target);
-        RemoveCard(card);
-        target.AddCard(card);
+        try
+        {
+            RemoveCard(card);
+            target.AddCard(card);
+        }
+        catch (Exception)
+        {
+            AddCard(card);
+        }
 
     }
 
@@ -27,8 +34,8 @@ public partial class PlayedCardsField : CardField
         duplicate = (Control)card.Duplicate();
         duplicate.MouseFilter = MouseFilterEnum.Ignore;
         GetParent().AddChild(duplicate);
-        duplicate.GlobalPosition = card.GlobalPosition;
-        mouseIn=true;
+        duplicate.GlobalPosition = card.GlobalPosition - offset;
+        mouseIn = true;
 
         // offset /= card.Size;
         // card.Scale*=2;
@@ -39,7 +46,7 @@ public partial class PlayedCardsField : CardField
     {
         base.OnMouseExited(card);
         duplicate.Free();
-        mouseIn=false;
+        mouseIn = false;
         // card.ZIndex-=1000;
 
         // offset /= card.Size;

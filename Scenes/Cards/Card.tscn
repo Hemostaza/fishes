@@ -1,20 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://c3dm0vycrtjn1"]
+[gd_scene load_steps=17 format=3 uid="uid://c3dm0vycrtjn1"]
 
 [ext_resource type="Texture2D" uid="uid://bijkpfi1tsr6p" path="res://Assets/Sprites/Cards/card.png" id="1_1k577"]
 [ext_resource type="Script" uid="uid://1r0ryhofkqfe" path="res://src/UI/CardsObjects/Card.cs" id="1_cetqg"]
 [ext_resource type="Resource" uid="uid://bh0xtg7bqb14e" path="res://Resources/Cards/TestCard.tres" id="2_kn1jn"]
 [ext_resource type="Texture2D" uid="uid://ddu0m6d4imi1l" path="res://Assets/Sprites/Cards/ramka.png" id="2_l0j15"]
+[ext_resource type="Shader" uid="uid://b05s0mgb4hy41" path="res://src/Grayscale.gdshader" id="3_4v2x1"]
 [ext_resource type="FontFile" uid="uid://cjxg7dxj8m6qg" path="res://Assets/Fonts/7x5.ttf" id="4_j526q"]
 [ext_resource type="Texture2D" uid="uid://bhspbor5nt77y" path="res://Assets/Sprites/Cards/zawartosc.png" id="4_l7msf"]
 [ext_resource type="Texture2D" uid="uid://dc6p03hfmx4u5" path="res://Assets/Sprites/Fishes/rybkaall.png" id="5_83pnt"]
 [ext_resource type="LabelSettings" uid="uid://oxfnve7kkrm1" path="res://Resources/LabelSettingsPower.tres" id="8_26dtv"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oa8sx"]
-texture = ExtResource("1_1k577")
-texture_margin_left = 6.0
-texture_margin_top = 6.0
-texture_margin_right = 6.0
-texture_margin_bottom = 6.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nilbr"]
+shader = ExtResource("3_4v2x1")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iqamh"]
 texture = ExtResource("2_l0j15")
@@ -23,12 +20,12 @@ texture = ExtResource("2_l0j15")
 atlas = ExtResource("5_83pnt")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7ri0y"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4r8q"]
 atlas = ExtResource("4_l7msf")
 region = Rect2(11, 32, 99, 69)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_77blu"]
-texture = SubResource("AtlasTexture_7ri0y")
+texture = SubResource("AtlasTexture_t4r8q")
 texture_margin_left = 4.0
 texture_margin_top = 14.0
 texture_margin_right = 4.0
@@ -51,21 +48,22 @@ offset_bottom = 175.0
 mouse_filter = 1
 script = ExtResource("1_cetqg")
 cardResource = ExtResource("2_kn1jn")
-cardNameLabel = NodePath("Panel/NamePlaq/Label")
-cardPowerLabel = NodePath("Panel/StrPlaq/Label")
-cardDescriptionLabel = NodePath("Panel/ActionDesc")
-image = NodePath("Panel/CardIcon")
+cardNameLabel = NodePath("NamePlaq/Label")
+cardPowerLabel = NodePath("StrPlaq/Label")
+cardDescriptionLabel = NodePath("ActionDesc")
+image = NodePath("CardIcon")
+shader = SubResource("ShaderMaterial_nilbr")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="TextureRect" parent="."]
 clip_contents = true
 custom_minimum_size = Vector2(125, 175)
 layout_mode = 0
 offset_right = 125.0
 offset_bottom = 175.0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_oa8sx")
+texture = ExtResource("1_1k577")
 
-[node name="Panel2" type="Panel" parent="Panel"]
+[node name="Panel2" type="Panel" parent="."]
 custom_minimum_size = Vector2(125, 175)
 layout_mode = 0
 offset_right = 125.0
@@ -73,7 +71,7 @@ offset_bottom = 175.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_iqamh")
 
-[node name="CardIcon" type="TextureRect" parent="Panel"]
+[node name="CardIcon" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -89,7 +87,7 @@ grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("AtlasTexture_g71mv")
 
-[node name="ActionDesc" type="RichTextLabel" parent="Panel"]
+[node name="ActionDesc" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(99, 18)
 layout_mode = 1
 anchors_preset = 7
@@ -98,7 +96,7 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -49.5
-offset_top = -32.0
+offset_top = -70.0
 offset_right = 49.5
 offset_bottom = -14.0
 grow_horizontal = 2
@@ -117,7 +115,7 @@ scroll_active = false
 autowrap_mode = 2
 shortcut_keys_enabled = false
 
-[node name="NamePlaq" type="TextureRect" parent="Panel"]
+[node name="NamePlaq" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(86, 15)
 layout_mode = 0
 offset_left = 13.0
@@ -127,7 +125,7 @@ offset_bottom = 28.0
 mouse_filter = 2
 texture = SubResource("AtlasTexture_sqanc")
 
-[node name="Label" type="RichTextLabel" parent="Panel/NamePlaq"]
+[node name="Label" type="RichTextLabel" parent="NamePlaq"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -146,7 +144,7 @@ text = "Gupik"
 scroll_active = false
 shortcut_keys_enabled = false
 
-[node name="StrPlaq" type="TextureRect" parent="Panel"]
+[node name="StrPlaq" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 96.0
 offset_top = 12.0
@@ -155,7 +153,7 @@ offset_bottom = 29.0
 mouse_filter = 2
 texture = SubResource("AtlasTexture_vhjey")
 
-[node name="Label" type="Label" parent="Panel/StrPlaq"]
+[node name="Label" type="Label" parent="StrPlaq"]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0

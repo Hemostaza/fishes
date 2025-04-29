@@ -13,12 +13,15 @@ public partial class PlayerHandCardField : CardField
 
     Card focusedCard;
 
+    int maxCards;
+
     [Signal]
     public delegate void discardedFromHandEventHandler(Card card);
 
     public override void _Ready()
     {
         base._Ready();
+        maxCards = 5;
         playBtn = (Button)btnCOntainer.GetChild(0);
         discardBtn = (TextureButton)btnCOntainer.GetChild(1);
         playBtn.Pressed += PlayCard;
@@ -27,7 +30,16 @@ public partial class PlayerHandCardField : CardField
 
     public override void AddCard(Card card)
     {
-        base.AddCard(card);
+        if (maxCards > GetChild(0).GetChildCount())
+        {
+            GD.Print(maxCards > GetChild(0).GetChildCount());
+            base.AddCard(card);
+        }
+        else
+        {
+            throw new Exception("Chuj xD");
+        }
+        //base.AddCard(card);
     }
 
     public void SetActiveCard(Card card)
@@ -43,20 +55,25 @@ public partial class PlayerHandCardField : CardField
     {
         base.OnMouseEntered(card);
         card.Position -= new Vector2(0, 20);
+        card.ZIndex += 1000;
         focusedCard = card;
         btnCOntainer.GetParent().RemoveChild(btnCOntainer);
         card.AddChild(btnCOntainer);//.Position = card.Position;
-        
-        btnCOntainer.Position = new Vector2(0,0);
+
+        btnCOntainer.Position = new Vector2(0, 0);
     }
     public override void OnMouseExited(Card card)
     {
         base.OnMouseExited(card);
-        card.Position += new Vector2(0, 20);
-        focusedCard = null;
-        btnCOntainer.GetParent().RemoveChild(btnCOntainer);
-        GetParent().AddChild(btnCOntainer);
-        btnCOntainer.Position = new Vector2(10000,10000);
+        if (focusedCard != null)
+        {
+            card.Position += new Vector2(0, 20);
+            card.ZIndex -= 1000;
+            focusedCard = null;
+            btnCOntainer.GetParent().RemoveChild(btnCOntainer);
+            GetParent().AddChild(btnCOntainer);
+            btnCOntainer.Position = new Vector2(10000, 10000);
+        }
     }
 
     public void DiscardCard()
@@ -78,10 +95,25 @@ public partial class PlayerHandCardField : CardField
         target.AddCard(cardToPlayed);
     }
 
-    public void DisableButtons(bool value){
+    public void DisableButtons(bool value)
+    {
         playBtn.Disabled = value;
         discardBtn.Disabled = value;
     }
+
+
+    public override void Disable(bool disable)
+    {
+        DisableButtons(disable);
+        OnMouseExited(focusedCard);
+        focusedCard = null;
+        foreach (Card c in GetChild(0).GetChildren())
+        {
+            c.Disabled(disable);
+            c.SetGreyed(disable);
+        }
+    }
+
 
 
 }

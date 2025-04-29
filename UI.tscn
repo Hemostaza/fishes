@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://b7g7i80jiprah"]
+[gd_scene load_steps=29 format=3 uid="uid://b7g7i80jiprah"]
 
 [ext_resource type="Script" uid="uid://cp50uxqht56g8" path="res://src/UI/CardController.cs" id="1_b3bc3"]
 [ext_resource type="Script" uid="uid://bpkcu3reou3a3" path="res://src/UI/CardsObjects/CardField.cs" id="2_g6l6n"]
@@ -10,11 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://bijkpfi1tsr6p" path="res://Assets/Sprites/Cards/card.png" id="6_0mc3e"]
 [ext_resource type="Script" uid="uid://cowg0ywij0ppr" path="res://src/UI/CardsObjects/PlayedCardsField.cs" id="6_i1vam"]
 [ext_resource type="FontFile" uid="uid://cjxg7dxj8m6qg" path="res://Assets/Fonts/7x5.ttf" id="7_2n5f6"]
-[ext_resource type="Texture2D" uid="uid://ddu0m6d4imi1l" path="res://Assets/Sprites/Cards/ramka.png" id="12_3ujc7"]
-[ext_resource type="Texture2D" uid="uid://dc6p03hfmx4u5" path="res://Assets/Sprites/Fishes/rybkaall.png" id="13_5xurb"]
-[ext_resource type="Texture2D" uid="uid://bhspbor5nt77y" path="res://Assets/Sprites/Cards/zawartosc.png" id="14_taqas"]
+[ext_resource type="Script" uid="uid://eohj1df5r146" path="res://src/UI/CardsObjects/DiscardedDeck.cs" id="7_jqn02"]
+[ext_resource type="Texture2D" uid="uid://br3spb6pny7v5" path="res://Assets/Sprites/Cards/emptyDeck.png" id="8_c6dx3"]
 [ext_resource type="Texture2D" uid="uid://cjln5f7nnhos3" path="res://Assets/Sprites/Cards/discardBtn.png" id="15_3ujc7"]
-[ext_resource type="LabelSettings" uid="uid://oxfnve7kkrm1" path="res://Resources/LabelSettingsPower.tres" id="15_d5rvm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c6dx3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_27c8x"]
 font = ExtResource("7_2n5f6")
@@ -24,56 +24,6 @@ font = ExtResource("7_2n5f6")
 font_size = 32
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q77pa"]
-
-[sub_resource type="Resource" id="Resource_qo1pa"]
-metadata/__load_path__ = "res://src/Cards/NewCardObject.cs"
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oa8sx"]
-texture = ExtResource("6_0mc3e")
-texture_margin_left = 6.0
-texture_margin_top = 6.0
-texture_margin_right = 6.0
-texture_margin_bottom = 6.0
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iqamh"]
-texture = ExtResource("12_3ujc7")
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g71mv"]
-atlas = ExtResource("13_5xurb")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7ri0y"]
-atlas = ExtResource("14_taqas")
-region = Rect2(11, 32, 99, 69)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_77blu"]
-texture = SubResource("AtlasTexture_7ri0y")
-texture_margin_left = 4.0
-texture_margin_top = 14.0
-texture_margin_right = 4.0
-texture_margin_bottom = 2.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sqanc"]
-atlas = ExtResource("14_taqas")
-region = Rect2(5, 8, 86, 15)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vhjey"]
-atlas = ExtResource("14_taqas")
-region = Rect2(101, 8, 17, 17)
-
-[sub_resource type="PackedScene" id="PackedScene_40r0a"]
-_bundled = {
-"conn_count": 0,
-"conns": PackedInt32Array(),
-"editable_instances": [],
-"names": PackedStringArray("Card", "Button", "custom_minimum_size", "offset_right", "offset_bottom", "script", "cardNameLabel", "cardPowerLabel", "cardDescriptionLabel", "image", "Panel", "Panel", "clip_contents", "custom_minimum_size", "layout_mode", "offset_right", "offset_bottom", "mouse_filter", "theme_override_styles/panel", "Panel2", "Panel", "custom_minimum_size", "layout_mode", "offset_right", "offset_bottom", "mouse_filter", "theme_override_styles/panel", "CardIcon", "TextureRect", "layout_mode", "anchors_preset", "anchor_left", "anchor_top", "anchor_right", "anchor_bottom", "offset_left", "offset_top", "offset_right", "offset_bottom", "grow_horizontal", "grow_vertical", "mouse_filter", "texture", "ActionDesc", "RichTextLabel", "custom_minimum_size", "layout_mode", "anchors_preset", "anchor_left", "anchor_top", "anchor_right", "anchor_bottom", "offset_left", "offset_top", "offset_right", "offset_bottom", "grow_horizontal", "grow_vertical", "mouse_filter", "theme_override_colors/default_color", "theme_override_constants/line_separation", "theme_override_fonts/normal_font", "theme_override_font_sizes/normal_font_size", "theme_override_styles/normal", "bbcode_enabled", "text", "fit_content", "scroll_active", "autowrap_mode", "shortcut_keys_enabled", "NamePlaq", "TextureRect", "custom_minimum_size", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "mouse_filter", "texture", "Label", "RichTextLabel", "layout_mode", "anchors_preset", "anchor_right", "anchor_bottom", "offset_left", "offset_top", "offset_right", "offset_bottom", "grow_horizontal", "grow_vertical", "theme_override_colors/default_color", "theme_override_fonts/normal_font", "theme_override_font_sizes/normal_font_size", "text", "scroll_active", "shortcut_keys_enabled", "StrPlaq", "TextureRect", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "mouse_filter", "texture", "Label", "Label", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "text", "label_settings", "horizontal_alignment", "vertical_alignment", "clip_text"),
-"node_count": 9,
-"node_paths": [NodePath("."), NodePath("./Panel"), NodePath("./Panel"), NodePath("./Panel"), NodePath("./Panel"), NodePath("./Panel/NamePlaq"), NodePath("./Panel"), NodePath("./Panel/StrPlaq")],
-"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 8, 2, 0, 3, 1, 4, 2, 5, 3, 1073741830, 4, 1073741831, 5, 1073741832, 6, 1073741833, 7, 0, 1073741824, 0, 11, 10, -1, 7, 12, 8, 13, 9, 14, 10, 15, 11, 16, 12, 17, 13, 18, 14, 0, 1073741825, 0, 20, 19, -1, 6, 21, 15, 22, 16, 23, 17, 24, 18, 25, 19, 26, 20, 0, 1073741826, 0, 28, 27, -1, 14, 29, 21, 30, 22, 31, 23, 32, 24, 33, 25, 34, 26, 35, 27, 36, 28, 37, 29, 38, 30, 39, 31, 40, 32, 41, 33, 42, 34, 0, 1073741827, 0, 44, 43, -1, 25, 45, 35, 46, 36, 47, 37, 48, 38, 49, 39, 50, 40, 51, 41, 52, 42, 53, 43, 54, 44, 55, 45, 56, 46, 57, 47, 58, 48, 59, 49, 60, 50, 61, 51, 62, 52, 63, 53, 64, 54, 65, 55, 66, 56, 67, 57, 68, 58, 69, 59, 0, 1073741828, 0, 71, 70, -1, 8, 72, 60, 73, 61, 74, 62, 75, 63, 76, 64, 77, 65, 78, 66, 79, 67, 0, 1073741829, 0, 81, 80, -1, 16, 82, 68, 83, 69, 84, 70, 85, 71, 86, 72, 87, 73, 88, 74, 89, 75, 90, 76, 91, 77, 92, 78, 93, 79, 94, 80, 95, 81, 96, 82, 97, 83, 0, 1073741830, 0, 99, 98, -1, 7, 100, 84, 101, 85, 102, 86, 103, 87, 104, 88, 105, 89, 106, 90, 0, 1073741831, 0, 108, 107, -1, 10, 109, 91, 110, 92, 111, 93, 112, 94, 113, 95, 114, 96, 115, 97, 116, 98, 117, 99, 118, 100, 0),
-"variants": [Vector2(125, 175), 125.0, 175.0, SubResource("Resource_qo1pa"), NodePath("Panel/NamePlaq/Label"), NodePath("Panel/StrPlaq/Label"), NodePath("Panel/ActionDesc"), NodePath("Panel/CardIcon"), true, Vector2(125, 175), 0, 125.0, 175.0, 2, SubResource("StyleBoxTexture_oa8sx"), Vector2(125, 175), 0, 125.0, 175.0, 2, SubResource("StyleBoxTexture_iqamh"), 1, 8, 0.5, 0.5, 0.5, 0.5, -46.5, -64.5, 47.5, 17.5, 2, 2, 2, SubResource("AtlasTexture_g71mv"), Vector2(99, 18), 1, 7, 0.5, 1.0, 0.5, 1.0, -49.5, -32.0, 49.5, -14.0, 2, 0, 2, Color(0.25, 0.183594, 0.195313, 1), 2, ExtResource("7_2n5f6"), 8, SubResource("StyleBoxTexture_77blu"), true, "[img]res://Assets/Sprites/Cards/dot.tres[/img] Eat 1 food or remove self
-[img]res://Assets/Sprites/Cards/dot.tres[/img] If >1 in aquarium then [img]res://Assets/Sprites/Cards/cipa.tres[/img] +1", true, false, 2, false, Vector2(86, 15), 0, 13.0, 13.0, 99.0, 28.0, 2, SubResource("AtlasTexture_sqanc"), 1, 15, 1.0, 1.0, 3.0, 4.0, -3.0, -3.0, 2, 2, Color(0.511719, 0.246094, 0.222656, 1), ExtResource("7_2n5f6"), 8, "Gupik", false, false, 0, 96.0, 12.0, 113.0, 29.0, 2, SubResource("AtlasTexture_vhjey"), 0, 1.0, 1.0, 17.0, 17.0, "11", ExtResource("15_d5rvm"), 1, 1, true],
-"version": 3
-}
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_foiwe"]
 
@@ -162,15 +112,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Discarded" type="Button" parent="." node_paths=PackedStringArray("target")]
+[node name="Discarded" type="Button" parent="." node_paths=PackedStringArray("cardOnTop", "target")]
+material = SubResource("ShaderMaterial_c6dx3")
 layout_mode = 0
 offset_left = 1130.0
 offset_top = 4.0
-offset_right = 1272.0
-offset_bottom = 198.0
-script = ExtResource("5_vrfts")
+offset_right = 1255.0
+offset_bottom = 179.0
+script = ExtResource("7_jqn02")
+cardOnTop = NodePath("Card")
 target = NodePath("../PlayerHand")
-maxDrawCount = 0
+emptyDeckTexture = ExtResource("8_c6dx3")
+fullDeckTexture = ExtResource("8_c6dx3")
 
 [node name="TextureRect" type="TextureRect" parent="Discarded"]
 layout_mode = 1
@@ -185,14 +138,16 @@ offset_right = 62.5
 offset_bottom = 87.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_0mc3e")
+texture = ExtResource("8_c6dx3")
+
+[node name="Card" parent="Discarded" instance=ExtResource("5_27c8x")]
 
 [node name="CardsLeft" type="Label" parent="Discarded"]
 layout_mode = 0
-offset_left = 108.0
-offset_top = 160.0
-offset_right = 136.0
-offset_bottom = 183.0
+offset_left = 102.0
+offset_top = 152.0
+offset_right = 130.0
+offset_bottom = 175.0
 text = "5"
 label_settings = SubResource("LabelSettings_27c8x")
 horizontal_alignment = 1
@@ -200,10 +155,10 @@ vertical_alignment = 1
 
 [node name="DrawsLeft" type="Label" parent="Discarded"]
 layout_mode = 0
-offset_left = 46.0
-offset_top = 64.0
-offset_right = 96.0
-offset_bottom = 118.0
+offset_left = 40.0
+offset_top = 62.0
+offset_right = 90.0
+offset_bottom = 116.0
 text = "4"
 label_settings = SubResource("LabelSettings_i1vam")
 horizontal_alignment = 1
@@ -240,7 +195,8 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_q77pa")
 script = ExtResource("5_vrfts")
 target = NodePath("../PlayerHand")
 maxDrawCount = 10
-newScene = SubResource("PackedScene_40r0a")
+emptyDeckTexture = ExtResource("8_c6dx3")
+fullDeckTexture = ExtResource("6_0mc3e")
 
 [node name="TextureRect" type="TextureRect" parent="PlayerDeck"]
 layout_mode = 1

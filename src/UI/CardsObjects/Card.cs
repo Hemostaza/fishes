@@ -14,6 +14,8 @@ public partial class Card : Control
     RichTextLabel cardDescriptionLabel;
     [Export]
     TextureRect image;
+    [Export]
+    Material shader;
 
     bool mouseIn;
     CardField field;
@@ -67,6 +69,7 @@ public partial class Card : Control
 
     void OnMouseEntered()
     {
+        //Przerobic na wysylanie sygnalu z kartą tak zeby nie łapać cardFielda 
         mouseIn = true;
         CardField cardField = (CardField)GetParent().GetParent();
         cardField.OnMouseEntered(this);
@@ -85,7 +88,7 @@ public partial class Card : Control
         if (@event is InputEventMouseButton mouseButton && mouseIn)
         {
 
-            if (mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Left && disabled==false)
+            if (mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Left && disabled == false)
             {
                 CardField cardField = (CardField)GetParent().GetParent();
                 cardField.CardPressed(this);
@@ -93,9 +96,31 @@ public partial class Card : Control
         }
     }
 
-    public void Disable(bool val)
+    public void Disabled(bool val)
     {
         disabled = val;
+        if (!val)
+        {
+            this.MouseExited += OnMouseExited;
+            this.MouseEntered += OnMouseEntered;
+        }
+        else
+        {
+            this.MouseEntered -= OnMouseEntered;
+            this.MouseExited -= OnMouseExited;
+        }
+        //wyszarzenie karty
+        //SetGreyed(val);
+
+    }
+    public void SetGreyed(bool val)
+    {
+        foreach (CanvasItem child in GetChildren())
+        {
+            if (val)
+                child.Material = shader;
+            else child.Material = null;
+        }
     }
 
 }
