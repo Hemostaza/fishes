@@ -23,11 +23,15 @@ public partial class CardField : Control
     virtual public void AddCard(Card card)
     {
         cardContainer.AddChild(card);
+        card.MouseEnteredCardHand += OnMouseEntered;
+        card.MouseExitedCardHand += OnMouseExited;
     }
 
     virtual public void RemoveCard(Card card)
     {
         cardContainer.RemoveChild(card);
+        card.MouseEnteredCardHand -= OnMouseEntered;
+        card.MouseExitedCardHand -= OnMouseExited;
     }
 
     public Node GetCardContainer()
@@ -53,16 +57,6 @@ public partial class CardField : Control
         }
         return null;
     }
-
-    // public void DiscardCard(Card card)
-    // {
-    //     CardResource res = card.GetResource();
-    //     card.Free();
-
-    //     CardDeck discarded = (CardDeck)GetParent().GetNode("Discarded");
-    //     discarded.AddCardFirst(res);
-
-    // }
 
     virtual public void OnMouseEntered(Card card)
     {

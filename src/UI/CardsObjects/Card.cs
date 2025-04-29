@@ -24,6 +24,13 @@ public partial class Card : Control
     int turnLived;
     bool disabled;
 
+    [Signal]
+    public delegate void MouseEnteredCardHandEventHandler(Card card);
+    [Signal]
+    public delegate void MouseExitedCardHandEventHandler(Card card);
+    [Signal]
+    public delegate void MouseClickCardHandEventHandler(Card card);
+
     public void CreateCard(CardResource resource)
     {
         cardResource = resource;
@@ -69,17 +76,14 @@ public partial class Card : Control
 
     void OnMouseEntered()
     {
-        //Przerobic na wysylanie sygnalu z kartą tak zeby nie łapać cardFielda 
         mouseIn = true;
-        CardField cardField = (CardField)GetParent().GetParent();
-        cardField.OnMouseEntered(this);
+        EmitSignal(SignalName.MouseEnteredCardHand,this);
     }
 
     void OnMouseExited()
     {
         mouseIn = false;
-        CardField cardField = (CardField)GetParent().GetParent();
-        cardField.OnMouseExited(this);
+        EmitSignal(SignalName.MouseExitedCardHand,this);
     }
 
     public override void _GuiInput(InputEvent @event)
@@ -87,11 +91,9 @@ public partial class Card : Control
         base._GuiInput(@event);
         if (@event is InputEventMouseButton mouseButton && mouseIn)
         {
-
             if (mouseButton.Pressed && mouseButton.ButtonIndex == MouseButton.Left && disabled == false)
             {
-                CardField cardField = (CardField)GetParent().GetParent();
-                cardField.CardPressed(this);
+                EmitSignal(SignalName.MouseClickCardHand,this);
             }
         }
     }
@@ -109,8 +111,6 @@ public partial class Card : Control
             this.MouseEntered -= OnMouseEntered;
             this.MouseExited -= OnMouseExited;
         }
-        //wyszarzenie karty
-        //SetGreyed(val);
 
     }
     public void SetGreyed(bool val)

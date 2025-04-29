@@ -55,9 +55,6 @@ public partial class CardDeck : Button
             }
             else AddCard(cr, false);
         }
-        //UpdateCardUI();
-        // cardsLeftInDeck = cards.Count;
-        // cardsLeftInDeckLabel.Text = cardsLeftInDeck.ToString();
     }
 
     public virtual void AddCard(CardResource card, bool fisrt)
@@ -71,7 +68,6 @@ public partial class CardDeck : Button
             cards.AddLast(card);
         }
         UpdateCardUI();
-        //cardsLeftInDeckLabel.Text = cardsLeftInDeck.ToString();
     }
     public override string ToString()
     {
@@ -100,8 +96,7 @@ public partial class CardDeck : Button
 
             ChangeCurrentDraw(1);
             cards.RemoveFirst();
-            UpdateCardUI();//cardsLeftInDeckLabel.Text = cards.Count.ToString();
-            //textureRect.Texture = emptyDeckTexture;
+            UpdateCardUI();
         }
         catch (Exception e)
         {

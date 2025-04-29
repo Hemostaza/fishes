@@ -3,7 +3,6 @@ using System;
 
 public partial class PlayerHandCardField : CardField
 {
-    Card activeCard;
     [Export]
     CardField target;
     [Export]
@@ -39,27 +38,17 @@ public partial class PlayerHandCardField : CardField
         {
             throw new Exception("Chuj xD");
         }
-        //base.AddCard(card);
-    }
-
-    public void SetActiveCard(Card card)
-    {
-        if (activeCard != null)
-            activeCard.Position += new Vector2(0, 20);
-        activeCard = card;
-        if (card != null)
-            activeCard.Position -= new Vector2(0, 20);
     }
 
     public override void OnMouseEntered(Card card)
     {
         base.OnMouseEntered(card);
         card.Position -= new Vector2(0, 20);
-        card.ZIndex += 1000;
+        card.ZIndex += 100;
         focusedCard = card;
         btnCOntainer.GetParent().RemoveChild(btnCOntainer);
-        card.AddChild(btnCOntainer);//.Position = card.Position;
 
+        card.AddChild(btnCOntainer);
         btnCOntainer.Position = new Vector2(0, 0);
     }
     public override void OnMouseExited(Card card)
@@ -68,7 +57,7 @@ public partial class PlayerHandCardField : CardField
         if (focusedCard != null)
         {
             card.Position += new Vector2(0, 20);
-            card.ZIndex -= 1000;
+            card.ZIndex -= 100;
             focusedCard = null;
             btnCOntainer.GetParent().RemoveChild(btnCOntainer);
             GetParent().AddChild(btnCOntainer);
@@ -79,14 +68,12 @@ public partial class PlayerHandCardField : CardField
     public void DiscardCard()
     {
         EmitSignal(SignalName.discardedFromHand, focusedCard);
-        SetActiveCard(null);
     }
 
     public override void CardPressed(Card card)
     {
-        base.CardPressed(card);
+        //base.CardPressed(card);
     }
-
 
     public void PlayCard()
     {
@@ -100,7 +87,6 @@ public partial class PlayerHandCardField : CardField
         playBtn.Disabled = value;
         discardBtn.Disabled = value;
     }
-
 
     public override void Disable(bool disable)
     {
