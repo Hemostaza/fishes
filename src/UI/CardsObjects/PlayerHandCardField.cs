@@ -12,7 +12,7 @@ public partial class PlayerHandCardField : CardField
 
     Card focusedCard;
 
-    int maxCards;
+    float xOffset = 125;
 
     [Signal]
     public delegate void discardedFromHandEventHandler(Card card);
@@ -29,15 +29,7 @@ public partial class PlayerHandCardField : CardField
 
     public override void AddCard(Card card)
     {
-        if (maxCards > GetChild(0).GetChildCount())
-        {
-            GD.Print(maxCards > GetChild(0).GetChildCount());
-            base.AddCard(card);
-        }
-        else
-        {
-            throw new Exception("Chuj xD");
-        }
+        base.AddCard(card);
     }
 
     public override void OnMouseEntered(Card card)
@@ -84,11 +76,12 @@ public partial class PlayerHandCardField : CardField
 
     public void DisableButtons(bool value)
     {
+        focusedCard = null;
         playBtn.Disabled = value;
         discardBtn.Disabled = value;
     }
 
-    public override void Disable(bool disable)
+    public override void Disable(bool disable, bool setGray)
     {
         DisableButtons(disable);
         OnMouseExited(focusedCard);
@@ -96,7 +89,7 @@ public partial class PlayerHandCardField : CardField
         foreach (Card c in GetChild(0).GetChildren())
         {
             c.Disabled(disable);
-            c.SetGreyed(disable);
+            if(setGray)c.SetGreyed(disable);
         }
     }
 

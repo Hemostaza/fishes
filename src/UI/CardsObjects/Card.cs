@@ -30,6 +30,8 @@ public partial class Card : Control
     public delegate void MouseExitedCardHandEventHandler(Card card);
     [Signal]
     public delegate void MouseClickCardHandEventHandler(Card card);
+    [Signal]
+    public delegate void OnActionEndEventHandler();
 
     public void CreateCard(CardResource resource)
     {
@@ -72,6 +74,10 @@ public partial class Card : Control
     public void EndTrun(CardController cardController)
     {
         cardResource.EndTrun();
+    }
+    public void ActionEnd(){
+        GD.Print("Emit end signal");
+        EmitSignal(SignalName.OnActionEnd);
     }
 
     void OnMouseEntered()

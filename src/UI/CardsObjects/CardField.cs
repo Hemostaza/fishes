@@ -5,9 +5,13 @@ using Godot;
 using Godot.Collections;
 public partial class CardField : Control
 {
-    int maxCards = 0;
+    public int maxCards = 0;
 
     Node cardContainer;
+
+
+    const int xCardSize = 125;
+    const float xOffser = (float)xCardSize / 2;
 
     public override void _Ready()
     {
@@ -20,13 +24,17 @@ public partial class CardField : Control
         cardContainer = noed;
     }
 
+    public bool HasSpace()
+    {
+        return maxCards == 0 ? true : maxCards > cardContainer.GetChildCount();
+    }
+
     virtual public void AddCard(Card card)
     {
         cardContainer.AddChild(card);
         card.MouseEnteredCardHand += OnMouseEntered;
         card.MouseExitedCardHand += OnMouseExited;
     }
-
     virtual public void RemoveCard(Card card)
     {
         cardContainer.RemoveChild(card);
@@ -70,12 +78,17 @@ public partial class CardField : Control
     {
     }
 
-    virtual public void Disable(bool disable)
+    virtual public void Disable(bool disable, bool setGray)
     {
         foreach (Card c in GetChild(0).GetChildren())
         {
             c.Disabled(disable);
         }
+    }
+
+    virtual public void Disable(bool disable)
+    {
+        Disable(disable,true);
     }
     virtual public void AddCardSorted(Card card)
     {

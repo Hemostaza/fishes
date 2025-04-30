@@ -13,14 +13,9 @@ public partial class PlayedCardsField : CardField
 
     public override void CardPressed(Card card)
     {
-        try
-        {
+        if(target.HasSpace()){
             RemoveCard(card);
             target.AddCard(card);
-        }
-        catch (Exception)
-        {
-            AddCard(card);
         }
     }
 

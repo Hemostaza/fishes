@@ -27,6 +27,9 @@ public partial class CardDeck : Button
 
     TextureRect textureRect;
 
+    [Signal]
+    public delegate void OnCardDrawEventHandler(CardDeck source, CardResource cardResource, CardField cardfield);
+
     public override void _Ready()
     {
         base._Ready();
@@ -87,20 +90,18 @@ public partial class CardDeck : Button
 
     public virtual void DrawCard(CardField target)
     {
-        try
+        if (target.HasSpace())
         {
             CardResource card = (CardResource)cards.First.Value.Duplicate();
-            Card cardInstance = (Card)cardScene.Instantiate();
-            cardInstance.CreateCard(card);
-            target.AddCard(cardInstance);
+            EmitSignal(SignalName.OnCardDraw, this, card, target);
+            GD.Print("wyciagam karte");
+            // Card cardInstance = (Card)cardScene.Instantiate();
+            // cardInstance.CreateCard(card);
+            // target.AddCard(cardInstance);
 
             ChangeCurrentDraw(1);
             cards.RemoveFirst();
             UpdateCardUI();
-        }
-        catch (Exception e)
-        {
-            GD.Print(e);
         }
     }
 

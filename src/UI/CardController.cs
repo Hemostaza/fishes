@@ -1,8 +1,9 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Drawing;
 
-public partial class CardController : Node
+public partial class CardController : Control
 {
     //Text array of cards
     [Export]
@@ -24,6 +25,8 @@ public partial class CardController : Node
     [Export]
     CardField inPlayField;
 
+    Tween tweenCardDrawAnim;
+
     void populateDecks()
     {
         playerDeck.PopulateDeck(playerCards);
@@ -34,7 +37,9 @@ public partial class CardController : Node
         base._Ready();
         populateDecks();
         playerDeck.cardScene = cardScene;
+        playerDeck.OnCardDraw += DrawCard;
         discardedDeck.cardScene = cardScene;
+        discardedDeck.OnCardDraw += DrawCard;
         playerField.discardedFromHand += DiscardCard;
     }
 
@@ -44,6 +49,28 @@ public partial class CardController : Node
         discardedDeck.Disabled = disabled;
         playerField.Disable(disabled);
         newlyPlayedField.Disable(disabled);
+    }
+
+    void DrawCard(CardDeck source, CardResource cardResource, CardField target)
+    {
+
+        Card card = (Card)cardScene.Instantiate();
+        card.CreateCard(cardResource);
+
+        int xOffset = 125;
+        AddChild(card);
+        source.Disabled = true;
+        card.Position = source.Position;
+        target.Disable(true,false);
+        tweenCardDrawAnim = GetTree().CreateTween();
+        tweenCardDrawAnim.TweenProperty(card, "position", new Vector2(target.Position.X + xOffset * target.GetChild(0).GetChildCount(), target.Position.Y), 0.2f);
+        tweenCardDrawAnim.TweenCallback(Callable.From(() =>
+        {
+            RemoveChild(card);
+            target.Disable(false,false);
+            target.AddCard(card);
+            source.Disabled=false;
+        }));
 
     }
 
@@ -71,7 +98,7 @@ public partial class CardController : Node
     {
         CardResource cardResource = card.GetResource();
         card.QueueFree();
-        discardedDeck.AddCard(cardResource,true);
+        discardedDeck.AddCard(cardResource, true);
     }
 
     public void PlayCards()

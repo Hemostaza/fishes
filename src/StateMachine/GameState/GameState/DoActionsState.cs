@@ -4,11 +4,9 @@ using Godot.Collections;
 
 public partial class DoActionsState : GameState
 {
-    double actionTime = 3.0;
+    double actionSpeed = 1.0;
     [Export]
     CardController cardController;
-
-    Dictionary<Card, Entity> cardLink;
 
     [Export]
     PackedScene fishScene;
@@ -21,14 +19,13 @@ public partial class DoActionsState : GameState
     public override void InitState()
     {
         base.InitState();
-        cardLink = new Dictionary<Card, Entity>();
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        actionTime = 3.0;
+        actionSpeed = 1.0;
         GD.Print(this.Name);
         cardController.DisableInput(true);
         cardController.PlayCards();
@@ -38,12 +35,18 @@ public partial class DoActionsState : GameState
     public override void Update(double delta)
     {
         base.Update(delta);
-        actionTime -= delta;
+        actionSpeed -= delta;
 
-        if (actionTime <= 0)
+
+        if (actionSpeed <= 0)
         {
             EmitSignal(SignalName.transitionedGameState, this, "PlayerTurnState");
         }
+    }
+
+    void StopAction()
+    {
+       // GD.Print("chuj");
     }
 
     public override void Exit()
@@ -60,6 +63,7 @@ public partial class DoActionsState : GameState
         {
             //card.TestAction();
             card.DoAction(cardController);
+            //card.OnActionEnd += () => GD.Print("cipa");
         }
     }
 
