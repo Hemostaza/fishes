@@ -1,10 +1,11 @@
-[gd_scene load_steps=29 format=3 uid="uid://b7g7i80jiprah"]
+[gd_scene load_steps=31 format=3 uid="uid://b7g7i80jiprah"]
 
 [ext_resource type="Script" uid="uid://cp50uxqht56g8" path="res://src/UI/CardController.cs" id="1_b3bc3"]
 [ext_resource type="Script" uid="uid://bpkcu3reou3a3" path="res://src/UI/CardsObjects/CardField.cs" id="2_g6l6n"]
 [ext_resource type="Resource" uid="uid://bh0xtg7bqb14e" path="res://Resources/Cards/TestCard.tres" id="3_g6l6n"]
 [ext_resource type="Resource" uid="uid://ex0na87wfr3j" path="res://Resources/Cards/NewTest.tres" id="3_qui0h"]
 [ext_resource type="Script" uid="uid://d1jwlts5l8hw7" path="res://src/UI/CardsObjects/PlayerHandCardField.cs" id="4_27c8x"]
+[ext_resource type="Resource" uid="uid://cnj15ot7ygmi6" path="res://Resources/Cards/FoodCardResource.tres" id="5_3ujc7"]
 [ext_resource type="PackedScene" uid="uid://c3dm0vycrtjn1" path="res://Scenes/Cards/Card.tscn" id="5_27c8x"]
 [ext_resource type="Script" uid="uid://bxpto4ogcs31v" path="res://src/UI/CardsObjects/CardDeck.cs" id="5_vrfts"]
 [ext_resource type="Texture2D" uid="uid://bijkpfi1tsr6p" path="res://Assets/Sprites/Cards/card.png" id="6_0mc3e"]
@@ -12,6 +13,7 @@
 [ext_resource type="FontFile" uid="uid://cjxg7dxj8m6qg" path="res://Assets/Fonts/7x5.ttf" id="7_2n5f6"]
 [ext_resource type="Script" uid="uid://eohj1df5r146" path="res://src/UI/CardsObjects/DiscardedDeck.cs" id="7_jqn02"]
 [ext_resource type="Texture2D" uid="uid://br3spb6pny7v5" path="res://Assets/Sprites/Cards/emptyDeck.png" id="8_c6dx3"]
+[ext_resource type="Texture2D" uid="uid://dj73xtkbpqler" path="res://Assets/Sprites/Cards/foodDeck.png" id="9_foiwe"]
 [ext_resource type="Texture2D" uid="uid://cjln5f7nnhos3" path="res://Assets/Sprites/Cards/discardBtn.png" id="15_3ujc7"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q77pa"]
@@ -47,7 +49,7 @@ font_size = 32
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0wyng"]
 
-[node name="Control" type="Control" node_paths=PackedStringArray("playerDeck", "discardedDeck", "newlyPlayedField", "playerField", "inPlayField")]
+[node name="Control" type="Control" node_paths=PackedStringArray("playerDeck", "discardedDeck", "newlyPlayedField", "playerField", "inPlayField", "foodDeck")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -67,6 +69,8 @@ cardScene = ExtResource("5_27c8x")
 newlyPlayedField = NodePath("PlayedCards")
 playerField = NodePath("PlayerHand")
 inPlayField = NodePath("InPlay")
+foodCard = ExtResource("5_3ujc7")
+foodDeck = NodePath("FoodDeck")
 
 [node name="PlayerDeck" type="Button" parent="." node_paths=PackedStringArray("target")]
 layout_mode = 0
@@ -119,6 +123,57 @@ label_settings = SubResource("LabelSettings_i1vam")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="FoodDeck" type="Button" parent="." node_paths=PackedStringArray("target")]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 146.0
+offset_bottom = 192.0
+theme_override_constants/outline_size = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_q77pa")
+script = ExtResource("5_vrfts")
+target = NodePath("../PlayerHand")
+maxDrawCount = 2
+emptyDeckTexture = ExtResource("8_c6dx3")
+fullDeckTexture = ExtResource("9_foiwe")
+
+[node name="TextureRect" type="TextureRect" parent="FoodDeck"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.5
+offset_top = -87.5
+offset_right = 62.5
+offset_bottom = 87.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_0mc3e")
+
+[node name="CardsLeft" type="Label" parent="FoodDeck"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 160.0
+offset_right = 136.0
+offset_bottom = 183.0
+text = "5"
+label_settings = SubResource("LabelSettings_27c8x")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DrawsLeft" type="Label" parent="FoodDeck"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 64.0
+offset_right = 96.0
+offset_bottom = 118.0
+text = "4"
+label_settings = SubResource("LabelSettings_i1vam")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="PlayerHand" type="Panel" parent="." node_paths=PackedStringArray("target", "btnCOntainer")]
 layout_mode = 1
 anchors_preset = 8
@@ -141,13 +196,6 @@ btnCOntainer = NodePath("../VBoxContainer")
 layout_mode = 0
 offset_right = 644.0
 offset_bottom = 170.0
-
-[node name="FoodDeck" type="Panel" parent="."]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 6.0
-offset_right = 138.0
-offset_bottom = 174.0
 
 [node name="InPlay" type="Panel" parent="."]
 layout_mode = 0
@@ -280,7 +328,17 @@ stretch_mode = 3
 
 [node name="NextTurn" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1206.0
+offset_left = 1080.0
 offset_top = 650.0
-offset_right = 1258.0
+offset_right = 1173.0
 offset_bottom = 704.0
+text = "granie kart"
+
+[node name="nextState" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1196.0
+offset_top = 648.0
+offset_right = 1335.0
+offset_bottom = 702.0
+text = "przejscie do akcji
+"

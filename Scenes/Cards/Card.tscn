@@ -39,7 +39,7 @@ region = Rect2(5, 8, 86, 15)
 atlas = ExtResource("4_l7msf")
 region = Rect2(101, 8, 17, 17)
 
-[node name="Card" type="Control" node_paths=PackedStringArray("cardNameLabel", "cardPowerLabel", "cardDescriptionLabel", "image")]
+[node name="Card" type="Control" node_paths=PackedStringArray("cardNameLabel", "cardPowerLabel", "cardDescriptionLabel", "image", "background")]
 custom_minimum_size = Vector2(125, 175)
 layout_mode = 3
 anchors_preset = 0
@@ -53,6 +53,7 @@ cardPowerLabel = NodePath("StrPlaq/Label")
 cardDescriptionLabel = NodePath("ActionDesc")
 image = NodePath("CardIcon")
 shader = SubResource("ShaderMaterial_nilbr")
+background = NodePath("Panel")
 
 [node name="Panel" type="TextureRect" parent="."]
 clip_contents = true

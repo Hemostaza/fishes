@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ActionTestFish" load_steps=5 format=3 uid="uid://bh0xtg7bqb14e"]
+[gd_resource type="Resource" script_class="ActionTestFish" load_steps=6 format=3 uid="uid://bh0xtg7bqb14e"]
 
+[ext_resource type="Texture2D" uid="uid://bijkpfi1tsr6p" path="res://Assets/Sprites/Cards/card.png" id="1_dmhm3"]
 [ext_resource type="PackedScene" uid="uid://bxips6vkfxffr" path="res://Scenes/Entities/Fish.tscn" id="1_gj0sr"]
 [ext_resource type="Script" uid="uid://fmdgqa346f6m" path="res://src/Cards/CardActions/ActionTestFish.cs" id="1_rxr58"]
 [ext_resource type="Texture2D" uid="uid://dc6p03hfmx4u5" path="res://Assets/Sprites/Fishes/rybkaall.png" id="2_scgs3"]
@@ -15,4 +16,5 @@ cardName = "Test carda"
 cardStrenght = 1
 cardDescription = "Testowa karta chuj"
 texture = SubResource("AtlasTexture_dlu3n")
+background = ExtResource("1_dmhm3")
 maxTurnCount = 0

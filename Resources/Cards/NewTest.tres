@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ActionTestFish" load_steps=4 format=3 uid="uid://ex0na87wfr3j"]
+[gd_resource type="Resource" script_class="ActionTestFish" load_steps=5 format=3 uid="uid://ex0na87wfr3j"]
 
+[ext_resource type="Texture2D" uid="uid://bijkpfi1tsr6p" path="res://Assets/Sprites/Cards/card.png" id="1_36sbr"]
 [ext_resource type="Script" uid="uid://fmdgqa346f6m" path="res://src/Cards/CardActions/ActionTestFish.cs" id="1_dlvyc"]
 [ext_resource type="PackedScene" uid="uid://bxips6vkfxffr" path="res://Scenes/Entities/Fish.tscn" id="1_prmlu"]
 [ext_resource type="Texture2D" uid="uid://b51h1djqpje0f" path="res://oldFiles/Old/buttonHover.png" id="2_w2ilc"]
@@ -11,5 +12,6 @@ cardName = "Test 2"
 cardStrenght = 2
 cardDescription = "Kolejna karta z dupy"
 texture = ExtResource("2_w2ilc")
+background = ExtResource("1_36sbr")
 maxTurnCount = 0
 metadata/_custom_type_script = "uid://fmdgqa346f6m"

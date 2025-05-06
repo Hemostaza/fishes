@@ -19,8 +19,7 @@ public partial class PlayerTurnState : GameState
     public override void Enter()
     {
         base.Enter();
-        turnTime = 3.0;
-        GD.Print(this.Name);
+        //turnTime = 3.0;
         cardController.DisableInput(false);
         cardController.ResetDrawCount();
     }
@@ -28,15 +27,10 @@ public partial class PlayerTurnState : GameState
 
     public override void Update(double delta){
         base.Update(delta);
-        turnTime-=delta;
-
-        if(turnTime<=0){
-            //EmitSignal(SignalName.transitionedGameState,this,"ActionTimeState");
-        }
     }
 
     public void NextTurn(){
-        EmitSignal(SignalName.transitionedGameState,this,"ActionTimeState");
+        EmitSignal(SignalName.transitionedGameState,this,"PlayCardsState");
     }
 
 }

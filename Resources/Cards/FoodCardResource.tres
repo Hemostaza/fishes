@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="FoodCard" load_steps=5 format=3 uid="uid://cnj15ot7ygmi6"]
+
+[ext_resource type="Texture2D" uid="uid://dj73xtkbpqler" path="res://Assets/Sprites/Cards/foodDeck.png" id="1_h46ph"]
+[ext_resource type="Script" uid="uid://cktaq0gvik6ox" path="res://src/Cards/CardActions/FoodCard.cs" id="1_vm048"]
+[ext_resource type="Texture2D" uid="uid://bburk2o30dyua" path="res://Assets/Sprites/Food/Food1.png" id="3_y68dr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mqy3y"]
+atlas = ExtResource("3_y68dr")
+region = Rect2(0, 0, 16, 0)
+
+[resource]
+script = ExtResource("1_vm048")
+cardName = "Fish food"
+cardStrenght = 0
+cardDescription = "Spawn 1 food for Gupik"
+texture = SubResource("AtlasTexture_mqy3y")
+background = ExtResource("1_h46ph")
+maxTurnCount = 0
+metadata/_custom_type_script = "uid://cktaq0gvik6ox"

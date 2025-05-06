@@ -44,7 +44,7 @@ public partial class CardDeck : Button
         UpdateCardUI();
     }
 
-    public void PopulateDeck(CardResource[] cardResources)
+    public virtual void PopulateDeck(CardResource[] cardResources)
     {
         if (cardResources == null || cardResources.Length == 0)
         {
@@ -58,6 +58,10 @@ public partial class CardDeck : Button
             }
             else AddCard(cr, false);
         }
+    }
+
+    public virtual void AddCard(CardResource card){
+        AddCard(card,true);
     }
 
     public virtual void AddCard(CardResource card, bool fisrt)

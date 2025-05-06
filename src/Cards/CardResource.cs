@@ -13,6 +13,8 @@ public abstract partial class CardResource : Resource
     [Export]
     Texture2D texture;
     [Export]
+    Texture2D background;
+    [Export]
     int maxTurnCount;
 
     public CardController cardController;
@@ -26,8 +28,11 @@ public abstract partial class CardResource : Resource
     public String GetCardDescription(){
         return cardDescription;
     }
-    public Texture2D GetTexture2D(){
+    public Texture2D GetCardImageTexture(){
         return texture;
+    }
+    public Texture2D GetBackgroundTexture(){
+        return background;
     }
 
     public int GetMaxTurnCount(){

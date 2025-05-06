@@ -26,10 +26,8 @@ public partial class DoActionsState : GameState
         base.Enter();
 
         actionSpeed = 1.0;
-        GD.Print(this.Name);
-        cardController.DisableInput(true);
-        cardController.PlayCards();
-        DoActions();
+        //TODO: sprawdzać czy input jest wyłączony zanim się go znów wyłączy
+        //cardController.DisableInput(true);
     }
 
     public override void Update(double delta)

@@ -10,6 +10,7 @@ public partial class GameState : Node
     }
 
     virtual public void Enter(){
+        GD.Print(Name);
     }
 
     virtual public void Exit(){

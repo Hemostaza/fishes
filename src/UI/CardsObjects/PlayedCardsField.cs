@@ -14,6 +14,7 @@ public partial class PlayedCardsField : CardField
     public override void CardPressed(Card card)
     {
         if(target.HasSpace()){
+            OnMouseExited(card);
             RemoveCard(card);
             target.AddCard(card);
         }

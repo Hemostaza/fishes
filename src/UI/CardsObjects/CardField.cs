@@ -31,13 +31,14 @@ public partial class CardField : Control
 
     virtual public void AddCard(Card card)
     {
-        cardContainer.AddChild(card);
+        //cardContainer.AddChild(card);
+        card.Reparent(cardContainer);
         card.MouseEnteredCardHand += OnMouseEntered;
         card.MouseExitedCardHand += OnMouseExited;
     }
     virtual public void RemoveCard(Card card)
     {
-        cardContainer.RemoveChild(card);
+        //cardContainer.RemoveChild(card);
         card.MouseEnteredCardHand -= OnMouseEntered;
         card.MouseExitedCardHand -= OnMouseExited;
     }
@@ -105,7 +106,7 @@ public partial class CardField : Control
             }
             index++;
         }
-        cardContainer.AddChild(card);
+        card.Reparent(cardContainer);
         cardContainer.MoveChild(card, index);
     }
 

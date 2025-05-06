@@ -70,6 +70,7 @@ public partial class PlayerHandCardField : CardField
     public void PlayCard()
     {
         Card cardToPlayed = focusedCard;
+        OnMouseExited(cardToPlayed);
         RemoveCard(cardToPlayed);
         target.AddCard(cardToPlayed);
     }

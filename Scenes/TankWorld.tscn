@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bg56oktm8pna5"]
+[gd_scene load_steps=7 format=3 uid="uid://bg56oktm8pna5"]
 
 [ext_resource type="PackedScene" uid="uid://bxips6vkfxffr" path="res://Scenes/Entities/Fish.tscn" id="1_k76qi"]
 [ext_resource type="PackedScene" uid="uid://b7g7i80jiprah" path="res://UI.tscn" id="3_h8tla"]
 [ext_resource type="Script" uid="uid://ugeowxqpktj2" path="res://src/StateMachine/GameState/GameStateMachine.cs" id="4_8qsmw"]
 [ext_resource type="Script" uid="uid://btd4qld1mt4gk" path="res://src/StateMachine/GameState/GameState/PlayerTurnState.cs" id="5_7ygf7"]
+[ext_resource type="Script" uid="uid://c0w8pjqqmalfm" path="res://src/StateMachine/GameState/GameState/PlayCardsState.cs" id="5_8qsmw"]
 [ext_resource type="Script" uid="uid://pdbb2jkx0g78" path="res://src/StateMachine/GameState/GameState/DoActionsState.cs" id="6_twjyc"]
 
 [node name="CHUJ" type="Node2D"]
@@ -31,6 +32,10 @@ initialState = NodePath("PlayerTurnState")
 
 [node name="PlayerTurnState" type="Node2D" parent="GameStateMachine" node_paths=PackedStringArray("cardController")]
 script = ExtResource("5_7ygf7")
+cardController = NodePath("../../Control")
+
+[node name="PlayCardsState" type="Node2D" parent="GameStateMachine" node_paths=PackedStringArray("cardController")]
+script = ExtResource("5_8qsmw")
 cardController = NodePath("../../Control")
 
 [node name="ActionTimeState" type="Node2D" parent="GameStateMachine" node_paths=PackedStringArray("cardController")]

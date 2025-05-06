@@ -16,6 +16,8 @@ public partial class Card : Control
     TextureRect image;
     [Export]
     Material shader;
+    [Export]
+    TextureRect background;
 
     bool mouseIn;
     CardField field;
@@ -36,10 +38,11 @@ public partial class Card : Control
     public void CreateCard(CardResource resource)
     {
         cardResource = resource;
-        image.Texture = resource.GetTexture2D();
+        image.Texture = resource.GetCardImageTexture();
         cardNameLabel.Text = resource.GetCardName();
         cardPowerLabel.Text = resource.GetCardStrenght().ToString();
         cardDescriptionLabel.Text = resource.GetCardDescription();
+        background.Texture = resource.GetBackgroundTexture();
         turnLived = 0;
         disabled = false;
         this.MouseEntered += OnMouseEntered;

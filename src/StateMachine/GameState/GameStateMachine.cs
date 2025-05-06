@@ -59,9 +59,8 @@ public partial class GameStateMachine : Node
         if(currentState!=null){
             currentState.Exit();
         }
-        
-        newState.Enter();
         currentState = newState;
+        newState.Enter();
     }
 
     public Dictionary<String, GameState> GetStates(){
